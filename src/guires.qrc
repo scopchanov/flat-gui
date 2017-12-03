@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/bin">
+        <file>translations/FlatGui_de.qm</file>
+        <file>translations/FlatGui_ru.qm</file>
+    </qresource>
+    <qresource prefix="/pix">
+        <file>images/icons/16/match-begins.png</file>
+        <file>images/icons/16/match-contains.png</file>
+        <file>images/icons/16/match-ends.png</file>
+        <file>images/icons/16/match-exact.png</file>
+    </qresource>
+</RCC>
