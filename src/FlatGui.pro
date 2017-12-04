@@ -1,7 +1,8 @@
 QT += core gui widgets
 
-TARGET = FlatGui
-TEMPLATE = lib
+TEMPLATE    = lib
+TARGET	    = FlatGui
+DESTDIR	    = ../deploy
 
 TRANSLATIONS = \
     translations/FlatGui_de.ts \

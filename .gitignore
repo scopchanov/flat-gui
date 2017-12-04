@@ -8,6 +8,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 build/
+deploy/
 doc/
 misc/
 
