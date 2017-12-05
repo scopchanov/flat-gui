@@ -1,4 +1,5 @@
 #include "Alert.h"
+#include "Alert_p.h"
 #include "ToolBar.h"
 #include "PushButton.h"
 #include <QApplication>
@@ -17,7 +18,7 @@
 
 Alert::Alert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex) :
 	QDialog(parent, Qt::FramelessWindowHint),
-	m_defaultButtonIndex(defaultButtonIndex)
+	m_ptr(new AlertPrivate(defaultButtonIndex))
 {
 	auto *layoutMain = new QVBoxLayout(this);
 	auto *layoutBody = new QVBoxLayout();
@@ -96,14 +97,31 @@ Alert::Alert(QWidget *parent, const QPixmap &icon, const QString &title, const Q
 	connect(labMessage, &QLabel::linkActivated, this, &Alert::onLinkClicked);
 }
 
+Alert::Alert(QWidget *parent) :
+	QDialog(parent, Qt::FramelessWindowHint),
+	m_ptr(new AlertPrivate(0))
+{
+	qDebug("ura");
+}
+
+Alert::~Alert()
+{
+	delete m_ptr;
+}
+
 int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex)
 {
 	return Alert(parent, icon, title, message, buttonNames, defaultButtonIndex).exec();
 }
 
+int Alert::aboutQt(QWidget *parent)
+{
+	return Alert(parent).exec();
+}
+
 void Alert::reject()
 {
-	done(m_defaultButtonIndex);
+	done(m_ptr->defaultButtonIndex);
 }
 
 void Alert::showEvent(QShowEvent *event)
@@ -125,7 +143,7 @@ void Alert::showEvent(QShowEvent *event)
 
 void Alert::onLinkClicked(const QString &link)
 {
-	if (link == "Qt v5.6.1")
+	if (link == "aboutQt")
 		QApplication::aboutQt();
 	else
 		QDesktopServices::openUrl(QUrl(link));
@@ -134,4 +152,10 @@ void Alert::onLinkClicked(const QString &link)
 void Alert::onButtonClicked()
 {
 	done(sender()->property("index").toInt());
+}
+
+AlertPrivate::AlertPrivate(int defaultButtonIndex) :
+	defaultButtonIndex(defaultButtonIndex)
+{
+
 }
