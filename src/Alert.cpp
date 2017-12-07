@@ -118,7 +118,6 @@ int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title,
 
 	layoutMessage->addWidget(labIcon);
 	layoutMessage->addWidget(labMessage);
-	layoutMessage->setAlignment(labIcon, Qt::AlignLeft | Qt::AlignTop);
 	layoutMessage->setContentsMargins(0, 0, 0, 0);
 	layoutMessage->setSpacing(20);
 
