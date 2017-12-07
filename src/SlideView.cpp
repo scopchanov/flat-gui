@@ -29,8 +29,8 @@ SlideView::~SlideView()
  * \brief Sets the \a page as the first page displayed by the view.
  * The page is added to the list of the pages and shown.
  * The countChanged, currentIndexChanged and currentPageChanged signals
- * are emitted. If a nullptr is passed as an argument or the page
- * is already in the list this function does nothing.
+ * are emitted. If a nullptr is passed as an argument this function does
+ * nothing.
  */
 
 void SlideView::addHomePage(QWidget *page)
@@ -51,7 +51,7 @@ void SlideView::addHomePage(QWidget *page)
 }
 
 /*!
- * \brief SlideView::stackPage
+ * \brief SlideView::addPage
  */
 
 void SlideView::addPage(QWidget *page, bool dontStack)
@@ -141,10 +141,10 @@ SlideViewPrivate::SlideViewPrivate(SlideView *parent) :
 void SlideViewPrivate::slideToPage(int n, int speed)
 {
 	if (busy
-			|| pages.isEmpty()
-			|| (currentIndex < 0)
-			|| (n == currentIndex)
-			|| (speed < 0))
+		|| pages.isEmpty()
+		|| (currentIndex < 0)
+		|| (n == currentIndex)
+		|| (speed < 0))
 		return;
 
 	auto *transition = new HorizontalSlide(p_ptr);

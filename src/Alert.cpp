@@ -2,79 +2,47 @@
 #include "Alert_p.h"
 #include "ToolBar.h"
 #include "PushButton.h"
-#include <QApplication>
-#include <QDesktopServices>
 #include <QGraphicsDropShadowEffect>
 #include <QPropertyAnimation>
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QStyle>
-#include <QUrl>
 
 /*!
  * \class Alert
  * \inmodule FlatGui
  */
 
-Alert::Alert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex) :
+Alert::Alert(QWidget *parent) :
 	QDialog(parent, Qt::FramelessWindowHint),
-	m_ptr(new AlertPrivate(defaultButtonIndex))
+	m_ptr(new AlertPrivate(this))
 {
 	auto *layoutMain = new QVBoxLayout(this);
 	auto *layoutBody = new QVBoxLayout();
 	auto *layoutTitle = new QHBoxLayout();
-	auto *layoutMessage = new QHBoxLayout();
 	auto *effect = new QGraphicsDropShadowEffect(this);
 	auto *body = new QWidget(this);
-	auto *toolBar = new ToolBar(this);
-	auto *labTitle = new QLabel(this);
-	auto *labIcon = new QLabel(this);
-	auto *labMessage = new QLabel(this);
 
-	labTitle->setText("<b>" + title + "</b>");
-	labTitle->setAlignment(Qt::AlignCenter);
-	labTitle->setMinimumHeight(48);
-	labTitle->setStyleSheet(".QLabel { border: none; border-bottom: 1px solid palette(midlight); }");
+	m_ptr->labTitle->setAlignment(Qt::AlignCenter);
+	m_ptr->labTitle->setMinimumHeight(48);
+	m_ptr->labTitle->setStyleSheet(".QLabel {"
+								   "	border: none;"
+								   "	border-bottom: 1px solid palette(midlight);"
+								   "}");
 
-	layoutTitle->addWidget(labTitle);
+	layoutTitle->addWidget(m_ptr->labTitle);
 	layoutTitle->setContentsMargins(12, 0, 12, 0);
 	layoutTitle->setSpacing(0);
 
-	labIcon->setPixmap(icon);
-	labIcon->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-	labIcon->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+	m_ptr->layoutMessage->setContentsMargins(12, 12, 12, 12);
+	m_ptr->layoutMessage->setSpacing(0);
 
-	labMessage->setText(message);
-	labMessage->setForegroundRole(QPalette::Text);
-	labMessage->setTextInteractionFlags(Qt::LinksAccessibleByMouse | Qt::TextSelectableByMouse);
-	labMessage->setTextFormat(Qt::RichText);
-	labMessage->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-	labMessage->setWordWrap(true);
-
-	layoutMessage->addWidget(labIcon);
-	layoutMessage->addWidget(labMessage);
-	layoutMessage->setContentsMargins(20, 20, 20, 20);
-	layoutMessage->setSpacing(20);
-
-	toolBar->setBackgroundRole(QPalette::Window);
-	toolBar->addStretch();
-
-	foreach (const QString &buttonName, buttonNames) {
-		auto *button = new PushButton(this);
-		int index = buttonNames.indexOf(buttonName);
-
-		button->setText(buttonName);
-		button->setDefault(index == defaultButtonIndex);
-		button->setProperty("index", index);
-
-		toolBar->addWidget(button);
-
-		connect(button, &PushButton::clicked, this, &Alert::onButtonClicked);
-	}
+	m_ptr->toolBar->setBackgroundRole(QPalette::Window);
+	m_ptr->toolBar->addStretch();
 
 	layoutBody->addLayout(layoutTitle);
-	layoutBody->addLayout(layoutMessage);
-	layoutBody->addWidget(toolBar);
+	layoutBody->addLayout(m_ptr->layoutMessage);
+	layoutBody->addWidget(m_ptr->toolBar);
 	layoutBody->setContentsMargins(0, 0, 0, 0);
 	layoutBody->setSpacing(0);
 
@@ -92,16 +60,6 @@ Alert::Alert(QWidget *parent, const QPixmap &icon, const QString &title, const Q
 	layoutMain->setSpacing(0);
 
 	setAttribute(Qt::WA_TranslucentBackground);
-	adjustSize();
-
-	connect(labMessage, &QLabel::linkActivated, this, &Alert::onLinkClicked);
-}
-
-Alert::Alert(QWidget *parent) :
-	QDialog(parent, Qt::FramelessWindowHint),
-	m_ptr(new AlertPrivate(0))
-{
-	qDebug("ura");
 }
 
 Alert::~Alert()
@@ -109,14 +67,67 @@ Alert::~Alert()
 	delete m_ptr;
 }
 
-int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex)
+void Alert::setTitle(const QString &title)
 {
-	return Alert(parent, icon, title, message, buttonNames, defaultButtonIndex).exec();
+	m_ptr->labTitle->setText("<b>" + title + "</b>");
 }
 
-int Alert::aboutQt(QWidget *parent)
+void Alert::setWidget(QWidget *widget)
 {
-	return Alert(parent).exec();
+	widget->setParent(this);
+	m_ptr->layoutMessage->addWidget(widget);
+}
+
+void Alert::setButtons(const QStringList &buttonNames, int defaultButtonIndex)
+{
+	foreach (const QString &buttonName, buttonNames) {
+		auto *button = new PushButton(this);
+		int index = buttonNames.indexOf(buttonName);
+
+		button->setText(buttonName);
+		button->setDefault(index == defaultButtonIndex);
+		button->setProperty("index", index);
+
+		m_ptr->toolBar->addWidget(button);
+
+		connect(button, &PushButton::clicked, this, &Alert::onButtonClicked);
+	}
+
+	m_ptr->defaultButtonIndex = defaultButtonIndex;
+}
+
+int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex)
+{
+	Alert alert(parent);
+	auto *widget = new QWidget();
+	auto *layoutMessage = new QHBoxLayout(widget);
+	auto *labIcon = new QLabel(widget);
+	auto *labMessage = new QLabel(widget);
+
+	labIcon->setPixmap(icon);
+	labIcon->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+	labIcon->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+
+	labMessage->setText(message);
+	labMessage->setForegroundRole(QPalette::Text);
+	labMessage->setTextFormat(Qt::RichText);
+	labMessage->setOpenExternalLinks(true);
+	labMessage->setTextInteractionFlags(Qt::LinksAccessibleByMouse | Qt::TextSelectableByMouse);
+	labMessage->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	labMessage->setWordWrap(true);
+
+	layoutMessage->addWidget(labIcon);
+	layoutMessage->addWidget(labMessage);
+	layoutMessage->setAlignment(labIcon, Qt::AlignLeft | Qt::AlignTop);
+	layoutMessage->setContentsMargins(0, 0, 0, 0);
+	layoutMessage->setSpacing(20);
+
+	alert.setTitle(title);
+	alert.setWidget(widget);
+	alert.setButtons(buttonNames, defaultButtonIndex);
+	alert.adjustSize();
+
+	return alert.exec();
 }
 
 void Alert::reject()
@@ -141,21 +152,16 @@ void Alert::showEvent(QShowEvent *event)
 	flyIn->start(QPropertyAnimation::DeleteWhenStopped);
 }
 
-void Alert::onLinkClicked(const QString &link)
-{
-	if (link == "aboutQt")
-		QApplication::aboutQt();
-	else
-		QDesktopServices::openUrl(QUrl(link));
-}
-
 void Alert::onButtonClicked()
 {
 	done(sender()->property("index").toInt());
 }
 
-AlertPrivate::AlertPrivate(int defaultButtonIndex) :
-	defaultButtonIndex(defaultButtonIndex)
+AlertPrivate::AlertPrivate(Alert *parent) :
+	labTitle(new QLabel(parent)),
+	layoutMessage(new QVBoxLayout()),
+	toolBar(new ToolBar(parent)),
+	defaultButtonIndex(0)
 {
 
 }
