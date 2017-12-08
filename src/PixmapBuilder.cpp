@@ -90,7 +90,11 @@ void PixmapBuilderPrivate::drawGrid(QPainter *painter, const QColor &color)
 
 void PixmapBuilderPrivate::drawGridSmall(QPainter *painter, const QColor &color)
 {
-
+	painter->setPen(QPen(color, 3));
+	painter->drawPoints(QPolygon(QVector<QPoint>{QPoint(1, 1),
+												 QPoint(1, 6),
+												 QPoint(6, 1),
+												 QPoint(6, 6)}));
 }
 
 void PixmapBuilderPrivate::drawGlass(QPainter *painter, const QColor &color)

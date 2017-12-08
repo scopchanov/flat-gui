@@ -2,9 +2,11 @@
 #include "GenericForm_p.h"
 #include "AbstractField.h"
 #include "DynamicDecoration.h"
+#include "PixmapBuilder.h"
 #include <QJsonObject>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QBuffer>
 #include <QDateTime>
 
 /*!
@@ -17,16 +19,21 @@ GenericForm::GenericForm(QWidget *parent) :
 	m_ptr(new GenericFormPrivate)
 {
 	auto *layoutMain = new QHBoxLayout(this);
-	auto *label = new QLabel(tr("The fields marked with %1 need to be filled out."
-								" The rest of the fields are either optional or already contain information.")
-							 .arg("&nbsp;<img src=':/pix/images/icons/8/grip-color-small.png' />&nbsp;"), this);
+	auto *label = new QLabel(this);
 	QFont f(font());
+	QByteArray ba;
+	QBuffer buffer(&ba);
 
 	f.setPointSize(10);
+
+	PixmapBuilder::create(PixmapBuilder::GridSmall, palette().color(QPalette::Highlight), 8).save(&buffer, "PNG");
 
 	label->setFont(f);
 	label->setWordWrap(true);
 	label->setForegroundRole(QPalette::Text);
+	label->setText(tr("The fields marked with %1 need to be filled out. "
+					  "The rest of the fields are either optional or already contain information.")
+				   .arg(QString("&nbsp;<img src='data:image/png;base64," + ba.toBase64() + "' />&nbsp;")));
 
 	m_ptr->layoutBody->addWidget(label);
 	m_ptr->layoutBody->addStretch();
@@ -60,21 +67,6 @@ void GenericForm::addField(AbstractField *field)
 
 	m_ptr->layoutBody->insertWidget(m_ptr->layoutBody->count() - 1, field);
 	m_ptr->fields.append(field);
-
-//	AbstractFormField *field = table ? (AbstractFormField *)(new TableField(this)) : (AbstractFormField *)(new TextField(this));
-
-////	if (table) { field = new TableField(this); } else { field = new TextField(this); }
-
-//	field->setObjectName(name);
-//	field->setRequired(required);
-//	field->setPlaceholderText(title);
-//	if (table) { static_cast<TableField *>(field)->setTable(table); }
-
-//	m_fields.append(field);
-//	m_layoutBody->addWidget(field);
-
-//	connect(field, &AbstractFormField::contentChanged, this, &FormWidget::contentChanged);
-//	connect(m_actClear, &QAction::triggered, field, &AbstractFormField::clear);
 }
 
 bool GenericForm::isEmpty() const
