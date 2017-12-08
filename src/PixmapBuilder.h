@@ -23,7 +23,10 @@ public:
 		Up,
 		Down,
 		Square,
-		SquareSmall
+		SquareSmall,
+		Info,
+		Warning,
+		Error
 	};
 
 	static QPixmap create(int type, const QColor &color, int size = 16);

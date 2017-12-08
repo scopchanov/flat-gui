@@ -69,6 +69,15 @@ QPixmap PixmapBuilder::drawPixmap(int type, const QColor &color, int size)
 	case SquareSmall:
 		m_ptr->drawSquareSmall(&painter, color);
 		break;
+	case Info:
+		m_ptr->drawInfo(&painter, color);
+		break;
+	case Warning:
+		m_ptr->drawWarning(&painter, color);
+		break;
+	case Error:
+		m_ptr->drawError(&painter, color);
+		break;
 	}
 
 	return pixmap;
@@ -180,4 +189,62 @@ void PixmapBuilderPrivate::drawSquare(QPainter *painter, const QColor &color)
 void PixmapBuilderPrivate::drawSquareSmall(QPainter *painter, const QColor &color)
 {
 	painter->fillRect(2, 2, 4, 4, color);
+}
+
+void PixmapBuilderPrivate::drawInfo(QPainter *painter, const QColor &color)
+{
+	QPainterPath circ;
+	QPainterPath letter;
+
+	circ.addEllipse(3, 3, 42, 42);
+
+	letter.addRoundedRect(22, 11, 4, 4, 1, 1);
+	letter.addRect(21, 18, 5, 3);
+	letter.addRect(22, 21, 4, 13);
+	letter.addRect(21, 34, 6, 3);
+
+	painter->setRenderHint(QPainter::Antialiasing);
+	painter->setPen(Qt::transparent);
+	painter->setBrush(color);
+	painter->drawPath(circ.subtracted(letter));
+}
+
+void PixmapBuilderPrivate::drawWarning(QPainter *painter, const QColor &color)
+{
+	QPainterPath triangle;
+	QPainterPath letter;
+
+	triangle.moveTo(2, 45);
+	triangle.lineTo(24, 2);
+	triangle.lineTo(45, 45);
+	triangle.lineTo(2, 45);
+
+	letter.addRoundedRect(22, 15, 4, 19, 1, 1);
+	letter.addRoundedRect(22, 37, 4, 4, 1, 1);
+
+	painter->setRenderHint(QPainter::Antialiasing);
+	painter->setPen(Qt::transparent);
+	painter->setBrush(color);
+	painter->drawPath(triangle.subtracted(letter));
+}
+
+void PixmapBuilderPrivate::drawError(QPainter *painter, const QColor &color)
+{
+	QPainterPath circ;
+	QPainterPath cross;
+	QTransform t;
+
+	t.translate(24, -10);
+	t.rotate(45);
+
+	circ.addEllipse(3, 3, 42, 42);
+
+	cross.addRoundedRect(22, 12, 4, 24, 1, 1);
+	cross.addRoundedRect(12, 22, 24, 4, 1, 1);
+	cross.setFillRule(Qt::WindingFill);
+
+	painter->setRenderHint(QPainter::Antialiasing);
+	painter->setPen(Qt::transparent);
+	painter->setBrush(color);
+	painter->drawPath(circ.subtracted(t.map(cross)));
 }

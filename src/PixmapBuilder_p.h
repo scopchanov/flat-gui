@@ -22,6 +22,9 @@ public:
 	void drawDown(QPainter *painter, const QColor &color);
 	void drawSquare(QPainter *painter, const QColor &color);
 	void drawSquareSmall(QPainter *painter, const QColor &color);
+	void drawInfo(QPainter *painter, const QColor &color);
+	void drawWarning(QPainter *painter, const QColor &color);
+	void drawError(QPainter *painter, const QColor &color);
 
 	friend class PixmapBuilder;
 };
