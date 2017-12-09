@@ -26,7 +26,8 @@ ButtonCategory::~ButtonCategory()
 
 void ButtonCategory::setName(const QString &str)
 {
-	m_ptr->name = str;
+
+	m_ptr->name = str.left(1).toUpper() + str.mid(1, str.length() - 1);
 }
 
 void ButtonCategory::setDescription(const QString &str)
