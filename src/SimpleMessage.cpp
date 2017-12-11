@@ -95,6 +95,8 @@ void SimpleMessage::onTimeout()
 {
 	auto *fadeOut = new QPropertyAnimation(this, "windowOpacity");
 
+	sender()->deleteLater();
+
 	fadeOut->setStartValue(1.0);
 	fadeOut->setEndValue(0.0);
 	fadeOut->setDuration(150);

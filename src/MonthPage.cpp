@@ -173,5 +173,6 @@ void MonthPage::doClick()
 
 void MonthPage::onTimeout()
 {
+	sender()->deleteLater();
 	dateChanged(m_date);
 }
