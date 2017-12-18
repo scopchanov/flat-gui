@@ -20,6 +20,7 @@ GridWidget::GridWidget(QWidget *parent) :
 	m_ptr->label->setFont(f);
 	m_ptr->label->setWordWrap(true);
 	m_ptr->label->setForegroundRole(QPalette::Text);
+	m_ptr->label->setOpenExternalLinks(true);
 
 	setAutoFillBackground(true);
 }
