@@ -5,21 +5,6 @@
 #include <QMouseEvent>
 
 /*!
-	\module FlatGui
-
-	\title Flat GUI Module
-
-	\brief Contains classes for writing mobile-app-like graphical user interfaces for desktop applications.
-
-	The network module provides classes to make network
-	programming easier and portable. It offers both
-	high-level classes such as QNetworkAccessManager that
-	implements application-level protocols, and
-	lower-level classes such as QTcpSocket, QTcpServer, and
-	QUdpSocket.
-*/
-
-/*!
  * \class AbstractButton
  * \inmodule FlatGui
  * \brief Base class for all buttons.

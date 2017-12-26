@@ -3,7 +3,7 @@
 #include <QPainter>
 
 /*!
- * \class ButtonCategory::ButtonCategory
+ * \class ButtonCategory
  * \inmodule FlatGui
  */
 
@@ -13,11 +13,6 @@ ButtonCategory::ButtonCategory(QWidget *parent) :
 {
 	setSize(200);
 }
-
-/*!
- * \brief ButtonCategory::setSize
- * \reimp
- */
 
 ButtonCategory::~ButtonCategory()
 {

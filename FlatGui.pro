@@ -1,8 +1,7 @@
-QT += core gui widgets
+QT	    += widgets
 
 TEMPLATE    = lib
-TARGET	    = FlatGui
-DESTDIR	    = ../deploy
+DESTDIR	    = ../../bin
 DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
 
 TRANSLATIONS = \
@@ -126,6 +125,9 @@ HEADERS += \
     GridWidget.h \
     GridWidget_p.h \
     Alert_p.h
+
+OTHER_FILES += \
+    FlatGui.qdoc
 
 RESOURCES += \
     guires.qrc
