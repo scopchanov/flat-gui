@@ -17,6 +17,8 @@ public:
 	void setWidget(QWidget *widget);
 	void setButtons(const QStringList &buttonNames, int defaultButtonIndex = 0);
 
+	QWidget *body() const;
+
 	static int showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex);
 
 	void reject();

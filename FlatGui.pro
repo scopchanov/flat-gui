@@ -1,6 +1,7 @@
 QT	    += widgets
 
 TEMPLATE    = lib
+TARGET	    = $$qtLibraryTarget(FlatGui)
 DESTDIR	    = ../../bin
 DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
 

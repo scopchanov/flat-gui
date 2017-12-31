@@ -21,7 +21,6 @@ Alert::Alert(QWidget *parent) :
 	auto *layoutBody = new QVBoxLayout();
 	auto *layoutTitle = new QHBoxLayout();
 	auto *effect = new QGraphicsDropShadowEffect(this);
-	auto *body = new QWidget(this);
 
 	m_ptr->labTitle->setAlignment(Qt::AlignCenter);
 	m_ptr->labTitle->setMinimumHeight(48);
@@ -50,12 +49,12 @@ Alert::Alert(QWidget *parent) :
 	effect->setColor(palette().color(QPalette::Shadow));
 	effect->setBlurRadius(5);
 
-	body->setAutoFillBackground(true);
-	body->setBackgroundRole(QPalette::Button);
-	body->setGraphicsEffect(effect);
-	body->setLayout(layoutBody);
+	m_ptr->body->setAutoFillBackground(true);
+	m_ptr->body->setBackgroundRole(QPalette::Button);
+	m_ptr->body->setGraphicsEffect(effect);
+	m_ptr->body->setLayout(layoutBody);
 
-	layoutMain->addWidget(body);
+	layoutMain->addWidget(m_ptr->body);
 	layoutMain->setContentsMargins(10, 10, 10, 10);
 	layoutMain->setSpacing(0);
 
@@ -94,6 +93,11 @@ void Alert::setButtons(const QStringList &buttonNames, int defaultButtonIndex)
 	}
 
 	m_ptr->defaultButtonIndex = defaultButtonIndex;
+}
+
+QWidget *Alert::body() const
+{
+	return m_ptr->body;
 }
 
 int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex)
@@ -157,6 +161,7 @@ void Alert::onButtonClicked()
 }
 
 AlertPrivate::AlertPrivate(Alert *parent) :
+	body(new QWidget(parent)),
 	labTitle(new QLabel(parent)),
 	layoutMessage(new QVBoxLayout()),
 	toolBar(new ToolBar(parent)),
