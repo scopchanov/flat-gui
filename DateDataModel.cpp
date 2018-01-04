@@ -28,7 +28,7 @@ QVariant DateDataModel::value() const
 
 QString DateDataModel::text() const
 {
-	return QLocale().toString(m_ptr->date, "dd.MM.yyyy");
+	return m_ptr->date.toString(Qt::DefaultLocaleShortDate);
 }
 
 QVariant DateDataModel::defaultValue() const

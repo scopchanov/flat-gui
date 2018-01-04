@@ -28,7 +28,7 @@ QVariant TimeDataModel::value() const
 
 QString TimeDataModel::text() const
 {
-	return QLocale().toString(m_ptr->time, "HH:mm");
+	return m_ptr->time.toString(Qt::DefaultLocaleShortDate);
 }
 
 QVariant TimeDataModel::defaultValue() const

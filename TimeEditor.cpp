@@ -76,14 +76,14 @@ TimeEditor::TimeEditor(QWidget *parent) :
 
 QTime TimeEditor::time() const
 {
-	return QLocale().toTime(m_labTime->text(), "HH:mm");
+	return QTime::fromString(m_labTime->text(), Qt::DefaultLocaleShortDate);
 }
 
 void TimeEditor::setTime(const QTime &time)
 {
 	const QTime &t(time.isValid() ? time : QDateTime::currentDateTime().time());
 
-	m_labTime->setText(t.toString("HH:mm"));
+	m_labTime->setText(t.toString(Qt::DefaultLocaleShortDate));
 	m_sldHours->setValue(t.hour());
 	m_sldMinutes->setValue(t.minute());
 }
@@ -101,8 +101,10 @@ void TimeEditor::reposition()
 
 void TimeEditor::updateTime()
 {
-	m_labTime->setText(QString("%1").arg(m_sldHours->value(), 2, 10, QChar('0'))
-					 + ":" + QString("%1").arg(m_sldMinutes->value(), 2, 10, QChar('0')));
+	m_labTime->setText(QTime::fromString(QString("%1").arg(m_sldHours->value(), 2, 10, QChar('0'))
+										 + ":"
+										 + QString("%1").arg(m_sldMinutes->value(), 2, 10, QChar('0')),
+										 "HH:mm").toString(Qt::DefaultLocaleShortDate));
 }
 
 void TimeEditor::onCancel()
