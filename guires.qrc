@@ -2,6 +2,12 @@
     <qresource prefix="/bin">
         <file>translations/FlatGui_de.qm</file>
         <file>translations/FlatGui_ru.qm</file>
+        <file>translations/FlatGui_bg.qm</file>
+        <file>translations/FlatGui_es.qm</file>
+        <file>translations/FlatGui_fr.qm</file>
+        <file>translations/FlatGui_it.qm</file>
+        <file>translations/FlatGui_pl.qm</file>
+        <file>translations/FlatGui_tr.qm</file>
     </qresource>
     <qresource prefix="/pix">
         <file>images/icons/16/match-begins.png</file>

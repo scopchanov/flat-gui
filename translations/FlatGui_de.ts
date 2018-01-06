@@ -30,7 +30,7 @@
 <context>
     <name>GenericForm</name>
     <message>
-        <location filename="../GenericForm.cpp" line="20"/>
+        <location filename="../GenericForm.cpp" line="34"/>
         <source>The fields marked with %1 need to be filled out. The rest of the fields are either optional or already contain information.</source>
         <translation>Die mit %1 gekennzeichneten Felder müssen ausgefüllt werden. Die übrigen Felder sind entweder optional oder bereits ausgefüllt.</translation>
     </message>

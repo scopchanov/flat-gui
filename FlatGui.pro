@@ -7,7 +7,13 @@ DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
 
 TRANSLATIONS = \
     translations/FlatGui_de.ts \
-    translations/FlatGui_ru.ts
+    translations/FlatGui_fr.ts \
+    translations/FlatGui_es.ts \
+    translations/FlatGui_it.ts \
+    translations/FlatGui_pl.ts \
+    translations/FlatGui_tr.ts \
+    translations/FlatGui_ru.ts \
+    translations/FlatGui_bg.ts
 
 DEFINES += FLATGUI_LIBRARY
 
