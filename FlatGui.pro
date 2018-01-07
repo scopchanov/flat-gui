@@ -1,3 +1,5 @@
+include(../autoversion.pri)
+
 QT	    += widgets
 
 TEMPLATE    = lib
