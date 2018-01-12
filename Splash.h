@@ -10,13 +10,11 @@ class FLATGUISHARED_EXPORT Splash : public QSplashScreen
 public:
 	explicit Splash(const QPixmap &pixmap);
 
-	bool isReady() const;
+protected:
+	void mousePressEvent(QMouseEvent *) override;
 
-private:
-	bool m_ready;
-
-private slots:
-	void onAnimationFinished();
+signals:
+	void splashShown();
 };
 
 #endif // SPLASH_H

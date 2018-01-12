@@ -7,8 +7,7 @@
  */
 
 Splash::Splash(const QPixmap &pixmap) :
-	QSplashScreen(pixmap),
-	m_ready(false)
+	QSplashScreen(pixmap)
 {
 	auto *animation = new QPropertyAnimation(this, "windowOpacity", this);
 
@@ -18,15 +17,10 @@ Splash::Splash(const QPixmap &pixmap) :
 	animation->setEasingCurve(QEasingCurve::OutQuad);
 	animation->start(QPropertyAnimation::DeleteWhenStopped);
 
-	connect(animation, &QPropertyAnimation::finished, this, &Splash::onAnimationFinished);
+	connect(animation, &QPropertyAnimation::finished, this, &Splash::splashShown);
 }
 
-bool Splash::isReady() const
+void Splash::mousePressEvent(QMouseEvent *)
 {
-	return m_ready;
-}
 
-void Splash::onAnimationFinished()
-{
-	m_ready = true;
 }
