@@ -10,7 +10,7 @@ user interfaces.
 2. Why is this project useful?
 
 The FlatGUI library allows Qt5 programmers to build elegant 
-graphical user interfaces for desktop applications in C++.
+graphical user interfaces for desktop applications in C++
 without the need of using technologies other than widgets. 
 
 3. How do I get started?
