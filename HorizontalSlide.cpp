@@ -29,12 +29,12 @@ SOFTWARE.
 HorizontalSlide::HorizontalSlide(QWidget *parent) :
 	QObject(parent),
 	m_parentWidget(parent),
-	m_width(parent->width()),
-	m_height(parent->height()),
-	m_labCurrent(new QLabel(parent)),
-	m_labNext(new QLabel(parent)),
 	m_currentPage(nullptr),
 	m_nextPage(nullptr),
+	m_labCurrent(new QLabel(parent)),
+	m_labNext(new QLabel(parent)),
+	m_width(parent->width()),
+	m_height(parent->height()),
 	m_slideLeft(false)
 {
 	m_labCurrent->setStyleSheet(".QLabel { padding: 0; }");
