@@ -1,11 +1,24 @@
 # flat-gui
 Library of GUI elements for Qt C++ applications
 
+1. What does this project do?
+
+The FlatGUI library consists of Qt5 based C++ classes 
+providing custom widgets for the creation of graphical 
+user interfaces.
+
+2. Why is this project useful?
+
 The FlatGUI library allows Qt5 users to build elegant 
-graphical user interfaces for desktop applications in C++ 
+graphical user interfaces for desktop applications in C++.
 without the need of using technologies other than widgets. 
-The GUI elements are tested fully under Windows 7/10 and 
-partially under Ubuntu 17 Desktop. The library is open 
-source and you are welcome to use it and contribute to it.
+
+3. How do I get started?
+
+Check out the example at https://github.com/scopchanov/examples/
+
+4. Where can I get more help, if I need it?
+
+The document section is underway. Please, be patient!
 
 Enjoy!
