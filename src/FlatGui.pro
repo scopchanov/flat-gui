@@ -1,11 +1,11 @@
-include(../autoversion.pri)
+include(../../autoversion.pri)
 
 QT	    += widgets
 
 TEMPLATE    = lib
 TARGET	    = $$qtLibraryTarget(FlatGui)
-DESTDIR	    = ../../bin
-DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
+DESTDIR	    = ../bin
+#DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
 
 TRANSLATIONS = \
     translations/FlatGui_de.ts \
