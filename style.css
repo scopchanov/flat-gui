@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: 'Titillium Web', sans-serif;
+    background-color:#F0F1F2;
+    color: #50585D;
+    line-height: 130%;
+    font-weight: normal;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   color: black;
+   font-weight: 300;
+}
+
+h1 {
+    font-size: 2.25em;
+    margin-top: 22px;
+    line-height: 130%;
+}
+
+h1.title {
+    margin: 0;
+}
+
+h2 {
+    margin-top: 50px;
+    font-size: 1.75em;
+}
+
+h3 {
+    margin-top: 12px;
+}
+
+div.header {
+    background-color: #353B3E;
+    padding: 24px;
+    padding-top: 48px;
+    margin: 0;
+    color: white;
+    font-size: 28pt;
+    text-align: right;
+}
+
+div.navbar {
+    float: right;
+}
+
+div.navitem {
+    float: left;
+    clear: right;
+    padding: 12px;
+}
+
+div.sidebar {
+    float: right;
+    margin: 0 0 24px 24px;
+}
+
+div.article {
+    max-width: 95%;
+    background-color: white;
+    padding: 12px 24px 1px 24px;
+    margin: auto;
+    clear: both;
+}
+
+div.footer {
+    font-size: 0.85em;
+    text-align: right;
+    padding: 12px 0;
+    max-width: 95%;
+    margin: auto;
+    clear: both;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 15px;
+    font-family: "Courier New";
+    font-size: 12pt;
+    margin-left: 2em;
+    color: white;
+    background-color: #353B3E;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 24px;
+    clear: both;
+}
+
+.table ul {
+    padding-left: 0px;
+}
+
+.toc ul {
+    padding: 0;
+}
+
+ul.breadcrumbs {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+ul.breadcrumbs li {
+    display: inline;
+    font-size: 0.85em;
+}
+
+ul.breadcrumbs li a:after {
+    color: #303030;
+    content: " › ";
+    line-height: 1;
+    top: -4px;
+}
+
+p.headerNavi {
+    margin-top: 6px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #D3D6D8;
+}
+
+.fn {
+    color: #303030;
+    border-bottom: 1px solid #D3D6D8;
+    padding-bottom: 16px;
+}
+
+li.fn {
+    margin-top: 9px;
+    padding-bottom: 6px;
+}
+
+a {
+   color: #15999B;
+   text-decoration: none;
+}
+
+a[name=toc] {
+   color: #303030;
+}
+
+.context table {
+    vertical-align: initial;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table.odd {
+  background-color:#00f9f9
+}
+
+table thead {
+  text-align:left;
+  padding-left:20px;
+}
+
+table, table td, table th {
+    border: 1px solid #D3D6D8;
+}
+
+table td, table th {
+  padding: 5px 10px;
+  line-height: 1.3;
+}
+
+.context .fixed table td {
+  min-width: 50%;
+  width: 50%
+}
+
+table.alignedsummary, table.propsummary {
+  width: initial;
+}
+
+.alignedsummary td {
+    margin: 0;
+    padding-left: 12px;
+}
+
+.string {
+    color: #21be2b;
+}
+
+.type {
+    color: #15999B
+}
+
+.keyword {
+    color: #FFCC00;
+}
+
+.cpp {
+    color: white;
+}
+
+.operator {
+    color: #FFCC00;
+}
+
+.number {
+    color: #FF3B30;
+}
+
+h3.fn {
+    font-size: 1.46em;
+    padding: 15px 0 15px 0;
+    word-wrap: break-word;
+}
+
+code {
+    font-size: 1.3em;
+}
+
+h3.fn code {
+    font-size: 100%;
+    float: right;
+    padding: 3px;
+    margin: 3px 0 0 20px;
+}
+
+.topAlign {
+    padding: 3px 5px 3px 15px;
+    vertical-align: top;
+}
+
+.rightAlign {
+    padding: 3px 5px 3px 10px;
+    text-align: right;
+}

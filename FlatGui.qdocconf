@@ -1,0 +1,89 @@
+include($QTDIR/5.11.2/msvc2017_64/doc/global/compat.qdocconf)
+
+project = FlatGUI
+description = API Reference Documentation
+version = 1.0.0
+
+tabsize = 4
+
+indexes += \
+    $QTDIR/Docs/Qt-5.11.2/qtcore/qtcore.index \
+    $QTDIR/Docs/Qt-5.11.2/qtwidgets/qtwidgets.index \
+    $QTDIR/Docs/Qt-5.11.2/qtnetwork/qtnetwork.index
+
+# where your source files are (here it's just the root directory)
+sourcedirs = .
+# where your header files are (probably in the same place as source)
+headerdirs = .
+exampledirs = ../examples/src
+# where you store images that are used in your qdoc comments
+imagedirs = .
+
+# what kind of sources should be processed
+sources.fileextensions += *.cpp \
+                          *.qdoc
+
+# what kind of headers should be processed
+headers.fileextensions = *.h
+
+# where to put the result
+outputdir = doc
+
+outputformats = HTML
+
+# path to the CSS files if you would like to use any (here it's the current directory)
+HTML.stylesheets = style.css
+
+HTML.nonavigationbar = "false"
+
+# the string that actually includes the CSS into documentation file
+HTML.headerstyles = \
+    "<link rel=\"stylesheet\" type=\"text/css\" href=\"style/style.css\"/>\n" \
+    "<link rel="icon" href="http://example.com/favicon.png">\n"
+
+# what to append to every page after header
+HTML.postheader = \
+    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" \
+    "<div class=\"header\">ScopeLibs</div>\n" \
+    "<div class=\"navbar\">\n" \
+    "	<div class=\"navitem\"><a href=\"index.html\">Home</a></div>\n" \
+    "	<div class=\"navitem\"><a href=\"libraries.html\">Libraries</a></div>\n" \
+    "	<div class=\"navitem\"><a href=\"class-index.html\">C++ classes</a></div>\n" \
+    "	<div class=\"navitem\"><a href=\"examples.html\">Examples</a></div>\n" \
+    "</div>\n" \
+    "<div class=\"article\"><div class=\"breadcrumbs\"><ul class=\"breadcrumbs\">\n"
+
+HTML.postpostheader = \
+    "</ul></div>\n"
+
+# what appears after the sidebar
+HTML.prologue = \
+    "<div class=\"context\">\n"
+
+# what to append to every page after the content
+HTML.footer = \
+    "</div></div>\n" \
+    "<div class=\"footer\">Created by " \
+    "<a href=\"https://www.linkedin.com/in/michael-scopchanov\" target=\"_blank\">" \
+    "Michael Scopchanov</a> &copy; Landau, 2017</div>"
+
+qhp.projects = scopelibs
+qhp.extraFiles +=   style/style.css
+
+qhp.scopelibs.file                = flat-gui.qhp
+qhp.scopelibs.namespace           = de.scopchanov.flat-gui.100
+qhp.scopelibs.virtualFolder       = flat-gui
+qhp.scopelibs.indexTitle          = FlatGUI
+#qhp.scopelibs.indexRoot           =
+
+qhp.scopelibs.subprojects         = classes examples
+
+qhp.scopelibs.subprojects.classes.title = C++ Classes
+qhp.scopelibs.subprojects.classes.indexTitle = FlatGUI C++ Classes
+qhp.scopelibs.subprojects.classes.selectors = class
+qhp.scopelibs.subprojects.classes.sortPages = true
+
+qhp.scopelibs.subprojects.examples.title = Examples
+qhp.scopelibs.subprojects.examples.indexTitle = FlatGUI Examples
+qhp.scopelibs.subprojects.examples.selectors = doc:example
+qhp.scopelibs.subprojects.examples.sortPages = true
