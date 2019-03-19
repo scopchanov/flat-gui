@@ -27,7 +27,7 @@ sources.fileextensions += *.cpp \
 headers.fileextensions = *.h
 
 # where to put the result
-outputdir = doc
+outputdir = ../doc
 
 outputformats = HTML
 
