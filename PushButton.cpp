@@ -119,7 +119,7 @@ void PushButton::paintEvent(QPaintEvent *event)
 
 void PushButton::setSize()
 {
-	int w = fontMetrics().width(m_ptr->text) + 18;
+	int w = fontMetrics().horizontalAdvance(m_ptr->text) + 18;
 
 	setMinimumSize(w < 100 ? 100 : w, 48);
 }

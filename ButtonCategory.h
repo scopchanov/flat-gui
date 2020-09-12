@@ -38,7 +38,7 @@ public:
 
 	void setName(const QString &str);
 	void setDescription(const QString &str);
-	void setSize(int n);
+	void setSize(int n) override;
 
 protected:
 	void paint(QPainter *painter) override;

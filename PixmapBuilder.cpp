@@ -25,6 +25,7 @@ SOFTWARE.
 #include "PixmapBuilder.h"
 #include "PixmapBuilder_p.h"
 #include <QPainter>
+#include <QPainterPath>
 #include <QPixmap>
 #include <QColor>
 

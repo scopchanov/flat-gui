@@ -50,14 +50,18 @@ GenericForm::GenericForm(QWidget *parent) :
 
 	f.setPointSize(10);
 
-	PixmapBuilder::create(PixmapBuilder::GridSmall, palette().color(QPalette::Highlight), 8).save(&buffer, "PNG");
+	PixmapBuilder::create(PixmapBuilder::GridSmall,
+						  palette().color(QPalette::Highlight), 8)
+			.save(&buffer, "PNG");
 
 	label->setFont(f);
 	label->setWordWrap(true);
 	label->setForegroundRole(QPalette::Text);
 	label->setText(tr("The fields marked with %1 need to be filled out. "
-					  "The rest of the fields are either optional or already contain information.")
-				   .arg(QString("&nbsp;<img src='data:image/png;base64," + ba.toBase64() + "' />&nbsp;")));
+					  "The rest of the fields are either optional or"
+					  " already contain information.")
+				   .arg(QString("&nbsp;<img src='data:image/png;base64,"
+								+ ba.toBase64() + "' />&nbsp;")));
 
 	m_ptr->layoutBody->addWidget(label);
 	m_ptr->layoutBody->addStretch();

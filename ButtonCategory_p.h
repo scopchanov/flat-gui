@@ -26,6 +26,7 @@ SOFTWARE.
 #define BUTTONCATEGORY_P_H
 
 #include <QtCore/qglobal.h>
+#include <QString>
 
 class ButtonCategoryPrivate
 {

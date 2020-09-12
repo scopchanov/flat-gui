@@ -25,7 +25,7 @@ SOFTWARE.
 #ifndef TEXTDATAMODEL_P_H
 #define TEXTDATAMODEL_P_H
 
-#include <QtCore/qglobal.h>
+#include <QString>
 
 class TextDataModelPrivate
 {

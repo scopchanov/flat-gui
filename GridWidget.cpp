@@ -59,7 +59,9 @@ void GridWidget::setDescription(const QString &text)
 	m_ptr->label->setText(text);
 }
 
-ButtonCategory *GridWidget::createButton(const QString &name, const QString &description, const QPixmap &pixmap, QAction *act)
+ButtonCategory *GridWidget::createButton(const QString &name,
+										 const QString &description,
+										 const QPixmap &pixmap, QAction *act)
 {
 	auto *button = new ButtonCategory(this);
 
@@ -91,7 +93,8 @@ void GridWidget::resizeEvent(QResizeEvent *)
 
 	neededHorizontalSpace = m_ptr->fullSize*buttonsInRow - m_ptr->spacing;
 
-	m_ptr->label->resize(neededHorizontalSpace, m_ptr->label->heightForWidth(neededHorizontalSpace));
+	m_ptr->label->resize(neededHorizontalSpace,
+						 m_ptr->label->heightForWidth(neededHorizontalSpace));
 
 	int numberOfRows = ceil(static_cast<qreal>(cnt) / buttonsInRow);
 	int neededVerticalSpace = m_ptr->fullSize*numberOfRows - m_ptr->spacing;
@@ -118,7 +121,8 @@ void GridWidget::resizeEvent(QResizeEvent *)
 		}
 	}
 
-	m_ptr->label->move(leftMargin, topMargin - m_ptr->label->height() - m_ptr->spacing);
+	m_ptr->label->move(leftMargin, topMargin - m_ptr->label->height()
+					   - m_ptr->spacing);
 	m_ptr->actualHeight = topMargin + neededVerticalSpace + m_ptr->spacing;
 }
 

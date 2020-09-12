@@ -71,7 +71,8 @@ AbstractEditor *TimeDataModel::editor() const
 
 	editor->setTime(m_ptr->time);
 
-	connect(editor, &TimeEditor::editingFinished, this, &TimeDataModel::onEditingFinished);
+	connect(editor, &TimeEditor::editingFinished,
+			this, &TimeDataModel::onEditingFinished);
 
 	return editor;
 }

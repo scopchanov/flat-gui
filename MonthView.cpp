@@ -67,7 +67,9 @@ void MonthView::onIncClicked()
 void MonthView::slide(bool left)
 {
 	if (!m_transitionInProgress) {
-		const auto &datePage(QDate(m_page->year(), m_page->month(), 1).addMonths(left ? 1 : -1));
+		const auto &datePage(QDate(m_page->year(),
+								   m_page->month(), 1).addMonths(left
+																 ? 1 : -1));
 		auto *transition = new HorizontalSlide(this);
 		auto *page = new MonthPage(this);
 
@@ -80,8 +82,10 @@ void MonthView::slide(bool left)
 		transition->setNextPage(page);
 		transition->start(left, 300);
 
-		connect(transition, &HorizontalSlide::finished, this, &MonthView::onSlideFinished);
-		connect(page, &MonthPage::dateChanged, this, &MonthView::dateChanged);
+		connect(transition, &HorizontalSlide::finished,
+				this, &MonthView::onSlideFinished);
+		connect(page, &MonthPage::dateChanged,
+				this, &MonthView::dateChanged);
 	}
 }
 
@@ -89,7 +93,8 @@ void MonthView::onSlideFinished()
 {
 	m_transitionInProgress = false;
 	m_page->close();
-	m_page = static_cast<MonthPage *>(static_cast<HorizontalSlide *>(sender())->nextPage());
+	m_page = static_cast<MonthPage *>(
+				 static_cast<HorizontalSlide *>(sender())->nextPage());
 
 	monthChanged(m_page->title());
 }

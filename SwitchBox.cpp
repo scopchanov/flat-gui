@@ -62,8 +62,10 @@ void SwitchBox::paintEvent(QPaintEvent *event)
 	painter.setClipping(true);
 	painter.setClipRect(event->rect());
 
-	painter.fillRect(rect().adjusted(1, 2, -1, -2), palette().color(QPalette::Light));
-	painter.fillRect(rect().adjusted(1, 2, m_ptr->offset - rect().width() - 1, -2), palette().color(QPalette::Highlight));
+	painter.fillRect(rect().adjusted(1, 2, -1, -2),
+					 palette().color(QPalette::Light));
+	painter.fillRect(rect().adjusted(1, 2, m_ptr->offset - rect().width() - 1, -2),
+					 palette().color(QPalette::Highlight));
 
 	painter.drawPixmap(m_ptr->offset, 3, 30, 30, m_ptr->pixmap);
 
@@ -91,8 +93,10 @@ void SwitchBox::doClick()
 	animation->setDuration(150);
 	animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-	connect(animation, &QVariantAnimation::valueChanged, this, &SwitchBox::onValueChanged);
-	connect(animation, &QVariantAnimation::finished, this, &SwitchBox::onFinished);
+	connect(animation, &QVariantAnimation::valueChanged,
+			this, &SwitchBox::onValueChanged);
+	connect(animation, &QVariantAnimation::finished,
+			this, &SwitchBox::onFinished);
 }
 
 void SwitchBox::onValueChanged(const QVariant &value)

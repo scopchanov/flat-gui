@@ -26,6 +26,7 @@ SOFTWARE.
 #define FIELD_P_H
 
 #include <QtCore/qglobal.h>
+#include <QString>
 
 class AbstractDataModel;
 class AbstractDecoration;

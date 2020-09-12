@@ -53,7 +53,8 @@ TimeEditor::TimeEditor(QWidget *parent) :
 
 	m_labTime->setAlignment(Qt::AlignCenter);
 	m_labTime->setFixedHeight(48);
-	m_labTime->setStyleSheet(".QLabel { border: none; border-bottom: 1px solid palette(midlight); }");
+	m_labTime->setStyleSheet(".QLabel { border: none;"
+							 " border-bottom: 1px solid palette(midlight); }");
 
 	m_sldHours->setOrientation(Qt::Horizontal);
 	m_sldHours->setMaximum(23);
@@ -125,10 +126,12 @@ void TimeEditor::reposition()
 
 void TimeEditor::updateTime()
 {
-	m_labTime->setText(QTime::fromString(QString("%1").arg(m_sldHours->value(), 2, 10, QChar('0'))
-										 + ":"
-										 + QString("%1").arg(m_sldMinutes->value(), 2, 10, QChar('0')),
-										 "HH:mm").toString(Qt::DefaultLocaleShortDate));
+	m_labTime->setText(
+				QTime::fromString(QString("%1").arg(m_sldHours->value(),
+													2, 10, QChar('0')) + ":"
+								  + QString("%1").arg(m_sldMinutes->value(),
+													  2, 10, QChar('0')),
+								  "HH:mm").toString(Qt::DefaultLocaleShortDate));
 }
 
 void TimeEditor::onCancel()

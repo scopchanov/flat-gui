@@ -26,6 +26,7 @@ SOFTWARE.
 #define TOOLBUTTON_P_H
 
 #include <QtCore/qglobal.h>
+#include <QPixmap>
 
 class QPixmap;
 class QPoint;

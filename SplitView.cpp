@@ -79,8 +79,10 @@ void SplitView::splitScreen()
 	animation->setDuration(150);
 	animation->start(QVariantAnimation::DeleteWhenStopped);
 
-	connect(animation, &QVariantAnimation::valueChanged, this, &SplitView::onSplitChanged);
-	connect(animation, &QVariantAnimation::finished, this, &SplitView::onSplitFinished);
+	connect(animation, &QVariantAnimation::valueChanged,
+			this, &SplitView::onSplitChanged);
+	connect(animation, &QVariantAnimation::finished,
+			this, &SplitView::onSplitFinished);
 }
 
 void SplitView::resizeEvent(QResizeEvent *)
@@ -88,7 +90,8 @@ void SplitView::resizeEvent(QResizeEvent *)
 	if (!m_ptr->sideWidget)
 		return;
 
-	m_ptr->setHorizontalSplit(width() - (m_ptr->slideIn ? 0 : m_ptr->sideWidget->width()));
+	m_ptr->setHorizontalSplit(width() - (m_ptr->slideIn
+										 ? 0 : m_ptr->sideWidget->width()));
 }
 
 void SplitView::onSplitChanged(const QVariant &value)

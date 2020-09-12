@@ -60,7 +60,7 @@ NavigationBar::~NavigationBar()
 void NavigationBar::setTitle(const QString &title)
 {
 	m_ptr->title = title.toUpper();
-	m_ptr->titleWidth = fontMetrics().width(m_ptr->title);
+	m_ptr->titleWidth = fontMetrics().horizontalAdvance(m_ptr->title);
 
 	update();
 }
@@ -74,7 +74,8 @@ void NavigationBar::paintEvent(QPaintEvent *event)
 	painter.setClipRect(event->rect());
 
 	painter.setPen(palette().color(QPalette::HighlightedText));
-	painter.setOpacity(w <= minWidth ? 0.0 : w >= minWidth + 48 ? 1.0 : (w - minWidth)/48.0);
+	painter.setOpacity(w <= minWidth ? 0.0 : w >= minWidth + 48
+									   ? 1.0 : (w - minWidth)/48.0);
 	painter.drawText(QRect(0, 0, w, 48), Qt::AlignCenter, m_ptr->title);
 }
 

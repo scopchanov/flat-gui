@@ -46,7 +46,8 @@ MonthPage::MonthPage(QWidget *parent) :
 
 QString MonthPage::title() const
 {
-	return QLocale().monthName(m_month).toUpper() + ", " + QString::number(m_year);
+	return QLocale().monthName(m_month).toUpper() + ", "
+			+ QString::number(m_year);
 }
 
 QDate MonthPage::date() const
@@ -102,7 +103,8 @@ void MonthPage::mousePressEvent(QMouseEvent *event)
 
 	m_day = 7*(clickPos.y()/48) + clickPos.x()/48 - m_offset;
 
-	if ((m_day > 0) && (m_day <= m_daysInMonth) && clickArea().contains(clickPos)) {
+	if ((m_day > 0) && (m_day <= m_daysInMonth)
+		&& clickArea().contains(clickPos)) {
 		setDown(true);
 		m_pressed = true;
 		repaint();
@@ -161,7 +163,11 @@ void MonthPage::paintEvent(QPaintEvent *event)
 		canvas.fill(Qt::transparent);
 
 		canvasPainter.begin(&canvas);
-		canvasPainter.setPen(palette().color(selected ? QPalette::HighlightedText : (n + m_offset) % 7 + 1 > 5 ? QPalette::Mid : QPalette::ButtonText));
+		canvasPainter.setPen(palette().color(selected
+											 ? QPalette::HighlightedText
+											 : (n + m_offset) % 7 + 1 > 5
+											   ? QPalette::Mid
+											   : QPalette::ButtonText));
 		canvasPainter.drawText(rectDay, Qt::AlignCenter, QString::number(n));
 
 		painter.translate(topLeft);

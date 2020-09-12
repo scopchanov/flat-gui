@@ -54,7 +54,10 @@ void PageCategories::setDescription(const QString &text)
     m_grid->setDescription(text);
 }
 
-ButtonCategory *PageCategories::createButton(const QString &name, const QString &description, const QPixmap &pixmap, QAction *act)
+ButtonCategory *PageCategories::createButton(const QString &name,
+											 const QString &description,
+											 const QPixmap &pixmap,
+											 QAction *act)
 {
     return m_grid->createButton(name, description, pixmap, act);
 }

@@ -41,7 +41,8 @@ Splash::Splash(const QPixmap &pixmap) :
 	animation->setEasingCurve(QEasingCurve::OutQuad);
 	animation->start(QPropertyAnimation::DeleteWhenStopped);
 
-	connect(animation, &QPropertyAnimation::finished, this, &Splash::splashShown);
+	connect(animation, &QPropertyAnimation::finished,
+			this, &Splash::splashShown);
 }
 
 void Splash::mousePressEvent(QMouseEvent *)

@@ -26,6 +26,7 @@ SOFTWARE.
 #define PUSHBUTTON_P_H
 
 #include <QtCore/qglobal.h>
+#include <QString>
 
 class PushButtonPrivate
 {

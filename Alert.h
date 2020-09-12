@@ -43,9 +43,11 @@ public:
 
 	QWidget *body() const;
 
-	static int showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex);
+	static int showAlert(QWidget *parent, const QPixmap &icon,
+						 const QString &title, const QString &message,
+						 const QStringList &buttonNames, int defaultButtonIndex);
 
-	void reject();
+	void reject() override;
 
 protected:
 	void showEvent(QShowEvent *event) override;

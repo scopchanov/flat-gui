@@ -25,6 +25,9 @@ SOFTWARE.
 #ifndef SLIDEVIEW_P_H
 #define SLIDEVIEW_P_H
 
+#include <QWidget>
+#include <QWidgetList>
+
 class SlideView;
 
 class SlideViewPrivate

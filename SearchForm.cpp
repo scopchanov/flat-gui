@@ -49,7 +49,9 @@ SearchForm::SearchForm(QWidget *parent) :
 
 	model->setPlaceholderText(placeholderText);
 
-	decoration->setPixmap(PixmapBuilder::create(PixmapBuilder::Glass, palette().color(QPalette::Text)));
+	decoration->setPixmap(
+				PixmapBuilder::create(PixmapBuilder::Glass,
+									  palette().color(QPalette::Text)));
 
 	m_ptr->field->setDataModel(model);
 	m_ptr->field->setDecoration(decoration);
@@ -67,7 +69,8 @@ SearchForm::SearchForm(QWidget *parent) :
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
 	connect(btnMatch, &ToolButton::clicked, this, &SearchForm::onMatchClicked);
-	connect(m_ptr->field, &AbstractField::contentChanged, this, &SearchForm::contentChanged);
+	connect(m_ptr->field, &AbstractField::contentChanged,
+			this, &SearchForm::contentChanged);
 }
 
 SearchForm::~SearchForm()

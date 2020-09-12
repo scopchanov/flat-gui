@@ -38,7 +38,8 @@ public:
 	~GridWidget();
 
 	void setDescription(const QString &text);
-	ButtonCategory *createButton(const QString &name, const QString &description, const QPixmap &pixmap, QAction *act);
+	ButtonCategory *createButton(const QString &name, const QString &description,
+								 const QPixmap &pixmap, QAction *act);
 
 protected:
 	void resizeEvent(QResizeEvent *) override;

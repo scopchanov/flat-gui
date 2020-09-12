@@ -38,7 +38,8 @@ public:
     explicit PageCategories(QWidget *parent = nullptr);
 
     void setDescription(const QString &text);
-    ButtonCategory *createButton(const QString &name, const QString &description, const QPixmap &pixmap, QAction *act);
+	ButtonCategory *createButton(const QString &name, const QString &description,
+								 const QPixmap &pixmap, QAction *act);
 
 private:
     GridWidget *m_grid;

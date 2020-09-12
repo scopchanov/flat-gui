@@ -86,8 +86,10 @@ void HorizontalSlide::start(bool slideLeft, int speed)
 //	animation->setEasingCurve(QEasingCurve::OutBack);
 	animation->start(QVariantAnimation::DeleteWhenStopped);
 
-	connect(animation, &QVariantAnimation::valueChanged, this, &HorizontalSlide::onValueChanged);
-	connect(animation, &QVariantAnimation::finished, this, &HorizontalSlide::onAnimationFinished);
+	connect(animation, &QVariantAnimation::valueChanged,
+			this, &HorizontalSlide::onValueChanged);
+	connect(animation, &QVariantAnimation::finished,
+			this, &HorizontalSlide::onAnimationFinished);
 }
 
 void HorizontalSlide::onValueChanged(const QVariant &value)

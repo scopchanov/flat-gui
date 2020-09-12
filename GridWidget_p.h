@@ -29,6 +29,7 @@ SOFTWARE.
 
 class GridWidget;
 class QLabel;
+class QWidget;
 
 class GridWidgetPrivate
 {

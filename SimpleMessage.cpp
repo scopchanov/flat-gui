@@ -37,7 +37,8 @@ SOFTWARE.
  * \inmodule FlatGui
  */
 
-void SimpleMessage::showMessage(QWidget *parent, const QPixmap &icon, const QString &message, int timeout)
+void SimpleMessage::showMessage(QWidget *parent, const QPixmap &icon,
+								const QString &message, int timeout)
 {
 	SimpleMessage(parent, icon, message, timeout).exec();
 }
@@ -49,24 +50,30 @@ void SimpleMessage::showEvent(QShowEvent *event)
 		return;
 	}
 
-	const QRect parentRect(parentWidget()->mapToGlobal(QPoint(0, 0)), parentWidget()->size());
+	const QRect parentRect(parentWidget()->mapToGlobal(QPoint(0, 0)),
+						   parentWidget()->size());
 	auto *flyIn = new QPropertyAnimation(this, "pos");
 	auto *timer = new QTimer(this);
 
 	timer->setSingleShot(true);
 	timer->setInterval(m_timeout);
 
-	flyIn->setStartValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, size(), parentRect).topLeft());
-	flyIn->setEndValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(), parentRect).topLeft());
+	flyIn->setStartValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter
+											 | Qt::AlignBottom, size(),
+											 parentRect).topLeft());
+	flyIn->setEndValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
+										   size(), parentRect).topLeft());
 	flyIn->setDuration(500);
 	flyIn->setEasingCurve(QEasingCurve::OutBack);
 	flyIn->start(QPropertyAnimation::DeleteWhenStopped);
 
-	connect(flyIn, &QPropertyAnimation::finished, timer, static_cast<void (QTimer::*)(void)>(&QTimer::start));
+	connect(flyIn, &QPropertyAnimation::finished,
+			timer, static_cast<void (QTimer::*)(void)>(&QTimer::start));
 	connect(timer, &QTimer::timeout, this, &SimpleMessage::onTimeout);
 }
 
-SimpleMessage::SimpleMessage(QWidget *parent, const QPixmap &icon, const QString &message, int timeout) :
+SimpleMessage::SimpleMessage(QWidget *parent, const QPixmap &icon,
+							 const QString &message, int timeout) :
 	QDialog(parent, Qt::FramelessWindowHint),
 	m_timeout(timeout)
 {
@@ -86,7 +93,8 @@ SimpleMessage::SimpleMessage(QWidget *parent, const QPixmap &icon, const QString
 	labMessage->setWordWrap(true);
 	labMessage->setAlignment(Qt::AlignCenter);
 
-	btnClose->setPixmap(PixmapBuilder::create(PixmapBuilder::Cross, palette().color(QPalette::Mid)));
+	btnClose->setPixmap(PixmapBuilder::create(PixmapBuilder::Cross,
+											  palette().color(QPalette::Mid)));
 	btnClose->setSize(32);
 
 	layoutBody->addWidget(labIcon);
@@ -126,5 +134,6 @@ void SimpleMessage::onTimeout()
 	fadeOut->setDuration(150);
 	fadeOut->start(QPropertyAnimation::DeleteWhenStopped);
 
-	connect(fadeOut, &QPropertyAnimation::finished, this, &SimpleMessage::accept);
+	connect(fadeOut, &QPropertyAnimation::finished,
+			this, &SimpleMessage::accept);
 }

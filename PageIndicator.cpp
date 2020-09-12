@@ -85,5 +85,6 @@ void PageIndicator::setCount(int cnt)
 void PageIndicator::setCurrentIndex(int n, int)
 {
 	for (int m = 0; m < m_layoutDots->count(); m++)
-		static_cast<QLabel *>(m_layoutDots->itemAt(m)->widget())->setPixmap(m == n ? m_pixmapActive : m_pixmapInactive);
+		static_cast<QLabel *>(m_layoutDots->itemAt(m)->widget())
+			->setPixmap(m == n ? m_pixmapActive : m_pixmapInactive);
 }

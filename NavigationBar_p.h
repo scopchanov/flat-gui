@@ -25,7 +25,7 @@ SOFTWARE.
 #ifndef NAVIGATIONBAR_P_H
 #define NAVIGATIONBAR_P_H
 
-class QString;
+#include <QString>
 
 class NavigationBarPrivate
 {

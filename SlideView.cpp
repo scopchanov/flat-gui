@@ -179,7 +179,8 @@ void SlideViewPrivate::slideToPage(int n, int speed)
 	transition->setNextPage(pages.at(n));
 	transition->start(n > currentIndex, speed);
 
-	QObject::connect(transition, &HorizontalSlide::finished, [this, transition](){
+	QObject::connect(transition, &HorizontalSlide::finished,
+					 [this, transition](){
 		currentIndex = pages.indexOf(transition->nextPage());
 		busy = false;
 

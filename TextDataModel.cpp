@@ -72,7 +72,8 @@ AbstractEditor *TextDataModel::editor() const
 	editor->setText(m_ptr->text);
 	editor->setPlaceholderText(m_ptr->placeholderText);
 
-	connect(editor, &TextEditor::editingFinished, this, &TextDataModel::onEditingFinished);
+	connect(editor, &TextEditor::editingFinished,
+			this, &TextDataModel::onEditingFinished);
 
 	return editor;
 }

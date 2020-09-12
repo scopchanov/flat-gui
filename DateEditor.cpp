@@ -51,10 +51,12 @@ DateEditor::DateEditor(QWidget *parent) :
 	auto *btnBack = new ToolButton(this);
 	auto *btnNext = new ToolButton(this);
 
-	btnBack->setPixmap(PixmapBuilder::create(PixmapBuilder::Back, palette().color(QPalette::Text)));
+	btnBack->setPixmap(PixmapBuilder::create(PixmapBuilder::Back,
+											 palette().color(QPalette::Text)));
 	btnBack->setSize(48);
 
-	btnNext->setPixmap(PixmapBuilder::create(PixmapBuilder::Next, palette().color(QPalette::Text)));
+	btnNext->setPixmap(PixmapBuilder::create(PixmapBuilder::Next,
+											 palette().color(QPalette::Text)));
 	btnNext->setSize(48);
 
 	toolbar->addWidget(btnBack);
@@ -68,8 +70,11 @@ DateEditor::DateEditor(QWidget *parent) :
 
 	for (int n = 0; n < 7; n++)
 		str.append("<td style='color: "
-				   + palette().color(n < 5 ? QPalette::ButtonText : QPalette::Mid).name()
-				   + "' width='48' align='center'>" + QString(QLocale().dayName(n + 1).toUpper().at(0))
+				   + palette().color(n < 5
+									 ? QPalette::ButtonText
+									 : QPalette::Mid).name()
+				   + "' width='48' align='center'>"
+				   + QString(QLocale().dayName(n + 1).toUpper().at(0))
 				   + "</td>");
 
 	str.append("</tr></table>");

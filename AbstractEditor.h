@@ -35,7 +35,8 @@ class FLATGUISHARED_EXPORT AbstractEditor : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit AbstractEditor(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+	explicit AbstractEditor(QWidget *parent = nullptr,
+							Qt::WindowFlags f = Qt::WindowFlags());
 	~AbstractEditor();
 
 	AbstractField *field() const;

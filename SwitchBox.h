@@ -41,7 +41,7 @@ public:
 
 protected:
 	void paintEvent(QPaintEvent *event) override final;
-	void doClick();
+	void doClick() override;
 
 private:
 	SwitchBoxPrivate *m_ptr;

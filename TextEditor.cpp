@@ -53,7 +53,8 @@ TextEditor::TextEditor(QWidget *parent) :
 	setBackgroundRole(QPalette::Highlight);
 	setFixedHeight(32);
 
-	connect(m_lineEdit, &LineEdit::editingFinished, this, &TextEditor::onEditingFinished);
+	connect(m_lineEdit, &LineEdit::editingFinished,
+			this, &TextEditor::onEditingFinished);
 }
 
 QString TextEditor::text() const
@@ -84,7 +85,9 @@ void TextEditor::setup()
 
 void TextEditor::onEditingFinished()
 {
-	m_lineEdit->blockSignals(true); // this line is needed to prevent the textChanged() from being emitted twice
+	m_lineEdit->blockSignals(true); // this line is needed to prevent
+									// the textChanged() from being emitted
+									// twice
 
 	editingFinished(!m_lineEdit->isRejected());
 }
