@@ -32,8 +32,9 @@ SOURCES += \
 HEADERS += \
         MainWindow.h
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../bin/ -lFlatGui
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../bin/ -lFlatGuid
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGui
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGuid
+else:unix: LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGui
 
-INCLUDEPATH += $$PWD/../../../src
-DEPENDPATH += $$PWD/../../../src
+INCLUDEPATH += $$PWD/../../../deploy/include
+DEPENDPATH += $$PWD/../../../deploy/include
