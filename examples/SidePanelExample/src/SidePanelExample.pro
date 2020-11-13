@@ -1,6 +1,6 @@
 QT += widgets
 
-TARGET = sidebar
+TARGET = SidePanelExample
 TEMPLATE = app
 
 SOURCES += \

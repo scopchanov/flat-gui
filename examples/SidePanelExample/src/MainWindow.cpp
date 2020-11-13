@@ -95,12 +95,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	splitView->setBaseWidget(labBody);
 	splitView->setSideWidget(sidePanel);
+	splitView->setSplitSide(SplitView::ST_Right);
 
 	layoutMain->addWidget(toolBar);
 	layoutMain->addWidget(splitView);
 	layoutMain->setContentsMargins(0, 0, 0, 0);
 	layoutMain->setSpacing(0);
 
+	setWindowTitle(tr("Side Panel Example"));
 	setCentralWidget(widget);
 	resize(480, 640);
 
