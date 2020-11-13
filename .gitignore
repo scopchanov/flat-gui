@@ -10,8 +10,6 @@ $RECYCLE.BIN/
 bin/
 build/
 doc/
-include/
-examples/
 misc/
 
 # Qt

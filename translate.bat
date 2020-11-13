@@ -1,8 +1,0 @@
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_bg.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_de.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_fr.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_es.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_it.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_pl.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_ru.ts"
-lrelease "\Documents\Projects\Libraries\src\FlatGui\translations\FlatGui_tr.ts"
