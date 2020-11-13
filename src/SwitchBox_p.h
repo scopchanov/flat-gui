@@ -31,6 +31,8 @@ class SwitchBox;
 
 class SwitchBoxPrivate
 {
+	Q_DISABLE_COPY(SwitchBoxPrivate)
+
 	explicit SwitchBoxPrivate(SwitchBox *parent);
 
 	void createPixmapSlider();

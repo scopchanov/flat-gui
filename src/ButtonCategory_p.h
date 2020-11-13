@@ -30,6 +30,8 @@ SOFTWARE.
 
 class ButtonCategoryPrivate
 {
+	Q_DISABLE_COPY(ButtonCategoryPrivate)
+
 	explicit ButtonCategoryPrivate();
 
 	QString name;

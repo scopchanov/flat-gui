@@ -25,11 +25,15 @@ SOFTWARE.
 #ifndef SEARCHFORM_P_H
 #define SEARCHFORM_P_H
 
+#include <QtCore/qglobal.h>
+
 class SearchForm;
 class AbstractField;
 
 class SearchFormPrivate
 {
+	Q_DISABLE_COPY(SearchFormPrivate)
+
 	explicit SearchFormPrivate(SearchForm *parent);
 
 	AbstractField *field;

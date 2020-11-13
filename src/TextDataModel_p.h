@@ -29,6 +29,8 @@ SOFTWARE.
 
 class TextDataModelPrivate
 {
+	Q_DISABLE_COPY(TextDataModelPrivate)
+
 	explicit TextDataModelPrivate();
 
 	QString text;

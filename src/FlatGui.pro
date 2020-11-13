@@ -26,7 +26,7 @@ VERSION = $$PROJECT_VERSION
 
 QT += widgets
 
-CONFIG += qt plugin c++11
+CONFIG += c++11
 CONFIG += skip_target_version_ext
 DEFINES += QT_DEPRECATED_WARNINGS
 

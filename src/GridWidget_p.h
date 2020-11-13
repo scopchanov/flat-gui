@@ -33,6 +33,8 @@ class QWidget;
 
 class GridWidgetPrivate
 {
+	Q_DISABLE_COPY(GridWidgetPrivate)
+
 	explicit GridWidgetPrivate(GridWidget *parent);
 
 	const int buttonSize;

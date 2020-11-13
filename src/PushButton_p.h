@@ -30,6 +30,8 @@ SOFTWARE.
 
 class PushButtonPrivate
 {
+	Q_DISABLE_COPY(PushButtonPrivate)
+
 	explicit PushButtonPrivate();
 
 	QString text;

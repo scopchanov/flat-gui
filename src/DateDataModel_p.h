@@ -29,6 +29,8 @@ SOFTWARE.
 
 class DateDataModelPrivate
 {
+	Q_DISABLE_COPY(DateDataModelPrivate)
+
 	explicit DateDataModelPrivate();
 
 	QDate date;

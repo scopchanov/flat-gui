@@ -32,6 +32,8 @@ class SlideView;
 
 class SlideViewPrivate
 {
+	Q_DISABLE_COPY(SlideViewPrivate)
+
 	explicit SlideViewPrivate(SlideView *parent);
 
 	void slideToPage(int n, int speed);

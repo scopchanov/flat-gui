@@ -29,6 +29,8 @@ SOFTWARE.
 
 class TimeDataModelPrivate
 {
+	Q_DISABLE_COPY(TimeDataModelPrivate)
+
 	explicit TimeDataModelPrivate();
 
 	QTime time;

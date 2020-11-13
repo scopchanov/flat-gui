@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef FIELD_P_H
-#define FIELD_P_H
+#ifndef ABSTRACTFIELD_P_H
+#define ABSTRACTFIELD_P_H
 
 #include <QtCore/qglobal.h>
 #include <QString>
@@ -32,7 +32,10 @@ class AbstractDataModel;
 class AbstractDecoration;
 class ToolButton;
 
-class AbstractFieldPrivate {
+class AbstractFieldPrivate
+{
+	Q_DISABLE_COPY(AbstractFieldPrivate)
+
 	explicit AbstractFieldPrivate();
 
 	AbstractDataModel *model;
@@ -46,4 +49,4 @@ class AbstractFieldPrivate {
 	friend class AbstractField;
 };
 
-#endif // FIELD_P_H
+#endif // ABSTRACTFIELD_P_H

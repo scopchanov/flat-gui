@@ -32,6 +32,8 @@ class QVBoxLayout;
 
 class GenericFormPrivate
 {
+	Q_DISABLE_COPY(GenericFormPrivate)
+
 	explicit GenericFormPrivate();
 
 	QList<AbstractField *> fields;

@@ -25,10 +25,14 @@ SOFTWARE.
 #ifndef ABSTRACTEDITOR_P_H
 #define ABSTRACTEDITOR_P_H
 
+#include <QtCore/qglobal.h>
+
 class AbstractField;
 
 class AbstractEditorPrivate
 {
+	Q_DISABLE_COPY(AbstractEditorPrivate)
+
 	explicit AbstractEditorPrivate();
 
 	AbstractField *field;

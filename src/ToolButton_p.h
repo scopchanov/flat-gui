@@ -33,6 +33,8 @@ class QPoint;
 
 class ToolButtonPrivate
 {
+	Q_DISABLE_COPY(ToolButtonPrivate)
+
 	explicit ToolButtonPrivate();
 
 	QPixmap pixmap;

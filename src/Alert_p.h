@@ -25,6 +25,8 @@ SOFTWARE.
 #ifndef ALERT_P_H
 #define ALERT_P_H
 
+#include <QtCore/qglobal.h>
+
 class Alert;
 class QWidget;
 class ToolBar;
@@ -33,6 +35,8 @@ class QVBoxLayout;
 
 class AlertPrivate
 {
+	Q_DISABLE_COPY(AlertPrivate)
+
 	explicit AlertPrivate(Alert *parent);
 
 	QWidget *body;

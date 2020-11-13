@@ -31,6 +31,8 @@ class AbstractValidator;
 
 class AbstractDataModelPrivate
 {
+	Q_DISABLE_COPY(AbstractDataModelPrivate)
+
 	explicit AbstractDataModelPrivate();
 
 	AbstractValidator *validator;

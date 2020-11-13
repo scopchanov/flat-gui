@@ -29,6 +29,8 @@ SOFTWARE.
 
 class DoubleValidatorPrivate
 {
+	Q_DISABLE_COPY(DoubleValidatorPrivate)
+
 	explicit DoubleValidatorPrivate();
 
 	qreal min;

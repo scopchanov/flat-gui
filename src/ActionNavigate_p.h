@@ -25,11 +25,15 @@ SOFTWARE.
 #ifndef ACTIONNAVIGATE_P_H
 #define ACTIONNAVIGATE_P_H
 
+#include <QtCore/qglobal.h>
+
 class SlideView;
 class QWidget;
 
 class ActionNavigatePrivate
 {
+	Q_DISABLE_COPY(ActionNavigatePrivate)
+
 	explicit ActionNavigatePrivate();
 
 	SlideView *view;

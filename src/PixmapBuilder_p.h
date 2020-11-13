@@ -25,12 +25,15 @@ SOFTWARE.
 #ifndef PIXMAPBUILDER_P_H
 #define PIXMAPBUILDER_P_H
 
+#include <QtCore/qglobal.h>
+
 class QPainter;
 class QColor;
 
 class PixmapBuilderPrivate
 {
-public:
+	Q_DISABLE_COPY(PixmapBuilderPrivate)
+
 	explicit PixmapBuilderPrivate();
 
 	void drawGrid(QPainter *painter, const QColor &color);

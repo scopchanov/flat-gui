@@ -29,6 +29,8 @@ SOFTWARE.
 
 class NavigationBarPrivate
 {
+	Q_DISABLE_COPY(NavigationBarPrivate)
+
 	explicit NavigationBarPrivate();
 
 	QString title;
