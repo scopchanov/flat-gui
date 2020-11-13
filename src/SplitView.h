@@ -1,11 +1,12 @@
 #ifndef SPLITVIEW_H
 #define SPLITVIEW_H
 
+#include "flatgui_global.h"
 #include <QWidget>
 
 class SplitViewPrivate;
 
-class SplitView : public QWidget
+class FLATGUISHARED_EXPORT SplitView : public QWidget
 {
 	Q_OBJECT
 public:

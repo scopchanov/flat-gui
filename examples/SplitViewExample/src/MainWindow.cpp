@@ -104,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	setCentralWidget(widget);
 	resize(480, 640);
 
-	connect(btnMenu, &ToolButton::clicked, splitView, &SplitView::splitScreen);
+	connect(btnMenu, &ToolButton::clicked, splitView, &SplitView::toggleSideWidget);
 	connect(btnAlert, &PushButton::clicked, this, &MainWindow::onAlert);
 	connect(btnDrumset, &PushButton::clicked, this, &MainWindow::onDrumset);
 }
