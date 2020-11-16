@@ -36,7 +36,7 @@ class SlideViewPrivate
 
 	explicit SlideViewPrivate(SlideView *parent);
 
-	void slideToPage(int n, int speed);
+	void slideToPage(int n, int duration);
 
 	SlideView *p_ptr;
 

@@ -33,18 +33,26 @@ class SlideViewPrivate;
 class FLATGUISHARED_EXPORT SlideView : public QWidget
 {
 	Q_OBJECT
+	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
+	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
+			   NOTIFY currentIndexChanged)
 public:
 	explicit SlideView(QWidget *parent = nullptr);
 	~SlideView();
 
+	int pageCount() const;
+	int currentIndex() const;
+	void setCurrentIndex(int index);
+
 	void addHomePage(QWidget *page);
-	void addPage(QWidget *page, bool dontStack = true);
+	void addPage(QWidget *page);
+	void addPageStacked(QWidget *page);
 
 public slots:
 	void gotoPreviousPage();
 	void gotoFirstPage();
 	void gotoNextPage();
-	void gotoPage(int n);
+	void gotoPage(int index, int duration);
 
 protected:
 	void resizeEvent(QResizeEvent *) override;
@@ -53,8 +61,8 @@ private:
 	SlideViewPrivate *m_ptr;
 
 signals:
-	void countChanged(int);
-	void currentIndexChanged(int, int);
+	void pageCountChanged();
+	void currentIndexChanged();
 	void currentPageChanged(const QString &);
 };
 

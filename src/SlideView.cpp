@@ -27,14 +27,14 @@ SOFTWARE.
 #include "HorizontalSlide.h"
 
 /*!
- * \class SlideView
- * \inmodule FlatGui
- * \brief Provides a container of stacked widgets
- *
- * The pages are shown one at a time. SlideView switches from one page
- * to another using a horizontal sliding animation. Pages are added to
- * the view using addPage. Any class inheriting from QWidget could be
- * used as a page.
+	\class SlideView
+	\inmodule FlatGui
+	\brief Provides a container for stacked widgets.
+
+	The pages are shown one at a time. SlideView switches from one page
+	to another using a horizontal sliding animation. Pages are added to
+	the view using addPage or addPageStacked. Any class inheriting from QWidget
+	could be used as a page.
  */
 
 SlideView::SlideView(QWidget *parent) :
@@ -50,11 +50,46 @@ SlideView::~SlideView()
 }
 
 /*!
- * \brief Sets the \a page as the first page displayed by the view.
- * The page is added to the list of the pages and shown.
- * The countChanged, currentIndexChanged and currentPageChanged signals
- * are emitted. If a nullptr is passed as an argument this function does
- * nothing.
+	\property SlideView::pageCount
+	\brief The count of the pages, which has been added to the view.
+
+	This property's default is \c 0.
+ */
+
+int SlideView::pageCount() const
+{
+	return m_ptr->pages.count();
+}
+
+/*!
+	\property SlideView::currentIndex
+	\brief The index of the currently displayed page, or \c -1 if no pages has
+	been added to the view.
+
+	This property's default is \c -1.
+ */
+
+int SlideView::currentIndex() const
+{
+	return m_ptr->currentIndex;
+}
+
+void SlideView::setCurrentIndex(int index)
+{
+	if (m_ptr->currentIndex == index)
+		return;
+
+	m_ptr->currentIndex = index;
+
+	emit currentIndexChanged();
+}
+
+/*!
+	Sets the \a page as the first page displayed by the view.
+	The page is added to the list of the pages and shown.
+	The pageCountChanged, currentIndexChanged and currentPageChanged signals
+	are emitted. If a \c nullptr is passed as an argument, this function does
+	nothing.
  */
 
 void SlideView::addHomePage(QWidget *page)
@@ -69,83 +104,115 @@ void SlideView::addHomePage(QWidget *page)
 	page->setParent(this);
 	page->show();
 
-	countChanged(1);
-	currentIndexChanged(0, 1);
-	currentPageChanged(page->windowTitle());
+	emit pageCountChanged();
+	emit currentIndexChanged();
+	emit currentPageChanged(page->windowTitle());
 }
 
 /*!
- * \brief SlideView::addPage
- */
+	Adds the page \a page to the children of this class and to the stack of
+	pages. This function emits the pageCountChanged signal.
 
-void SlideView::addPage(QWidget *page, bool dontStack)
+	\sa addHomePage(), addPageStacked()
+*/
+
+void SlideView::addPage(QWidget *page)
 {
 	if (!page || m_ptr->pages.isEmpty())
 		return;
 
 	page->setParent(this);
 
-	if (dontStack)
-		while (m_ptr->currentIndex < m_ptr->pages.count() - 1)
-			m_ptr->pages.takeLast();
+	while (m_ptr->currentIndex < m_ptr->pages.count() - 1)
+		m_ptr->pages.takeLast();
 
 	m_ptr->pages.append(page);
 
-	countChanged(m_ptr->pages.count());
+	emit pageCountChanged();
 
-	if (dontStack) {
-		page->resize(size());
-		gotoNextPage();
-	}
+	page->resize(size());
+	gotoNextPage();
 }
 
 /*!
- * \brief SlideView::gotoPreviousPage
+	Adds the page \a page to the children of this class. This function emits
+	the pageCountChanged signal.
+
+	\sa addHomePage(), addPage()
+*/
+
+void SlideView::addPageStacked(QWidget *page)
+{
+	if (!page || m_ptr->pages.isEmpty())
+		return;
+
+	page->setParent(this);
+
+	m_ptr->pages.append(page);
+
+	emit pageCountChanged();
+}
+
+/*!
+	Slides the previous page into the view, i.e. the page with index smaller by
+	one than the index of the current page.
+
+	This is a convenience function. It is equivalent to calling gotoPage(
+	currentIndex() - 1, 300).
+
+	\sa gotoPage()
  */
 
 void SlideView::gotoPreviousPage()
 {
-	if (m_ptr->currentIndex < 1)
-		return;
-
-	m_ptr->slideToPage(m_ptr->currentIndex - 1, 300);
+	gotoPage(m_ptr->currentIndex - 1, 300);
 }
 
 /*!
- * \brief SlideView::gotoFirstPage
+	Slides the first page into the view, i.e. the page with the index 0.
+
+	This is a convenience function. It is equivalent to calling gotoPage(0,
+	100).
+
+	\sa gotoPage()
  */
 
 void SlideView::gotoFirstPage()
 {
-	if (m_ptr->currentIndex < 1)
-		return;
-
-	m_ptr->slideToPage(0, 100);
+	gotoPage(0, 100);
 }
 
 /*!
- * \brief SlideView::gotoNextPage
+	Slides the next page into the view, i.e. the page with index larger by one
+	than the index of the current page.
+
+	This is a convenience function. It is equivalent to calling gotoPage(
+	currentIndex() + 1, 300).
+
+	\sa gotoPage()
  */
 
 void SlideView::gotoNextPage()
 {
-	if (m_ptr->currentIndex > m_ptr->pages.count() - 2)
-		return;
-
-	m_ptr->slideToPage(m_ptr->currentIndex + 1, 300);
+	gotoPage(m_ptr->currentIndex + 1, 300);
 }
 
 /*!
- * \brief SlideView::gotoPage
+	Slides the page with index \a index into the view for \a duration ms. If
+	this were the current page, this function does nothing.
  */
 
-void SlideView::gotoPage(int n)
+void SlideView::gotoPage(int index, int duration)
 {
-	if ((n < 0) || (m_ptr->currentIndex == n))
+	if ((index < 0) || (m_ptr->currentIndex == index))
 		return;
 
-	m_ptr->slideToPage(n, 300);
+	m_ptr->slideToPage(index, duration);
 }
+
+/*!
+	\reimp
+ */
 
 void SlideView::resizeEvent(QResizeEvent *)
 {
@@ -162,13 +229,13 @@ SlideViewPrivate::SlideViewPrivate(SlideView *parent) :
 
 }
 
-void SlideViewPrivate::slideToPage(int n, int speed)
+void SlideViewPrivate::slideToPage(int n, int duration)
 {
 	if (busy
 		|| pages.isEmpty()
 		|| (currentIndex < 0)
 		|| (n == currentIndex)
-		|| (speed < 0))
+		|| (duration < 0))
 		return;
 
 	auto *transition = new HorizontalSlide(p_ptr);
@@ -177,14 +244,14 @@ void SlideViewPrivate::slideToPage(int n, int speed)
 
 	transition->setCurrentPage(pages.at(currentIndex));
 	transition->setNextPage(pages.at(n));
-	transition->start(n > currentIndex, speed);
+	transition->start(n > currentIndex, duration);
 
 	QObject::connect(transition, &HorizontalSlide::finished,
 					 [this, transition](){
 		currentIndex = pages.indexOf(transition->nextPage());
 		busy = false;
 
-		p_ptr->currentIndexChanged(currentIndex, pages.count());
+		p_ptr->currentIndexChanged();
 		p_ptr->currentPageChanged(pages.at(currentIndex)->windowTitle());
 	});
 }
