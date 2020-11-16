@@ -2,9 +2,6 @@
 	\module FlatGui
 	\ingroup libraries
 
-	\indexpage class-index.html
-	\startpage Home
-
 	\title Flat GUI
 	\brief Contains classes for writing mobile-app-like
 	graphical user interfaces for desktop applications.

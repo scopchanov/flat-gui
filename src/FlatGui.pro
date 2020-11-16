@@ -33,7 +33,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 TEMPLATE    = lib
 TARGET	    = $$qtLibraryTarget(FlatGui)
 DESTDIR	    = ../deploy/lib
-#DLLDESTDIR  = "../../../WaageScan Advanced/app/deploy"
 
 TRANSLATIONS = \
     translations/FlatGui_de.ts \
@@ -165,6 +164,7 @@ HEADERS += \
     ValidatorFactory.h
 
 OTHER_FILES += \
+    FlatGui.qdocconf \
     FlatGui.qdoc
 
 RESOURCES += \
