@@ -53,7 +53,7 @@ SlideView::~SlideView()
 	Appends the page \a page to the children of this class. This function emits
 	the pageCountChanged signal.
 
-	\sa addHomePage(), addPage()
+	\sa pageCount(), currentPage()
 */
 
 void SlideView::appendPage(QWidget *page)
@@ -197,10 +197,12 @@ SlideViewPrivate::SlideViewPrivate(SlideView *parent) :
 
 }
 
-void SlideViewPrivate::foo()
+// TODO: Make this method part of the public API
+
+void SlideViewPrivate::removeRemainingPages()
 {
 	while (currentIndex < pages.count() - 1)
-		pages.takeLast();
+		pages.removeLast();
 }
 
 void SlideViewPrivate::slideToPage(int index, int duration)

@@ -36,7 +36,7 @@ class SlideViewPrivate
 
 	explicit SlideViewPrivate(SlideView *parent);
 
-	void foo();
+	void removeRemainingPages();
 	void slideToPage(int index, int duration);
 
 	SlideView *p_ptr;
