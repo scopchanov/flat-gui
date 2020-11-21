@@ -22,30 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SLIDEVIEW_P_H
-#define SLIDEVIEW_P_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QWidget>
-#include <QWidgetList>
+#include <QMainWindow>
 
 class SlideView;
 
-class SlideViewPrivate
+class MainWindow : public QMainWindow
 {
-	Q_DISABLE_COPY(SlideViewPrivate)
+	Q_OBJECT
+public:
+	MainWindow(QWidget *parent = nullptr);
 
-	explicit SlideViewPrivate(SlideView *parent);
+private:
+	QWidget *createLabel(const QString &title);
+	QWidget *createStretch();
 
-	void slideToPage(int n, int duration);
-
-	SlideView *p_ptr;
-
-	QWidgetList pages;
-	int currentIndex;
-	int nextIndex;
-	bool busy;
-
-	friend class SlideView;
+private slots:
+	void enableButtons(SlideView *slideView, QAction *actPrevious, QAction *actNext);
 };
-
-#endif // SLIDEVIEW_P_H
+#endif // MAINWINDOW_H

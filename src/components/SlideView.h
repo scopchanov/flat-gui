@@ -22,43 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "ActionNavigate.h"
-#include "ActionNavigate_p.h"
-#include "components/SlideView.h"
+#ifndef SLIDEVIEW_H
+#define SLIDEVIEW_H
 
-/*!
- * \class ActionNavigate
- * \inmodule FlatGui
- */
+#include "flatgui_global.h"
+#include <QWidget>
 
-ActionNavigate::ActionNavigate(QWidget *parent) :
-	QAction(parent),
-	m_ptr(new ActionNavigatePrivate)
+class SlideViewPrivate;
+
+class FLATGUISHARED_EXPORT SlideView : public QWidget
 {
-	connect(this, &ActionNavigate::triggered, this, &ActionNavigate::onTriggered);
-}
+	Q_OBJECT
+	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
+	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
+			   NOTIFY currentIndexChanged)
+public:
+	explicit SlideView(QWidget *parent = nullptr);
+	~SlideView();
 
-void ActionNavigate::setView(SlideView *view)
-{
-	m_ptr->view = view;
-}
+	void appendPage(QWidget *page);
+	int pageCount() const;
+	QWidget *currentPage() const;
 
-void ActionNavigate::setPage(QWidget *page)
-{
-	m_ptr->page = page;
-}
+	int currentIndex() const;
+	void setCurrentIndex(int index);
 
-void ActionNavigate::onTriggered()
-{
-	if (!m_ptr->view || !m_ptr->page)
-		return;
+public slots:
+	void gotoPreviousPage();
+	void gotoFirstPage();
+	void gotoNextPage();
+	void gotoPage(int index, int duration);
 
-//	m_ptr->view->addPage(m_ptr->page);
-}
+protected:
+	void resizeEvent(QResizeEvent *) override;
 
-ActionNavigatePrivate::ActionNavigatePrivate() :
-	view(nullptr),
-	page(nullptr)
-{
+private:
+	SlideViewPrivate *m_ptr;
 
-}
+signals:
+	void pageCountChanged();
+	void currentIndexChanged();
+};
+
+#endif // SLIDEVIEW_H

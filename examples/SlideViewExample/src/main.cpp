@@ -22,43 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "ActionNavigate.h"
-#include "ActionNavigate_p.h"
-#include "components/SlideView.h"
+#include "MainWindow.h"
 
-/*!
- * \class ActionNavigate
- * \inmodule FlatGui
- */
+#include <QApplication>
 
-ActionNavigate::ActionNavigate(QWidget *parent) :
-	QAction(parent),
-	m_ptr(new ActionNavigatePrivate)
+int main(int argc, char *argv[])
 {
-	connect(this, &ActionNavigate::triggered, this, &ActionNavigate::onTriggered);
-}
+	QApplication a(argc, argv);
+	MainWindow w;
 
-void ActionNavigate::setView(SlideView *view)
-{
-	m_ptr->view = view;
-}
+	QFont font(QApplication::font());
 
-void ActionNavigate::setPage(QWidget *page)
-{
-	m_ptr->page = page;
-}
+	font.setPointSize(11);
 
-void ActionNavigate::onTriggered()
-{
-	if (!m_ptr->view || !m_ptr->page)
-		return;
+	QApplication::setFont(font);
 
-//	m_ptr->view->addPage(m_ptr->page);
-}
+	w.show();
 
-ActionNavigatePrivate::ActionNavigatePrivate() :
-	view(nullptr),
-	page(nullptr)
-{
-
+	return a.exec();
 }

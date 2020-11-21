@@ -22,42 +22,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef HORIZONTALSLIDE_H
-#define HORIZONTALSLIDE_H
+#ifndef HORIZONTALSLIDE_P_H
+#define HORIZONTALSLIDE_P_H
 
-#include <QObject>
+#include <QtCore/qglobal.h>
+#include <QPixmap>
 
+class HorizontalSlide;
+class QWidget;
 class QLabel;
 
-class HorizontalSlide : public QObject
+class HorizontalSlidePrivate
 {
-	Q_OBJECT
-public:
-	explicit HorizontalSlide(QWidget *parent);
+	Q_DISABLE_COPY(HorizontalSlidePrivate);
 
-	void setCurrentPage(QWidget *currentPage);
-	QWidget *nextPage() const;
-	void setNextPage(QWidget *nextPage);
+	explicit HorizontalSlidePrivate(HorizontalSlide *parent);
+	~HorizontalSlidePrivate();
 
-public slots:
-	void start(bool slideLeft, int speed);
+	void startSlide();
+	QPixmap makeSnapshot(QWidget *page);
+	void setInProgress(bool value);
 
-private:
-	QWidget *m_parentWidget;
-	QWidget *m_currentPage;
-	QWidget *m_nextPage;
-	QLabel *m_labCurrent;
-	QLabel *m_labNext;
-	int m_width;
-	int m_height;
-	bool m_slideLeft;
+	HorizontalSlide *p_ptr;
 
-private slots:
-	void onValueChanged(const QVariant &value);
-	void onAnimationFinished();
+	QWidget *currentPage;
+	QWidget *nextPage;
+	QLabel *labCurrent;
+	QLabel *labNext;
+	int direction;
+	int duration;
+	bool inProgress;
 
-signals:
-	void finished();
+	friend class HorizontalSlide;
 };
 
-#endif // HORIZONTALSLIDE_H
+#endif // HORIZONTALSLIDE_P_H

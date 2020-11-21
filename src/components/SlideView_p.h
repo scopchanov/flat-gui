@@ -22,48 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SLIDEVIEW_H
-#define SLIDEVIEW_H
+#ifndef SLIDEVIEW_P_H
+#define SLIDEVIEW_P_H
 
-#include "flatgui_global.h"
 #include <QWidget>
+#include <QWidgetList>
 
-class SlideViewPrivate;
+class SlideView;
 
-class FLATGUISHARED_EXPORT SlideView : public QWidget
+class SlideViewPrivate
 {
-	Q_OBJECT
-	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
-	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
-			   NOTIFY currentIndexChanged)
-public:
-	explicit SlideView(QWidget *parent = nullptr);
-	~SlideView();
+	Q_DISABLE_COPY(SlideViewPrivate)
 
-	int pageCount() const;
-	int currentIndex() const;
-	void setCurrentIndex(int index);
+	explicit SlideViewPrivate(SlideView *parent);
 
-	void addHomePage(QWidget *page);
-	void addPage(QWidget *page);
-	void addPageStacked(QWidget *page);
+	void foo();
+	void slideToPage(int index, int duration);
 
-public slots:
-	void gotoPreviousPage();
-	void gotoFirstPage();
-	void gotoNextPage();
-	void gotoPage(int index, int duration);
+	SlideView *p_ptr;
 
-protected:
-	void resizeEvent(QResizeEvent *) override;
+	QWidgetList pages;
+	int currentIndex;
+	int nextIndex;
+	bool busy;
 
-private:
-	SlideViewPrivate *m_ptr;
-
-signals:
-	void pageCountChanged();
-	void currentIndexChanged();
-	void currentPageChanged(const QString &);
+	friend class SlideView;
 };
 
-#endif // SLIDEVIEW_H
+#endif // SLIDEVIEW_P_H

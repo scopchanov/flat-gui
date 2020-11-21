@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #include "MonthView.h"
-#include "HorizontalSlide.h"
+#include "cdk/HorizontalSlide.h"
 
 MonthView::MonthView(QWidget *parent) :
 	QWidget(parent),
@@ -80,12 +80,15 @@ void MonthView::slide(bool left)
 
 		transition->setCurrentPage(m_page);
 		transition->setNextPage(page);
-		transition->start(left, 300);
+		transition->setDirection(left ? HorizontalSlide::SD_SlideLeft
+									  : HorizontalSlide::SD_SlideRight);
+		transition->setDuration(300);
+		transition->start();
 
-		connect(transition, &HorizontalSlide::finished,
-				this, &MonthView::onSlideFinished);
-		connect(page, &MonthPage::dateChanged,
-				this, &MonthView::dateChanged);
+//		connect(transition, &HorizontalSlide::finished,
+//				this, &MonthView::onSlideFinished);
+//		connect(page, &MonthPage::dateChanged,
+//				this, &MonthView::dateChanged);
 	}
 }
 
