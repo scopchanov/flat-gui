@@ -22,14 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "MainWindow.h"
-#include <QApplication>
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-int main(int argc, char *argv[])
+#include <QMainWindow>
+
+class MainWindow : public QMainWindow
 {
-	QApplication a(argc, argv);
-	MainWindow w;
-	w.show();
+	Q_OBJECT
+public:
+	explicit MainWindow(QWidget *parent = nullptr);
+};
 
-	return a.exec();
-}
+#endif // MAINWINDOW_H

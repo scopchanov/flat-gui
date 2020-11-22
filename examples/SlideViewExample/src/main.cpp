@@ -23,19 +23,14 @@ SOFTWARE.
 */
 
 #include "MainWindow.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
+	QApplication::setFont(QFont("MS Shell Dlg 2", 11));
+
 	QApplication a(argc, argv);
 	MainWindow w;
-
-	QFont font(QApplication::font());
-
-	font.setPointSize(11);
-
-	QApplication::setFont(font);
 
 	w.show();
 

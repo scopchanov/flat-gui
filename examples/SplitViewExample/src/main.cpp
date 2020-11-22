@@ -22,20 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "MainWindow.h"
+#include <QApplication>
 
-#include <QMainWindow>
-
-class MainWindow : public QMainWindow
+int main(int argc, char *argv[])
 {
-	Q_OBJECT
-public:
-	explicit MainWindow(QWidget *parent = nullptr);
+	QApplication::setFont(QFont("MS Shell Dlg 2", 11));
 
-private slots:
-	void onAlert();
-	void onDrumset();
-};
+	QApplication a(argc, argv);
+	MainWindow w;
 
-#endif // MAINWINDOW_H
+	w.show();
+
+	return a.exec();
+}

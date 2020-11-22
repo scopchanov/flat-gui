@@ -22,15 +22,25 @@
 
 QT += widgets
 
-TARGET = SidePanelExample
-TEMPLATE = app
+CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        MainWindow.cpp
+    main.cpp \
+    MainWindow.cpp
 
 HEADERS += \
-        MainWindow.h
+    MainWindow.h
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    SplitViewExample.qdoc
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGui
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGuid

@@ -36,14 +36,18 @@ class SSplitViewPrivate
 
 	explicit SSplitViewPrivate(SSplitView *parent);
 
-	void doLayout(int x);
+	void startTransition();
+	void setSideWidgetState(int value);
+	void resizeWidgets();
+	void layoutWidgets(int x);
 
 	SSplitView *p_ptr;
 	QWidget *baseWidget;
 	QWidget *sideWidget;
 	int splitSide;
-	bool busy;
-	bool slideIn;
+	int splitDuration;
+	int sideWidgetState;
+	bool inProgress;
 
 	friend class SSplitView;
 };

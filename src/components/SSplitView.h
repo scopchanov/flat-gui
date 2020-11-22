@@ -33,19 +33,42 @@ class SSplitViewPrivate;
 class FLATGUISHARED_EXPORT SSplitView : public QWidget
 {
 	Q_OBJECT
+	Q_PROPERTY(QWidget *baseWidget READ baseWidget WRITE setBaseWidget
+			   NOTIFY baseWidgetChanged)
+	Q_PROPERTY(QWidget *sideWidget READ sideWidget WRITE setSideWidget
+			   NOTIFY sideWidgetChanged)
+	Q_PROPERTY(SideType splitSide READ splitSide WRITE setSplitSide
+			   NOTIFY splitSideChanged)
+	Q_PROPERTY(int splitDuration READ splitDuration WRITE setSplitDuration
+			   NOTIFY splitDurationChanged)
+	Q_PROPERTY(StateType sideWidgetState READ sideWidgetState
+			   NOTIFY sideWidgetStateChanged)
 public:
 	enum SideType : int {
-		ST_Left,
+		ST_Left = 0,
 		ST_Right
+	};
+
+	enum StateType : int {
+		ST_Closed = 0,
+		ST_Open
 	};
 
 	explicit SSplitView(QWidget *parent = nullptr);
 	~SSplitView();
 
+	QWidget *baseWidget() const;
 	void setBaseWidget(QWidget *widget);
-	void setSideWidget(QWidget *widget, bool hidden = true);
+	QWidget *sideWidget() const;
+	void setSideWidget(QWidget *widget);
 	SideType splitSide() const;
-	void setSplitSide(SideType sd);
+	void setSplitSide(SideType side);
+	int splitDuration() const;
+	void setSplitDuration(int duration);
+	StateType sideWidgetState() const;
+
+	void openSideWidget();
+	void closeSideWidget();
 
 public slots:
 	void toggleSideWidget();
@@ -56,12 +79,12 @@ protected:
 private:
 	SSplitViewPrivate *m_ptr;
 
-private slots:
-	void onValueChanged(const QVariant &value);
-	void onAnimationFinished();
-
 signals:
-	void toggled(bool isOpen);
+	void baseWidgetChanged();
+	void sideWidgetChanged();
+	void splitSideChanged();
+	void splitDurationChanged();
+	void sideWidgetStateChanged();
 };
 
 #endif // SSPLITVIEW_H

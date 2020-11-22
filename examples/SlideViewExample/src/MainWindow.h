@@ -27,6 +27,7 @@ SOFTWARE.
 
 #include <QMainWindow>
 
+class QLabel;
 class SSlideView;
 
 class MainWindow : public QMainWindow
@@ -36,10 +37,11 @@ public:
 	MainWindow(QWidget *parent = nullptr);
 
 private:
-	QWidget *createLabel(const QString &title);
+	QLabel *createLabel(const QString &title);
 	QWidget *createStretch();
 
 private slots:
-	void enableButtons(SSlideView *slideView, QAction *actPrevious, QAction *actNext);
+	void enableButtons(SSlideView *slideView, QAction *actBack,
+					   QAction *actNext);
 };
 #endif // MAINWINDOW_H

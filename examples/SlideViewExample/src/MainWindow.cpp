@@ -24,11 +24,9 @@ SOFTWARE.
 
 #include "MainWindow.h"
 #include "SSlideView.h"
-#include <QBoxLayout>
 #include <QToolBar>
-#include <QPushButton>
-#include <QLabel>
 #include <QAction>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
@@ -36,11 +34,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	auto *toolBar = new QToolBar(this);
 	auto *labTitle(new QLabel(this));
 	auto *slideView(new SSlideView(this));
-	auto *actBack = new QAction(tr("<"), this);
-	auto *actNext = new QAction(tr(">"), this);
+	auto *actBack = new QAction(QIcon(":/pix/images/icons/arrow-left.png"),
+								tr("Previous"), this);
+	auto *actNext = new QAction(QIcon(":/pix/images/icons/arrow-right.png"),
+								tr("Next"), this);
 
-	connect(actNext, &QAction::triggered, slideView, &SSlideView::gotoNextPage);
-	connect(actBack, &QAction::triggered, slideView, &SSlideView::gotoPreviousPage);
+	connect(actBack, &QAction::triggered,
+			slideView, &SSlideView::gotoPreviousPage);
+	connect(actNext, &QAction::triggered,
+			slideView, &SSlideView::gotoNextPage);
 
 	connect(slideView, &SSlideView::currentIndexChanged,
 			[this, slideView, labTitle, actBack, actNext](){
@@ -69,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	resize(320, 480);
 }
 
-QWidget *MainWindow::createLabel(const QString &title)
+QLabel *MainWindow::createLabel(const QString &title)
 {
 	auto *label = new QLabel(title + "\n\n"
 							 + "Lorem ipsum dolor sit amet, consetetur sadipscing"
@@ -103,11 +105,11 @@ QWidget *MainWindow::createStretch()
 	return stretch;
 }
 
-void MainWindow::enableButtons(SSlideView *slideView, QAction *actPrevious,
+void MainWindow::enableButtons(SSlideView *slideView, QAction *actBack,
 							   QAction *actNext)
 {
 	int currentIndex = slideView->currentIndex();
 
-	actPrevious->setEnabled(currentIndex > 0);
+	actBack->setEnabled(currentIndex > 0);
 	actNext->setEnabled(currentIndex < slideView->pageCount() - 1);
 }
