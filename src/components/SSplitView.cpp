@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SplitView.h"
-#include "SplitView_p.h"
+#include "SSplitView.h"
+#include "SSplitView_p.h"
 #include <QVariantAnimation>
 
-SplitView::SplitView(QWidget *parent) :
+SSplitView::SSplitView(QWidget *parent) :
 	QWidget(parent),
-	m_ptr(new SplitViewPrivate(this))
+	m_ptr(new SSplitViewPrivate(this))
 {
 
 }
 
-SplitView::~SplitView()
+SSplitView::~SSplitView()
 {
 	delete m_ptr;
 }
 
-void SplitView::setBaseWidget(QWidget *widget)
+void SSplitView::setBaseWidget(QWidget *widget)
 {
 	if (!widget)
 		return;
@@ -47,7 +47,7 @@ void SplitView::setBaseWidget(QWidget *widget)
 	m_ptr->baseWidget = widget;
 }
 
-void SplitView::setSideWidget(QWidget *widget, bool hidden)
+void SSplitView::setSideWidget(QWidget *widget, bool hidden)
 {
 	if (!widget)
 		return;
@@ -61,17 +61,17 @@ void SplitView::setSideWidget(QWidget *widget, bool hidden)
 					: (hidden ? width() : width() - m_ptr->sideWidget->width()));
 }
 
-SplitView::SideType SplitView::splitSide() const
+SSplitView::SideType SSplitView::splitSide() const
 {
 	return static_cast<SideType>(m_ptr->splitSide);
 }
 
-void SplitView::setSplitSide(SplitView::SideType sd)
+void SSplitView::setSplitSide(SSplitView::SideType sd)
 {
 	m_ptr->splitSide = sd;
 }
 
-void SplitView::toggleSideWidget()
+void SSplitView::toggleSideWidget()
 {
 	if (m_ptr->busy || !m_ptr->sideWidget)
 		return;
@@ -89,14 +89,14 @@ void SplitView::toggleSideWidget()
 	animation->setDuration(150);
 
 	connect(animation, &QVariantAnimation::valueChanged,
-			this, &SplitView::onValueChanged);
+			this, &SSplitView::onValueChanged);
 	connect(animation, &QVariantAnimation::finished,
-			this, &SplitView::onAnimationFinished);
+			this, &SSplitView::onAnimationFinished);
 
 	animation->start(QVariantAnimation::DeleteWhenStopped);
 }
 
-void SplitView::resizeEvent(QResizeEvent *)
+void SSplitView::resizeEvent(QResizeEvent *)
 {
 	if (!m_ptr->sideWidget)
 		return;
@@ -106,12 +106,12 @@ void SplitView::resizeEvent(QResizeEvent *)
 					: (m_ptr->slideIn ? 0: m_ptr->sideWidget->width()));
 }
 
-void SplitView::onValueChanged(const QVariant &value)
+void SSplitView::onValueChanged(const QVariant &value)
 {
 	m_ptr->doLayout(value.toInt());
 }
 
-void SplitView::onAnimationFinished()
+void SSplitView::onAnimationFinished()
 {
 	m_ptr->slideIn ^= true;
 	m_ptr->busy = false;
@@ -119,25 +119,25 @@ void SplitView::onAnimationFinished()
 	toggled(!m_ptr->slideIn);
 }
 
-SplitViewPrivate::SplitViewPrivate(SplitView *parent) :
+SSplitViewPrivate::SSplitViewPrivate(SSplitView *parent) :
 	p_ptr(parent),
 	baseWidget(nullptr),
 	sideWidget(nullptr),
-	splitSide(SplitView::ST_Left),
+	splitSide(SSplitView::ST_Left),
 	busy(false),
 	slideIn(false)
 {
 
 }
 
-void SplitViewPrivate::doLayout(int x)
+void SSplitViewPrivate::doLayout(int x)
 {
 	if (!baseWidget || !sideWidget)
 		return;
 
 	int h = p_ptr->height();
 	int w = p_ptr->width() - x;
-	bool leftSide = splitSide == SplitView::ST_Left;
+	bool leftSide = splitSide == SSplitView::ST_Left;
 
 	x = leftSide ? x : w;
 

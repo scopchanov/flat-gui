@@ -79,7 +79,6 @@ SOURCES += \
     SidePanel.cpp \
     SimpleMessage.cpp \
     Splash.cpp \
-    SplitView.cpp \
     StaticDecoration.cpp \
     SwitchBox.cpp \
     TextDataModel.cpp \
@@ -91,8 +90,9 @@ SOURCES += \
     ToolBar.cpp \
     ToolButton.cpp \
     ValidatorFactory.cpp \
-    cdk/HorizontalSlide.cpp \
-    components/SlideView.cpp
+    cdk/SHorizontalSlide.cpp \
+    components/SSlideView.cpp \
+    components/SSplitView.cpp
 
 HEADERS += \
     AbstractButton.h \
@@ -119,12 +119,12 @@ HEADERS += \
     DoubleValidator_p.h \
     DynamicDecoration.h \
     FancyField.h \
+    cdk/SHorizontalSlide_p.h \
     flatgui_global.h \
     GenericForm.h \
     GenericForm_p.h \
     GridWidget.h \
     GridWidget_p.h \
-    cdk/HorizontalSlide.h \
     LineEdit.h \
     ListItemAnimation.h \
     MonthPage.h \
@@ -143,8 +143,6 @@ HEADERS += \
     SidePanel.h \
     SimpleMessage.h \
     Splash.h \
-    SplitView.h \
-    SplitView_p.h \
     StaticDecoration.h \
     SwitchBox.h \
     SwitchBox_p.h \
@@ -160,9 +158,12 @@ HEADERS += \
     ToolButton.h \
     ToolButton_p.h \
     ValidatorFactory.h \
-    cdk/HorizontalSlide_p.h \
-    components/SlideView.h \
-    components/SlideView_p.h
+    cdk/SHorizontalSlide.h \
+    cdk/SHorizontalSlide_p.h \
+    components/SSlideView.h \
+    components/SSlideView_p.h \
+    components/SSplitView.h \
+    components/SSplitView_p.h
 
 OTHER_FILES += \
     FlatGui.qdocconf \

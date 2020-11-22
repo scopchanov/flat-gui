@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "MainWindow.h"
 #include "SidePanel.h"
-#include "SplitView.h"
+#include "SSplitView.h"
 #include "ToolBar.h"
 #include "ToolButton.h"
 #include "PushButton.h"
@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	auto *widget = new QWidget(this);
 	auto *toolBar = new ToolBar(this);
-	auto *splitView = new SplitView(this);
+	auto *splitView = new SSplitView(this);
 	auto *sidePanel = new SidePanel();
 	auto layoutMain = new QVBoxLayout(widget);
 	auto *btnMenu = new ToolButton();
@@ -119,7 +119,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	splitView->setBaseWidget(labBody);
 	splitView->setSideWidget(sidePanel);
-	splitView->setSplitSide(SplitView::ST_Right);
+	splitView->setSplitSide(SSplitView::ST_Right);
 
 	layoutMain->addWidget(toolBar);
 	layoutMain->addWidget(splitView);
@@ -130,7 +130,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	setCentralWidget(widget);
 	resize(480, 640);
 
-	connect(btnMenu, &ToolButton::clicked, splitView, &SplitView::toggleSideWidget);
+	connect(btnMenu, &ToolButton::clicked, splitView, &SSplitView::toggleSideWidget);
 	connect(btnAlert, &PushButton::clicked, this, &MainWindow::onAlert);
 	connect(btnDrumset, &PushButton::clicked, this, &MainWindow::onDrumset);
 }

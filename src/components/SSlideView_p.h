@@ -22,31 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SLIDEVIEW_P_H
-#define SLIDEVIEW_P_H
+#ifndef SSLIDEVIEW_P_H
+#define SSLIDEVIEW_P_H
 
 #include <QWidget>
 #include <QWidgetList>
 
-class SlideView;
+class SSlideView;
 
-class SlideViewPrivate
+class SSlideViewPrivate
 {
-	Q_DISABLE_COPY(SlideViewPrivate)
+	Q_DISABLE_COPY(SSlideViewPrivate)
 
-	explicit SlideViewPrivate(SlideView *parent);
+	explicit SSlideViewPrivate(SSlideView *parent);
 
 	void removeRemainingPages();
 	void slideToPage(int index, int duration);
 
-	SlideView *p_ptr;
+	SSlideView *p_ptr;
 
 	QWidgetList pages;
 	int currentIndex;
 	int nextIndex;
 	bool busy;
 
-	friend class SlideView;
+	friend class SSlideView;
 };
 
-#endif // SLIDEVIEW_P_H
+#endif // SSLIDEVIEW_P_H

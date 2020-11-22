@@ -22,30 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SPLITVIEW_P_H
-#define SPLITVIEW_P_H
+#ifndef SSLIDEVIEW_H
+#define SSLIDEVIEW_H
 
-#include <QtCore/qglobal.h>
+#include "flatgui_global.h"
+#include <QWidget>
 
-class SplitView;
-class QWidget;
+class SSlideViewPrivate;
 
-class SplitViewPrivate
+class FLATGUISHARED_EXPORT SSlideView : public QWidget
 {
-	Q_DISABLE_COPY(SplitViewPrivate)
+	Q_OBJECT
+	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
+	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
+			   NOTIFY currentIndexChanged)
+public:
+	explicit SSlideView(QWidget *parent = nullptr);
+	~SSlideView();
 
-	explicit SplitViewPrivate(SplitView *parent);
+	void appendPage(QWidget *page);
+	int pageCount() const;
+	QWidget *currentPage() const;
 
-	void doLayout(int x);
+	int currentIndex() const;
+	void setCurrentIndex(int index);
 
-	SplitView *p_ptr;
-	QWidget *baseWidget;
-	QWidget *sideWidget;
-	int splitSide;
-	bool busy;
-	bool slideIn;
+public slots:
+	void gotoPreviousPage();
+	void gotoFirstPage();
+	void gotoNextPage();
+	void gotoPage(int index, int duration);
 
-	friend class SplitView;
+protected:
+	void resizeEvent(QResizeEvent *) override;
+
+private:
+	SSlideViewPrivate *m_ptr;
+
+signals:
+	void pageCountChanged();
+	void currentIndexChanged();
 };
 
-#endif // SPLITVIEW_P_H
+#endif // SSLIDEVIEW_H

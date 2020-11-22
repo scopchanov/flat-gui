@@ -27,7 +27,7 @@ SOFTWARE.
 
 #include <QtCore/qglobal.h>
 
-class SlideView;
+class SSlideView;
 class QWidget;
 
 class ActionNavigatePrivate
@@ -36,7 +36,7 @@ class ActionNavigatePrivate
 
 	explicit ActionNavigatePrivate();
 
-	SlideView *view;
+	SSlideView *view;
 	QWidget *page;
 
 	friend class ActionNavigate;

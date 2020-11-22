@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "ActionNavigate.h"
 #include "ActionNavigate_p.h"
-#include "components/SlideView.h"
+#include "components/SSlideView.h"
 
 /*!
  * \class ActionNavigate
@@ -38,7 +38,7 @@ ActionNavigate::ActionNavigate(QWidget *parent) :
 	connect(this, &ActionNavigate::triggered, this, &ActionNavigate::onTriggered);
 }
 
-void ActionNavigate::setView(SlideView *view)
+void ActionNavigate::setView(SSlideView *view)
 {
 	m_ptr->view = view;
 }

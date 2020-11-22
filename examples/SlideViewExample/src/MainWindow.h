@@ -27,7 +27,7 @@ SOFTWARE.
 
 #include <QMainWindow>
 
-class SlideView;
+class SSlideView;
 
 class MainWindow : public QMainWindow
 {
@@ -40,6 +40,6 @@ private:
 	QWidget *createStretch();
 
 private slots:
-	void enableButtons(SlideView *slideView, QAction *actPrevious, QAction *actNext);
+	void enableButtons(SSlideView *slideView, QAction *actPrevious, QAction *actNext);
 };
 #endif // MAINWINDOW_H

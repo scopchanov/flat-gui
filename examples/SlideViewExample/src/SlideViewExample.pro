@@ -42,3 +42,6 @@ else:unix: LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGui
 
 INCLUDEPATH += $$PWD/../../../deploy/include
 DEPENDPATH += $$PWD/../../../deploy/include
+
+DISTFILES += \
+	SlideViewExample.qdoc

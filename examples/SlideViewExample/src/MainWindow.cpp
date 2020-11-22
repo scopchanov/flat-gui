@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #include "MainWindow.h"
-#include "SlideView.h"
+#include "SSlideView.h"
 #include <QBoxLayout>
 #include <QToolBar>
 #include <QPushButton>
@@ -35,20 +35,20 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	auto *toolBar = new QToolBar(this);
 	auto *labTitle(new QLabel(this));
-	auto *slideView(new SlideView(this));
+	auto *slideView(new SSlideView(this));
 	auto *actBack = new QAction(tr("<"), this);
 	auto *actNext = new QAction(tr(">"), this);
 
-	connect(actNext, &QAction::triggered, slideView, &SlideView::gotoNextPage);
-	connect(actBack, &QAction::triggered, slideView, &SlideView::gotoPreviousPage);
+	connect(actNext, &QAction::triggered, slideView, &SSlideView::gotoNextPage);
+	connect(actBack, &QAction::triggered, slideView, &SSlideView::gotoPreviousPage);
 
-	connect(slideView, &SlideView::currentIndexChanged,
+	connect(slideView, &SSlideView::currentIndexChanged,
 			[this, slideView, labTitle, actBack, actNext](){
 		enableButtons(slideView, actBack, actNext);
 		labTitle->setText(slideView->currentPage()->windowTitle());
 	});
 
-	connect(slideView, &SlideView::pageCountChanged,
+	connect(slideView, &SSlideView::pageCountChanged,
 			[this, slideView, actBack, actNext](){
 		enableButtons(slideView, actBack, actNext);
 	});
@@ -89,9 +89,7 @@ QWidget *MainWindow::createLabel(const QString &title)
 	label->setWordWrap(true);
 	label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 	label->setWindowTitle(title);
-//	label->setAutoFillBackground(true);
 	label->setMargin(20);
-//	label->hide();
 
 	return label;
 }
@@ -105,7 +103,7 @@ QWidget *MainWindow::createStretch()
 	return stretch;
 }
 
-void MainWindow::enableButtons(SlideView *slideView, QAction *actPrevious,
+void MainWindow::enableButtons(SSlideView *slideView, QAction *actPrevious,
 							   QAction *actNext)
 {
 	int currentIndex = slideView->currentIndex();

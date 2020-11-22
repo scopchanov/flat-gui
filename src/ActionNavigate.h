@@ -29,7 +29,7 @@ SOFTWARE.
 #include <QAction>
 
 class ActionNavigatePrivate;
-class SlideView;
+class SSlideView;
 
 class FLATGUISHARED_EXPORT ActionNavigate : public QAction
 {
@@ -37,7 +37,7 @@ class FLATGUISHARED_EXPORT ActionNavigate : public QAction
 public:
 	explicit ActionNavigate(QWidget *parent = nullptr);
 
-	void setView(SlideView *view);
+	void setView(SSlideView *view);
 	void setPage(QWidget *page);
 
 private:

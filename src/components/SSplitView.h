@@ -22,38 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef HORIZONTALSLIDE_P_H
-#define HORIZONTALSLIDE_P_H
+#ifndef SSPLITVIEW_H
+#define SSPLITVIEW_H
 
-#include <QtCore/qglobal.h>
-#include <QPixmap>
+#include "flatgui_global.h"
+#include <QWidget>
 
-class HorizontalSlide;
-class QWidget;
-class QLabel;
+class SSplitViewPrivate;
 
-class HorizontalSlidePrivate
+class FLATGUISHARED_EXPORT SSplitView : public QWidget
 {
-	Q_DISABLE_COPY(HorizontalSlidePrivate);
+	Q_OBJECT
+public:
+	enum SideType : int {
+		ST_Left,
+		ST_Right
+	};
 
-	explicit HorizontalSlidePrivate(HorizontalSlide *parent);
-	~HorizontalSlidePrivate();
+	explicit SSplitView(QWidget *parent = nullptr);
+	~SSplitView();
 
-	void startSlide();
-	QPixmap makeSnapshot(QWidget *page);
-	void setInProgress(bool value);
+	void setBaseWidget(QWidget *widget);
+	void setSideWidget(QWidget *widget, bool hidden = true);
+	SideType splitSide() const;
+	void setSplitSide(SideType sd);
 
-	HorizontalSlide *p_ptr;
+public slots:
+	void toggleSideWidget();
 
-	QWidget *currentPage;
-	QWidget *nextPage;
-	QLabel *labCurrent;
-	QLabel *labNext;
-	int direction;
-	int duration;
-	bool inProgress;
+protected:
+	void resizeEvent(QResizeEvent *) override;
 
-	friend class HorizontalSlide;
+private:
+	SSplitViewPrivate *m_ptr;
+
+private slots:
+	void onValueChanged(const QVariant &value);
+	void onAnimationFinished();
+
+signals:
+	void toggled(bool isOpen);
 };
 
-#endif // HORIZONTALSLIDE_P_H
+#endif // SSPLITVIEW_H
