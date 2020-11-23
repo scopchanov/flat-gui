@@ -27,12 +27,13 @@ SOFTWARE.
 #include <QVariantAnimation>
 
 /*!
-	class SSplitView
-	\brief
+	\class SSplitView
+	\inmodule FlatGui
+	\brief Provides a horizontally splittable widget.
  */
 
 /*!
-	Constructs a new SSplitView instance with \a parent as a parent.
+	Constructs a SSplitView instance with a given \a parent.
  */
 
 SSplitView::SSplitView(QWidget *parent) :
@@ -48,8 +49,10 @@ SSplitView::~SSplitView()
 }
 
 /*!
-	\property baseWidget
+	\property SSplitView::baseWidget
 	\brief The widget which is constantly shown.
+
+	This property's default is \c nullptr.
  */
 
 QWidget *SSplitView::baseWidget() const
@@ -69,8 +72,10 @@ void SSplitView::setBaseWidget(QWidget *widget)
 }
 
 /*!
-	\property sideWidget
+	\property SSplitView::sideWidget
 	\brief The widget which is toggled.
+
+	This property's default is \c nullptr.
  */
 
 QWidget *SSplitView::sideWidget() const
@@ -90,8 +95,10 @@ void SSplitView::setSideWidget(QWidget *widget)
 }
 
 /*!
-	\property splitSide
+	\property SSplitView::splitSide
 	\brief The side on which the side widget is placed.
+
+	This property's default is SSplitView::ST_Left.
  */
 
 SSplitView::SideType SSplitView::splitSide() const
@@ -110,8 +117,10 @@ void SSplitView::setSplitSide(SSplitView::SideType side)
 }
 
 /*!
-	\property splitDuration
+	\property SSplitView::splitDuration
 	\brief The duration of the side widget's toggle transition.
+
+	This property's default is 250.
  */
 
 int SSplitView::splitDuration() const
@@ -130,8 +139,10 @@ void SSplitView::setSplitDuration(int duration)
 }
 
 /*!
-	\property sideWidgetState
+	\property SSplitView::sideWidgetState
 	\brief The state of the side widget.
+
+	This property's default is SSplitView::ST_Closed.
  */
 
 SSplitView::StateType SSplitView::sideWidgetState() const
@@ -165,7 +176,7 @@ void SSplitView::toggleSideWidget()
 }
 
 /*!
-	\reimpl
+	\reimp
  */
 
 void SSplitView::resizeEvent(QResizeEvent *)

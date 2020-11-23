@@ -27,14 +27,18 @@ SOFTWARE.
 #include "cdk/SHorizontalSlide.h"
 
 /*!
-	\class SlideView
+	\class SSlideView
 	\inmodule FlatGui
 	\brief Provides a container for stacked widgets.
 
-	The pages are shown one at a time. SlideView switches from one page
+	The pages are shown one at a time. SSlideView switches from one page
 	to another using a horizontal sliding transition. Pages are added to
 	the view using addPage or addPageStacked. Any class inheriting from QWidget
 	could be used as a page.
+ */
+
+/*!
+	Constructs a SSlideView instance with a given \a parent.
  */
 
 SSlideView::SSlideView(QWidget *parent) :
@@ -79,7 +83,7 @@ void SSlideView::appendPage(QWidget *page)
 }
 
 /*!
-	\property SlideView::pageCount
+	\property SSlideView::pageCount
 	\brief The count of the pages, which has been added to the view.
 
 	This property's default is \c 0.
@@ -96,7 +100,7 @@ QWidget *SSlideView::currentPage() const
 }
 
 /*!
-	\property SlideView::currentIndex
+	\property SSlideView::currentIndex
 	\brief The index of the currently displayed page, or \c -1 if no pages has
 	been added to the view.
 
