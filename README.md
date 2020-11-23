@@ -4,7 +4,7 @@
 
 _A Qt C++ Library_
 
-**Note:** I am currently reworking this repository. Some links might not be yet operational, or have not a complete content. Please be patient!
+**Note:** I am currently reworking this repository. Some links might not be operational yet, nor have the complete nor the actual content. Please be patient!
 
 ## What is FlatGUI?
 
