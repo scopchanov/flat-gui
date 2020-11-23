@@ -24,13 +24,16 @@ SOFTWARE.
 
 #include "MainWindow.h"
 #include <QApplication>
+#include <QFontDatabase>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
-	QApplication::setFont(QFont("MS Shell Dlg 2", 11));
-
 	QApplication a(argc, argv);
 	MainWindow w;
+
+	QFontDatabase::addApplicationFont(":/bin/fonts/roboto/Roboto-Regular.ttf");
+	QApplication::setFont(QFont("Roboto", 11));
 
 	w.show();
 

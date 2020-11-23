@@ -3,4 +3,9 @@
         <file>images/icons/arrow-left.png</file>
         <file>images/icons/arrow-right.png</file>
     </qresource>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
 </RCC>

@@ -2,4 +2,9 @@
     <qresource prefix="/pix">
         <file>images/icons/menu.png</file>
     </qresource>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
 </RCC>

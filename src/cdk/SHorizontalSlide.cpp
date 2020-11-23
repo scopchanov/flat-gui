@@ -28,7 +28,7 @@ SOFTWARE.
 #include <QLabel>
 
 /*!
-	\class HorizontalSlide
+	\class SHorizontalSlide
 	\inmodule FlatGui
 	\brief Provides a horizontal sliding transition between two pages.
 
@@ -47,7 +47,7 @@ SOFTWARE.
  */
 
 /*!
-	Constructs a HorizontalSlide instance with a given \a parent.
+	Constructs a SHorizontalSlide instance with a given \a parent.
  */
 
 SHorizontalSlide::SHorizontalSlide(QWidget *parent) :
@@ -63,7 +63,7 @@ SHorizontalSlide::~SHorizontalSlide()
 }
 
 /*!
-	\property HorizontalSlide::currentPage
+	\property SHorizontalSlide::currentPage
 	\brief The page from which the transition should start.
 
 	This property's default is \c nullptr.
@@ -85,7 +85,7 @@ void SHorizontalSlide::setCurrentPage(QWidget *page)
 }
 
 /*!
-	\property HorizontalSlide::nextPage
+	\property SHorizontalSlide::nextPage
 	\brief The page to which should be trainsitioned.
 
 	This property's default is \c nullptr.
@@ -107,7 +107,7 @@ void SHorizontalSlide::setNextPage(QWidget *page)
 }
 
 /*!
-	\property HorizontalSlide::direction
+	\property SHorizontalSlide::direction
 	\brief The direction of the transition.
 
 	This property's default is \c SD_SlideLeft.
@@ -129,7 +129,7 @@ void SHorizontalSlide::setDirection(SlideDirection direction)
 }
 
 /*!
-	\property HorizontalSlide::duration
+	\property SHorizontalSlide::duration
 	\brief The duration of the transition.
 
 	This property's default is \c 250.
@@ -151,7 +151,7 @@ void SHorizontalSlide::setDuration(int duration)
 }
 
 /*!
-	\property HorizontalSlide::inProgress
+	\property SHorizontalSlide::inProgress
 	\brief Wether the transition is currently in progress.
 
 	This property's default is \c false.
