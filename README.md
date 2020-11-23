@@ -2,7 +2,7 @@
 
 # FlatGUI
 
-
+_A Qt C++ Library_
 
 ## What is FlatGUI?
 
@@ -10,7 +10,7 @@ FlatGUI is an open-source library created to support the development of non-nati
 
 ## Who might find FlatGUI useful?
 
-If you are a die-hard fan of the Qt Widgets technology and QML is not your preferred language, though you still would like to create Desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
+If you are a die-hard fan of the Qt Widgets technology and QML is not your preferred language, though you still would like to create desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
 
 ## How to use FlatGUI?
 
@@ -19,11 +19,6 @@ To use the FlatGUI you need the [Qt Library](https://www.qt.io/) and a C++ compi
 - Get started [here](https://www.scopchanov.de/projects/flatgui/get-started/)
 - Read the [API documentation](https://doc.scopchanov.de/flatgui/flatgui-module.html)
 - Browse the [examples](https://doc.scopchanov.de/flatgui/examples.html)
-
-2. Open the pro-file of a particular example in Qt Creator
-3. Set a build kit
-4. Build and run the project from Qt Creator
-My personal setup is a Windows 10 PC with a Microsoft Visual Studio 2019.
 
 ## Disclaimer
 
