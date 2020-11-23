@@ -1,7 +1,8 @@
-![screenshot](https://i.stack.imgur.com/4YdRs.png?raw=true "Screenshot")
+![flatgui cover](https://i.stack.imgur.com/uAn8u.png?raw=true "FlatGUI Cover")
 
-# flat-gui
-Library of GUI elements for Qt C++ applications
+# FlatGUI
+
+FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for Qt widgets-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use components.
 
 1. What does this project do?
 
