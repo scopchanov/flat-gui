@@ -4,6 +4,8 @@
 
 _A Qt C++ Library_
 
+**Note:** I am currently reworking this repository. Some links might not be yet operational, or have not a complete content. Please be patient!
+
 ## What is FlatGUI?
 
 FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for Qt widgets-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use components.
@@ -19,6 +21,14 @@ To use the FlatGUI you need the [Qt Library](https://www.qt.io/) and a C++ compi
 - Get started [here](https://www.scopchanov.de/projects/flatgui/get-started/)
 - Read the [API documentation](https://doc.scopchanov.de/flatgui/flatgui-module.html)
 - Browse the [examples](https://doc.scopchanov.de/flatgui/examples.html)
+
+## How to contribute?
+
+**Your contribution is very welcome.**
+
+https://stackoverflow.com/help/minimal-reproducible-example
+
+Check out [the project page](https://www.scopchanov.de/projects/flatgui/contribute/) for more contribution options.
 
 ## Disclaimer
 
