@@ -2,26 +2,29 @@
 
 # FlatGUI
 
+
+
+## What is FlatGUI?
+
 FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for Qt widgets-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use components.
 
-1. What does this project do?
+## Who might find FlatGUI useful?
 
-The FlatGUI library consists of Qt5 based C++ classes 
-providing custom widgets for the creation of graphical 
-user interfaces.
+If you are a die-hard fan of the Qt Widgets technology and QML is not your preferred language, though you still would like to create Desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
 
-2. Why is this project useful?
+## How to use FlatGUI?
 
-The FlatGUI library allows Qt5 programmers to build elegant 
-graphical user interfaces for desktop applications in C++
-without the need of using technologies other than widgets. 
+To use the FlatGUI you need the [Qt Library](https://www.qt.io/) and a C++ compiler for your platform.
 
-3. How do I get started?
+- Get started [here](https://www.scopchanov.de/projects/flatgui/get-started/)
+- Read the [API documentation](https://doc.scopchanov.de/flatgui/flatgui-module.html)
+- Browse the [examples](https://doc.scopchanov.de/flatgui/examples.html)
 
-Check out the example at https://github.com/scopchanov/examples/
+2. Open the pro-file of a particular example in Qt Creator
+3. Set a build kit
+4. Build and run the project from Qt Creator
+My personal setup is a Windows 10 PC with a Microsoft Visual Studio 2019.
 
-4. Where can I get more help, if I need it?
+## Disclaimer
 
-The document section is underway. Please, be patient!
-
-Enjoy!
+The code in this repository is **not** an official release by the Qt company or any other organization. It is written solely by me, Michael Scopchanov, in my spare time, based on my personal programming experience, as well as on my understanding of the intended way of using the Qt library.
