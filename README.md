@@ -8,11 +8,11 @@ _A Qt C++ Library_
 
 ## What is FlatGUI?
 
-FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for Qt widgets-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use GUI components.
+FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for [Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-index.html)-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use GUI components.
 
 ## Who might find FlatGUI useful?
 
-If you are a die-hard fan of the Qt Widgets technology and QML is not your preferred language, though you still would like to create desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
+If you are a die-hard fan of the [Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-index.html) technology and QML is not your preferred language, though you still would like to create desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
 
 ## How to use FlatGUI?
 
