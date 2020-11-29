@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-QT += widgets
+QT += gui widgets
 
 CONFIG += c++11
 
@@ -31,11 +31,9 @@ SOURCES += \
 HEADERS += \
     MainWindow.h
 
-RESOURCES += \
-    resources.qrc
-
 DISTFILES += \
-    SplitViewExample.qdoc
+    SlideView.qdoc \
+    SlideViewExample.qdoc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -48,3 +46,6 @@ else:unix: LIBS += -L$$PWD/../../../deploy/lib/ -lFlatGui
 
 INCLUDEPATH += $$PWD/../../../deploy/include
 DEPENDPATH += $$PWD/../../../deploy/include
+
+RESOURCES += \
+	resources.qrc

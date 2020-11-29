@@ -1,8 +1,11 @@
 include($QT_INSTALL_DOCS/global/compat.qdocconf)
+include(../../common/doc/html-template.qdocconf)
 
 project = FlatGUI
 description = API Reference Documentation
-version = 1.0.1
+version = 2.0.0
+url = https://doc.scopchanov.de/flatgui/
+url.examples = https://doc.scopchanov.de/flatgui/examples/
 
 tabsize = 4
 
@@ -15,92 +18,27 @@ includepaths = \
     $QT_INSTALL_HEADERS/QtWidgets \
     $QT_INSTALL_DOCS
 
-indexes += \
-    $QT_INSTALL_DOCS/qtcore/qtcore.index \
-    $QT_INSTALL_DOCS/qtwidgets/qtwidgets.index \
-    $QT_INSTALL_DOCS/qtnetwork/qtnetwork.index
+depends += \
+    qtcore \
+    qtgui \
+    qtwidgets
 
-# where your source files are (here it's just the root directory)
-sourcedirs = .
-# where your header files are (probably in the same place as source)
-headerdirs = .
-exampledirs = ../examples
-# where you store images that are used in your qdoc comments
+#indexes += \
+#    $QT_INSTALL_DOCS/qtcore/qtcore.index \
+#    $QT_INSTALL_DOCS/qtwidgets/qtwidgets.index \
+#    $QT_INSTALL_DOCS/qtnetwork/qtnetwork.index
+
 imagedirs = .
-
-# what kind of sources should be processed
+headers.fileextensions = *.h
 sources.fileextensions += *.cpp \
                           *.qdoc
-
-# what kind of headers should be processed
-headers.fileextensions = *.h
-
-# where to put the result
 outputdir = ../doc
-
 outputformats = HTML
 
-# path to the CSS files if you would like to use any (here it's the current directory)
-HTML.stylesheets = ../../style.css
-
-HTML.nonavigationbar = "false"
-
-# the string that actually includes the CSS into documentation file
-HTML.headerstyles = \
-    "<link rel=\"stylesheet\" type=\"text/css\" href=\"style/style.css\"/>\n" \
-    "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/code.css\"/>\n" \
-    "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/icons.css\"/>\n" \
-    "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/material.css\"/>\n" \
-    "<link rel=\"icon\" href=\"../favicon.png\">\n"
-
-# what to append to every page after header
-HTML.postheader = \
-    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" \
-    "<header class=\"column-layout mat-elevation-z4\">" \
-    "   <div class=\"column-content\">" \
-    "	    <nav>" \
-    "		<a class=\"nav-link\" href=\"https://doc.scopchanov.de\">Home</a>" \
-    "		<a class=\"nav-link\" href=\"flatgui-module.html\">API</a>" \
-    "		<a class=\"nav-link\" href=\"https://www.scopchanov.de/projects/flatgui\">Project</a>" \
-    "	    </nav>" \
-    "    </div>" \
-    "</header>" \
-    "<article class=\"column-layout\">" \
-    "	<section class=\"column-content\">"
-
-#HTML.postpostheader = \
-#    "</ul></div>\n"
-
-# what appears after the sidebar
-#HTML.prologue = \
-
-
-# what to append to every page after the content
-HTML.footer = \
-    "</section>" \
-    "</article>" \
-    "<footer class=\"column-layout\">" \
-    "   <div class=\"column-content footer-content\">" \
-    "	<p><strong>Design and programming</strong><br>Michael Scopchanov</p>" \
-    "	<nav class=\"social-menu\">" \
-    "	    <a target=\"_blank\" href=\"https://www.youtube.com/channel/UCxx_Gopl4N9vD1VVehM-7sA\">" \
-    "		<span class=\"sc sc-youtube\"></span>" \
-    "	    </a>" \
-    "	    <a target=\"_blank\" href=\"https://www.xing.com/profile/Michael_Scopchanov/\">" \
-    "		<span class=\"sc sc-xing\"></span>" \
-    "	    </a>" \
-    "	    <a target=\"_blank\" href=\"https://stackoverflow.com/users/5366641/scopchanov\">" \
-    "		<span class=\"sc sc-stackoverflow\"></span>" \
-    "	    </a>" \
-    "	    <a target=\"_blank\" href=\"https://github.com/scopchanov\">" \
-    "		<span class=\"sc sc-github\"></span>" \
-    "	    </a>" \
-    "	</nav>" \
-    "	<div>© Michael Scopchanov, 2020</div>" \
-    "   </div>" \
-    "</footer>" \
-    "</body>" \
-    "</html>"
+headerdirs = .
+sourcedirs = .
+exampledirs = ../examples
+#examplesinstallpath = examples
 
 qhp.projects = scopelibs
 qhp.extraFiles +=   style/style.css

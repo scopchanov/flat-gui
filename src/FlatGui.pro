@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-include(../../autoversion.pri)
+include(../../common/autoversion.pri)
 
 VERSION = $$PROJECT_VERSION
 

@@ -28,7 +28,8 @@ SOFTWARE.
 
 /*!
 	\class SSlideView
-	\inmodule FlatGui
+	\inmodule Components
+	\ingroup Layouts
 	\brief Provides a container for stacked widgets.
 
 	The pages are shown one at a time. SSlideView switches from one page

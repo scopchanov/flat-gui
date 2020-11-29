@@ -1,4 +1,9 @@
 /*!
     \page Examples
+    \title FlatGUI Examples and Tutorials
+
+    FlatGUI provides a collection of code samples and tutorials to help the
+    users start working with the library.
+
     \generatelist annotatedexamples
  */

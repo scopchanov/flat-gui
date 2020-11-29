@@ -29,10 +29,11 @@ SOFTWARE.
 
 /*!
 	\class SHorizontalSlide
-	\inmodule FlatGui
+	\inmodule CDK
+	\ingroup libraries
 	\brief Provides a horizontal sliding transition between two pages.
 
-	The class provides an interface for managing the horizontal sliding
+	The class provides an interface for managing a horizontal sliding
 	transition between two pages. The currentPage property holds the page from
 	which the transition should start. The nextPage property holds the page to
 	which should be trainsitioned. Each QWidget subclass can be used as a page.
@@ -44,6 +45,18 @@ SOFTWARE.
 
 	This class is a part of the CDK and can be used for the development of
 	custom GUI components.
+ */
+
+/*!
+	\enum SHorizontalSlide::SlideDirection
+
+	SlideDirection is used to specify in which direction the transition between
+	the two pages should take place.
+
+	\value SD_SlideLeft Indicates a sliding transition from right to left.
+	\value SD_SlideRight Indicates a sliding transition from left to right.
+
+	\sa direction(), setDirection(), {SlideView}
  */
 
 /*!

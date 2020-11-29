@@ -28,7 +28,8 @@ SOFTWARE.
 
 /*!
 	\class SSplitView
-	\inmodule FlatGui
+	\inmodule Components
+	\ingroup Layouts
 	\brief Provides a horizontally splittable widget.
  */
 
