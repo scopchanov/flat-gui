@@ -2,26 +2,30 @@
 
 # FlatGUI
 
-FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for Qt widgets-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use components.
+_A Qt C++ Library_
 
-1. What does this project do?
+**Note:** I am currently reworking this repository. Some links might not be operational yet, nor have the complete nor the actual content. Please be patient!
 
-The FlatGUI library consists of Qt5 based C++ classes 
-providing custom widgets for the creation of graphical 
-user interfaces.
+## What is FlatGUI?
 
-2. Why is this project useful?
+FlatGUI is an open-source library created to support the development of non-native looking graphical user interfaces for [Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-index.html)-based desktop applications. It servers as an extension to the Qt’s functionality, providing a component development kit (CDK) for the creation of custom widgets, as well as a collection of ready-to-use GUI components.
 
-The FlatGUI library allows Qt5 programmers to build elegant 
-graphical user interfaces for desktop applications in C++
-without the need of using technologies other than widgets. 
+## Who might find FlatGUI useful?
 
-3. How do I get started?
+If you are a die-hard fan of the [Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-index.html) technology and QML is not your preferred language, though you still would like to create desktop applications with non-native looking graphical user interfaces, then FlatGUI is made just for you.
 
-Check out the example at https://github.com/scopchanov/examples/
+## How to use FlatGUI?
 
-4. Where can I get more help, if I need it?
+To use the FlatGUI you need the [Qt Library](https://www.qt.io/) and a C++ compiler for your platform.
 
-The document section is underway. Please, be patient!
+- Get started [here](https://www.scopchanov.de/projects/flatgui/get-started/)
+- Read the [API documentation](https://doc.scopchanov.de/flatgui/flatgui-module.html)
+- Browse the [examples](https://doc.scopchanov.de/flatgui/examples.html)
 
-Enjoy!
+## How to contribute?
+
+Check out the [contribution guide](CONTRIBUTING.md).
+
+## Disclaimer
+
+The code in this repository is **not** an official release by the Qt company or any other organization. It is written solely by me, Michael Scopchanov, in my spare time, based on my personal programming experience, as well as on my understanding of the intended way of using the Qt library.
