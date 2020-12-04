@@ -28,6 +28,7 @@ SOFTWARE.
 #include <QVBoxLayout>
 #include <QAction>
 #include <QLabel>
+#include <math.h>
 
 GridWidget::GridWidget(QWidget *parent) :
 	QWidget(parent),
