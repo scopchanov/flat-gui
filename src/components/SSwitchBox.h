@@ -22,31 +22,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ABSTRACTFIELD_P_H
-#define ABSTRACTFIELD_P_H
+#ifndef SSWITCHBOX_H
+#define SSWITCHBOX_H
 
-#include <QtCore/qglobal.h>
-#include <QString>
+#include "cdk/SAbstractButton.h"
 
-class AbstractDataModel;
-class AbstractDecoration;
-class SToolButton;
+class SSwitchBoxPrivate;
 
-class AbstractFieldPrivate
+class FLATGUISHARED_EXPORT SSwitchBox : public SAbstractButton
 {
-	Q_DISABLE_COPY(AbstractFieldPrivate)
+	Q_OBJECT
+public:
+	explicit SSwitchBox(QWidget *parent = nullptr);
+	~SSwitchBox();
 
-	explicit AbstractFieldPrivate();
+	bool isChecked() const;
+	void setChecked(bool checked);
 
-	AbstractDataModel *model;
-	AbstractDecoration *decoration;
-	SToolButton *btnClear;
-	QString text;
-	QString placeholderText;
-	bool required;
-	bool active;
+protected:
+	void paintEvent(QPaintEvent *event) override final;
+	void doClick() override;
 
-	friend class AbstractField;
+private:
+	SSwitchBoxPrivate *m_ptr;
+
+private slots:
+	void onValueChanged(const QVariant &value);
+	void onFinished();
 };
 
-#endif // ABSTRACTFIELD_P_H
+#endif // SSWITCHBOX_H

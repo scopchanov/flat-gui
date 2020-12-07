@@ -22,20 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PushButton.h"
-#include "PushButton_p.h"
+#include "SPushButton.h"
+#include "SPushButton_p.h"
 #include <QVariantAnimation>
 #include <QPainter>
 #include <QPaintEvent>
 
 /*!
- * \class PushButton
- * \inmodule FlatGui
+	\class SPushButton
+	\inmodule Components
+	\ingroup Layouts
+	\brief
  */
 
-PushButton::PushButton(QWidget *parent) :
-	AbstractButton(parent),
-	m_ptr(new PushButtonPrivate)
+SPushButton::SPushButton(QWidget *parent) :
+	SAbstractButton(parent),
+	m_ptr(new SPushButtonPrivate)
 {
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 	setForegroundRole(QPalette::ButtonText);
@@ -43,28 +45,28 @@ PushButton::PushButton(QWidget *parent) :
 	setFixedHeight(48);
 }
 
-PushButton::~PushButton()
+SPushButton::~SPushButton()
 {
 	delete m_ptr;
 }
 
-void PushButton::setText(const QString &text)
+void SPushButton::setText(const QString &text)
 {
 	m_ptr->text = text;
 
 	setSize();
 }
 
-void PushButton::setDefault(bool b)
+void SPushButton::setDefault(bool value)
 {
-	if (b)
+	if (value)
 		setForegroundRole(QPalette::Highlight);
 }
 
-bool PushButton::event(QEvent *event)
+bool SPushButton::event(QEvent *event)
 {
 	if (event->type() != QEvent::EnabledChange)
-		return AbstractButton::event(event);
+		return SAbstractButton::event(event);
 
 	if (isEnabled()) {
 		auto *animation = new QVariantAnimation(this);
@@ -76,7 +78,8 @@ bool PushButton::event(QEvent *event)
 		animation->setEasingCurve(QEasingCurve::OutBack);
 		animation->start(QVariantAnimation::DeleteWhenStopped);
 
-		connect(animation, &QVariantAnimation::valueChanged, this, &PushButton::onHighlightChanged);
+		connect(animation, &QVariantAnimation::valueChanged,
+				this, &SPushButton::onHighlightChanged);
 	}
 
 	repaint();
@@ -84,7 +87,7 @@ bool PushButton::event(QEvent *event)
 	return true;
 }
 
-void PushButton::paintEvent(QPaintEvent *event)
+void SPushButton::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
 
@@ -99,7 +102,7 @@ void PushButton::paintEvent(QPaintEvent *event)
 
 	canvasPainter.begin(&canvas);
 	canvasPainter.setPen(palette().color(foregroundRole()));
-	canvasPainter.setOpacity(m_down ? 0.8 : 1);
+	canvasPainter.setOpacity(isDown() ? 0.8 : 1);
 	canvasPainter.drawText(rect(), Qt::AlignCenter, m_ptr->text);
 
 	if (m_ptr->highlight) {
@@ -108,7 +111,7 @@ void PushButton::paintEvent(QPaintEvent *event)
 		painter.setOpacity(1);
 	}
 
-	if (m_down) {
+	if (isDown()) {
 		painter.translate(rect().center());
 		painter.scale(0.96, 0.96);
 		painter.translate(-rect().center());
@@ -117,20 +120,20 @@ void PushButton::paintEvent(QPaintEvent *event)
 	painter.drawPixmap(rect(), canvas);
 }
 
-void PushButton::setSize()
+void SPushButton::setSize()
 {
 	int w = fontMetrics().horizontalAdvance(m_ptr->text) + 18;
 
 	setMinimumSize(w < 100 ? 100 : w, 48);
 }
 
-void PushButton::onHighlightChanged(const QVariant &value)
+void SPushButton::onHighlightChanged(const QVariant &value)
 {
 	m_ptr->highlight = value.toDouble();
 	repaint();
 }
 
-PushButtonPrivate::PushButtonPrivate() :
+SPushButtonPrivate::SPushButtonPrivate() :
 	highlight(0)
 {
 

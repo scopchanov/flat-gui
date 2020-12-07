@@ -22,31 +22,50 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "AbstractButton.h"
+#include "SAbstractButton.h"
+#include "SAbstractButton_p.h"
 #include <QStyle>
 #include <QAction>
 #include <QActionEvent>
 #include <QMouseEvent>
 
 /*!
- * \class AbstractButton
- * \inmodule FlatGui
- * \brief Base class for all buttons.
+	\class SAbstractButton
+	\inmodule CDK
+	\ingroup Buttons
+	\brief Base class for all buttons.
  */
 
-AbstractButton::AbstractButton(QWidget *parent) :
+SAbstractButton::SAbstractButton(QWidget *parent) :
 	QWidget(parent),
-	m_pressed(false),
-	m_down(false)
+	m_ptr(new SAbstractButtonPrivate(this))
 {
-	setFocusPolicy(Qt::FocusPolicy(style()->styleHint(QStyle::SH_Button_FocusPolicy)));
-	setSizePolicy(QSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed, QSizePolicy::DefaultType));
+	setFocusPolicy(Qt::FocusPolicy(style()
+								   ->styleHint(QStyle::SH_Button_FocusPolicy)));
+	setSizePolicy(QSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed,
+							  QSizePolicy::DefaultType));
 	setAttribute(Qt::WA_WState_OwnSizePolicy, false);
 	setForegroundRole(QPalette::ButtonText);
 	setBackgroundRole(QPalette::Button);
 }
 
-bool AbstractButton::event(QEvent *event)
+SAbstractButton::~SAbstractButton()
+{
+	delete m_ptr;
+}
+
+bool SAbstractButton::isPressed() const
+{
+	return m_ptr->pressed;
+}
+
+
+bool SAbstractButton::isDown() const
+{
+	return m_ptr->down;
+}
+
+bool SAbstractButton::event(QEvent *event)
 {
 	if (!isEnabled()) {
 		switch(event->type()) {
@@ -70,7 +89,23 @@ bool AbstractButton::event(QEvent *event)
 	return QWidget::event(event);
 }
 
-void AbstractButton::actionEvent(QActionEvent *event)
+void SAbstractButton::setPressed(bool pressed)
+{
+	if (m_ptr->pressed == pressed)
+		return;
+
+	m_ptr->pressed = pressed;
+}
+
+void SAbstractButton::setDown(bool down)
+{
+	if (m_ptr->down == down)
+		return;
+
+	m_ptr->down = down;
+}
+
+void SAbstractButton::actionEvent(QActionEvent *event)
 {
 	QAction *action = event->action();
 
@@ -79,10 +114,10 @@ void AbstractButton::actionEvent(QActionEvent *event)
 
 	QWidget::actionEvent(event);
 
-	connect(this, &AbstractButton::clicked, action, &QAction::trigger);
+	connect(this, &SAbstractButton::clicked, action, &QAction::trigger);
 }
 
-void AbstractButton::mousePressEvent(QMouseEvent *event)
+void SAbstractButton::mousePressEvent(QMouseEvent *event)
 {
 	if (event->button() != Qt::LeftButton) {
 		event->ignore();
@@ -91,7 +126,7 @@ void AbstractButton::mousePressEvent(QMouseEvent *event)
 
 	if (clickArea().contains(event->pos())) {
 		setDown(true);
-		m_pressed = true;
+		m_ptr->pressed = true;
 		repaint();
 		event->accept();
 	} else {
@@ -99,22 +134,22 @@ void AbstractButton::mousePressEvent(QMouseEvent *event)
 	}
 }
 
-void AbstractButton::mouseReleaseEvent(QMouseEvent *event)
+void SAbstractButton::mouseReleaseEvent(QMouseEvent *event)
 {
-	m_pressed = false;
+	m_ptr->pressed = false;
 
 	if (event->button() != Qt::LeftButton) {
 		event->ignore();
 		return;
 	}
 
-	if (!m_down) {
+	if (!m_ptr->down) {
 		event->ignore();
 		return;
 	}
 
 	if (clickArea().contains(event->pos())) {
-		m_down = false;
+		m_ptr->down = false;
 		repaint();
 		doClick();
 		event->accept();
@@ -124,15 +159,15 @@ void AbstractButton::mouseReleaseEvent(QMouseEvent *event)
 	}
 }
 
-void AbstractButton::mouseMoveEvent(QMouseEvent *event)
+void SAbstractButton::mouseMoveEvent(QMouseEvent *event)
 {
-	if (!(event->buttons() & Qt::LeftButton) || !m_pressed) {
+	if (!(event->buttons() & Qt::LeftButton) || !m_ptr->pressed) {
 		event->ignore();
 		return;
 	}
 
-	if (clickArea().contains(event->pos()) != m_down) {
-		setDown(!m_down);
+	if (clickArea().contains(event->pos()) != m_ptr->down) {
+		setDown(!m_ptr->down);
 		repaint();
 		event->accept();
 	} else if (!clickArea().contains(event->pos())) {
@@ -140,17 +175,20 @@ void AbstractButton::mouseMoveEvent(QMouseEvent *event)
 	}
 }
 
-QRect AbstractButton::clickArea() const
+QRect SAbstractButton::clickArea() const
 {
 	return rect();
 }
 
-void AbstractButton::doClick()
+void SAbstractButton::doClick()
 {
-	clicked();
+	emit clicked();
 }
 
-void AbstractButton::setDown(bool down)
+SAbstractButtonPrivate::SAbstractButtonPrivate(SAbstractButton *parent) :
+	p_ptr(parent),
+	pressed(false),
+	down(false)
 {
-	m_down = down;
+
 }

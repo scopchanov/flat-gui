@@ -22,31 +22,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ABSTRACTFIELD_P_H
-#define ABSTRACTFIELD_P_H
+#ifndef SSWITCHBOX_P_H
+#define SSWITCHBOX_P_H
 
-#include <QtCore/qglobal.h>
-#include <QString>
+#include <QPixmap>
 
-class AbstractDataModel;
-class AbstractDecoration;
-class SToolButton;
+class SSwitchBox;
 
-class AbstractFieldPrivate
+class SSwitchBoxPrivate
 {
-	Q_DISABLE_COPY(AbstractFieldPrivate)
+	Q_DISABLE_COPY(SSwitchBoxPrivate)
 
-	explicit AbstractFieldPrivate();
+	explicit SSwitchBoxPrivate(SSwitchBox *parent);
 
-	AbstractDataModel *model;
-	AbstractDecoration *decoration;
-	SToolButton *btnClear;
-	QString text;
-	QString placeholderText;
-	bool required;
-	bool active;
+	void createPixmapSlider();
 
-	friend class AbstractField;
+	SSwitchBox *p_ptr;
+
+	int offset;
+	bool checked;
+	bool busy;
+	QPixmap pixmap;
+
+	friend class SSwitchBox;
 };
 
-#endif // ABSTRACTFIELD_P_H
+#endif // SSWITCHBOX_P_H

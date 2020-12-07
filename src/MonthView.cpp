@@ -27,10 +27,10 @@ SOFTWARE.
 
 MonthView::MonthView(QWidget *parent) :
 	QWidget(parent),
-	m_page(new MonthPage(this)),
+	m_page(new SMonthPage(this)),
 	m_transitionInProgress(false)
 {
-	connect(m_page, &MonthPage::dateChanged, this, &MonthView::dateChanged);
+	connect(m_page, &SMonthPage::dateChanged, this, &MonthView::dateChanged);
 }
 
 QString MonthView::title() const
@@ -71,7 +71,7 @@ void MonthView::slide(bool left)
 								   m_page->month(), 1).addMonths(left
 																 ? 1 : -1));
 		auto *transition = new SHorizontalSlide(this);
-		auto *page = new MonthPage(this);
+		auto *page = new SMonthPage(this);
 
 		page->setup(datePage.year(), datePage.month());
 		page->setDate(m_page->date());
@@ -96,7 +96,7 @@ void MonthView::onSlideFinished()
 {
 	m_transitionInProgress = false;
 	m_page->close();
-	m_page = static_cast<MonthPage *>(
+	m_page = static_cast<SMonthPage *>(
 				 static_cast<SHorizontalSlide *>(sender())->nextPage());
 
 	monthChanged(m_page->title());

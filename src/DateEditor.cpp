@@ -25,9 +25,9 @@ SOFTWARE.
 #include "DateEditor.h"
 #include "AbstractField.h"
 #include "ToolBar.h"
-#include "ToolButton.h"
 #include "MonthView.h"
 #include "PixmapBuilder.h"
+#include "components/SToolButton.h"
 #include <QLocale>
 #include <QPalette>
 #include <QKeyEvent>
@@ -48,8 +48,8 @@ DateEditor::DateEditor(QWidget *parent) :
 	auto *layoutMain = new QVBoxLayout(this);
 	auto *toolbar = new ToolBar(this);
 	auto *labDays = new QLabel(this);
-	auto *btnBack = new ToolButton(this);
-	auto *btnNext = new ToolButton(this);
+	auto *btnBack = new SToolButton(this);
+	auto *btnNext = new SToolButton(this);
 
 	btnBack->setPixmap(PixmapBuilder::create(PixmapBuilder::Back,
 											 palette().color(QPalette::Text)));
@@ -93,8 +93,8 @@ DateEditor::DateEditor(QWidget *parent) :
 	setFixedSize(336, 384);
 	setStyleSheet(".DateEditor { border: 1px solid palette(mid); }");
 
-	connect(btnBack, &ToolButton::clicked, m_view, &MonthView::onDecClicked);
-	connect(btnNext, &ToolButton::clicked, m_view, &MonthView::onIncClicked);
+	connect(btnBack, &SToolButton::clicked, m_view, &MonthView::onDecClicked);
+	connect(btnNext, &SToolButton::clicked, m_view, &MonthView::onIncClicked);
 	connect(m_view, &MonthView::monthChanged, m_labTitle, &QLabel::setText);
 	connect(m_view, &MonthView::dateChanged, this, &DateEditor::onDateChanged);
 }

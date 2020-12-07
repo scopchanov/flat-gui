@@ -22,26 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef TOOLBUTTON_P_H
-#define TOOLBUTTON_P_H
+#ifndef SMONTHPAGE_P_H
+#define SMONTHPAGE_P_H
 
 #include <QtCore/qglobal.h>
-#include <QPixmap>
+#include <QDate>
 
-class QPixmap;
-class QPoint;
+class SMonthPage;
 
-class ToolButtonPrivate
+class SMonthPagePrivate
 {
-	Q_DISABLE_COPY(ToolButtonPrivate)
+	Q_DISABLE_COPY(SMonthPagePrivate)
 
-	explicit ToolButtonPrivate();
+	explicit SMonthPagePrivate();
 
-	QPixmap pixmap;
-	QPoint pixmapOrigin;
-	qreal scaleFactor;
+	QHash<int, int> daysX;
+	QHash<int, int> daysY;
+	QHash<int, int> baseLines;
+	QDate date;
+	int daysInMonth;
+	int offset;
+	int year;
+	int month;
+	int day;
 
-	friend class ToolButton;
+	friend class SMonthPage;
 };
 
-#endif // TOOLBUTTON_P_H
+#endif // SMONTHPAGE_P_H

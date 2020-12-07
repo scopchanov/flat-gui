@@ -22,29 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SWITCHBOX_P_H
-#define SWITCHBOX_P_H
+#ifndef SPUSHBUTTON_P_H
+#define SPUSHBUTTON_P_H
 
-#include <QPixmap>
+#include <QtCore/qglobal.h>
+#include <QString>
 
-class SwitchBox;
-
-class SwitchBoxPrivate
+class SPushButtonPrivate
 {
-	Q_DISABLE_COPY(SwitchBoxPrivate)
+	Q_DISABLE_COPY(SPushButtonPrivate)
 
-	explicit SwitchBoxPrivate(SwitchBox *parent);
+	explicit SPushButtonPrivate();
 
-	void createPixmapSlider();
+	QString text;
+	qreal highlight;
 
-	SwitchBox *p_ptr;
-
-	int offset;
-	bool checked;
-	bool busy;
-	QPixmap pixmap;
-
-	friend class SwitchBox;
+	friend class SPushButton;
 };
 
-#endif // SWITCHBOX_P_H
+#endif // SPUSHBUTTON_P_H

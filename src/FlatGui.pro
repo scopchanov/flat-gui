@@ -47,7 +47,6 @@ TRANSLATIONS = \
 DEFINES += FLATGUI_LIBRARY
 
 SOURCES += \
-    AbstractButton.cpp \
     AbstractDataModel.cpp \
     AbstractDecoration.cpp \
     AbstractEditor.cpp \
@@ -67,20 +66,17 @@ SOURCES += \
     GridWidget.cpp \
     LineEdit.cpp \
     ListItemAnimation.cpp \
-    MonthPage.cpp \
     MonthView.cpp \
     NavigationBar.cpp \
     PageCategories.cpp \
     PageIndicator.cpp \
     PersonNameValidator.cpp \
     PixmapBuilder.cpp \
-    PushButton.cpp \
     SearchForm.cpp \
     SidePanel.cpp \
     SimpleMessage.cpp \
     Splash.cpp \
     StaticDecoration.cpp \
-    SwitchBox.cpp \
     TextDataModel.cpp \
     TextEditor.cpp \
     TextField.cpp \
@@ -88,14 +84,17 @@ SOURCES += \
     TimeEditor.cpp \
     TimeField.cpp \
     ToolBar.cpp \
-    ToolButton.cpp \
     ValidatorFactory.cpp \
+    cdk/SAbstractButton.cpp \
     cdk/SHorizontalSlide.cpp \
+    components/SMonthPage.cpp \
+    components/SPushButton.cpp \
     components/SSlideView.cpp \
-    components/SSplitView.cpp
+    components/SSplitView.cpp \
+    components/SSwitchBox.cpp \
+    components/SToolButton.cpp
 
 HEADERS += \
-    AbstractButton.h \
     AbstractDataModel.h \
     AbstractDataModel_p.h \
     AbstractDecoration.h \
@@ -119,7 +118,7 @@ HEADERS += \
     DoubleValidator_p.h \
     DynamicDecoration.h \
     FancyField.h \
-    cdk/SHorizontalSlide_p.h \
+    components/SMonthPage_p.h \
     flatgui_global.h \
     GenericForm.h \
     GenericForm_p.h \
@@ -127,7 +126,6 @@ HEADERS += \
     GridWidget_p.h \
     LineEdit.h \
     ListItemAnimation.h \
-    MonthPage.h \
     MonthView.h \
     NavigationBar.h \
     NavigationBar_p.h \
@@ -136,16 +134,12 @@ HEADERS += \
     PersonNameValidator.h \
     PixmapBuilder.h \
     PixmapBuilder_p.h \
-    PushButton.h \
-    PushButton_p.h \
     SearchForm.h \
     SearchForm_p.h \
     SidePanel.h \
     SimpleMessage.h \
     Splash.h \
     StaticDecoration.h \
-    SwitchBox.h \
-    SwitchBox_p.h \
     TextDataModel.h \
     TextEditor.h \
     TextField.h \
@@ -155,15 +149,22 @@ HEADERS += \
     TimeEditor.h \
     TimeField.h \
     ToolBar.h \
-    ToolButton.h \
-    ToolButton_p.h \
     ValidatorFactory.h \
+    cdk/SAbstractButton.h \
+    cdk/SAbstractButton_p.h \
     cdk/SHorizontalSlide.h \
     cdk/SHorizontalSlide_p.h \
+    components/SMonthPage.h \
+    components/SPushButton.h \
+    components/SPushButton_p.h \
     components/SSlideView.h \
     components/SSlideView_p.h \
     components/SSplitView.h \
-    components/SSplitView_p.h
+    components/SSplitView_p.h \
+    components/SSwitchBox.h \
+    components/SSwitchBox_p.h \
+    components/SToolButton.h \
+    components/SToolButton_p.h
 
 OTHER_FILES += \
     FlatGui.qdocconf \

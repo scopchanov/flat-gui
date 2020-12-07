@@ -25,11 +25,11 @@ SOFTWARE.
 #ifndef BUTTONCATEGORY_H
 #define BUTTONCATEGORY_H
 
-#include "ToolButton.h"
+#include "components/SToolButton.h"
 
 class ButtonCategoryPrivate;
 
-class ButtonCategory : public ToolButton
+class ButtonCategory : public SToolButton
 {
 	Q_OBJECT
 public:

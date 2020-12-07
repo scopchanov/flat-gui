@@ -27,8 +27,8 @@ SOFTWARE.
 #include "AbstractDecoration.h"
 #include "AbstractDataModel.h"
 #include "AbstractEditor.h"
-#include "ToolButton.h"
 #include "PixmapBuilder.h"
+#include "components/SToolButton.h"
 #include <QPaintEvent>
 #include <QPainter>
 #include <QVariantAnimation>
@@ -47,7 +47,7 @@ SOFTWARE.
  */
 
 AbstractField::AbstractField(QWidget *parent) :
-	AbstractButton(parent),
+	SAbstractButton(parent),
 	m_ptr(new AbstractFieldPrivate)
 {
 	setFixedHeight(36);
@@ -235,7 +235,7 @@ void AbstractField::paintEvent(QPaintEvent *event)
 
 	painter.setPen(palette().color(QPalette::Dark));
 
-	if (m_down || m_ptr->active) {
+	if (isDown() || m_ptr->active) {
 		painter.setPen(palette().color(QPalette::Highlight));
 		painter.drawRect(rect().adjusted(0, 0, -1, -1));
 	}
@@ -287,7 +287,7 @@ void AbstractField::onValueChanged()
 	if (m_ptr->btnClear)
 		return;
 
-	m_ptr->btnClear = new ToolButton(this);
+	m_ptr->btnClear = new SToolButton(this);
 	m_ptr->btnClear->setPixmap(PixmapBuilder::create(PixmapBuilder::Cross, palette().color(QPalette::Text)));
 	m_ptr->btnClear->setBackgroundRole(QPalette::Window);
 	m_ptr->btnClear->setAutoFillBackground(true);
@@ -295,8 +295,8 @@ void AbstractField::onValueChanged()
 	m_ptr->btnClear->move(width() - 34, 2);
 	m_ptr->btnClear->show();
 
-	connect(m_ptr->btnClear, &ToolButton::clicked, this, &AbstractField::clear);
-	connect(m_ptr->btnClear, &ToolButton::destroyed, this, &AbstractField::onButtonClearDestroyed);
+	connect(m_ptr->btnClear, &SToolButton::clicked, this, &AbstractField::clear);
+	connect(m_ptr->btnClear, &SToolButton::destroyed, this, &AbstractField::onButtonClearDestroyed);
 }
 
 void AbstractField::onButtonClearDestroyed()

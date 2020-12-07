@@ -22,34 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef PUSHBUTTON_H
-#define PUSHBUTTON_H
+#ifndef STOOLBUTTON_H
+#define STOOLBUTTON_H
 
-#include "AbstractButton.h"
+#include "cdk/SAbstractButton.h"
 
-class PushButtonPrivate;
+class SToolButtonPrivate;
 
-class FLATGUISHARED_EXPORT PushButton : public AbstractButton
+class FLATGUISHARED_EXPORT SToolButton : public SAbstractButton
 {
 	Q_OBJECT
 public:
-	explicit PushButton(QWidget *parent = nullptr);
-	~PushButton();
+	explicit SToolButton(QWidget *parent = nullptr);
+	~SToolButton();
 
-	void setText(const QString &text);
-	void setDefault(bool b);
+	void setPixmap(const QPixmap &pixmap);
+	virtual void setSize(int n);
 
 protected:
-	bool event(QEvent *event) override;
-	void paintEvent(QPaintEvent *event) override;
+	void paintEvent(QPaintEvent *event) override final;
+
+	virtual void paint(QPainter *painter);
+	void setPixmapOrigin(const QPoint &p);
+	void setScaleFactor(qreal d);
 
 private:
-	void setSize();
-
-	PushButtonPrivate *m_ptr;
-
-private slots:
-	void onHighlightChanged(const QVariant &value);
+	SToolButtonPrivate *m_ptr;
 };
 
-#endif // PUSHBUTTON_H
+#endif // STOOLBUTTON_H

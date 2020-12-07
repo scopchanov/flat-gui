@@ -22,22 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef PUSHBUTTON_P_H
-#define PUSHBUTTON_P_H
+#ifndef STOOLBUTTON_P_H
+#define STOOLBUTTON_P_H
 
 #include <QtCore/qglobal.h>
-#include <QString>
+#include <QPixmap>
 
-class PushButtonPrivate
+class QPixmap;
+class QPoint;
+
+class SToolButtonPrivate
 {
-	Q_DISABLE_COPY(PushButtonPrivate)
+	Q_DISABLE_COPY(SToolButtonPrivate)
 
-	explicit PushButtonPrivate();
+	explicit SToolButtonPrivate();
 
-	QString text;
-	qreal highlight;
+	QPixmap pixmap;
+	QPoint pixmapOrigin;
+	qreal scaleFactor;
 
-	friend class PushButton;
+	friend class SToolButton;
 };
 
-#endif // PUSHBUTTON_P_H
+#endif // STOOLBUTTON_P_H

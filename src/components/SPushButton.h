@@ -22,49 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef MONTHPAGE_H
-#define MONTHPAGE_H
+#ifndef SPUSHBUTTON_H
+#define SPUSHBUTTON_H
 
-#include "AbstractButton.h"
-#include <QDate>
+#include "cdk/SAbstractButton.h"
 
-class FLATGUISHARED_EXPORT MonthPage : public AbstractButton
+class SPushButtonPrivate;
+
+class FLATGUISHARED_EXPORT SPushButton : public SAbstractButton
 {
 	Q_OBJECT
 public:
-	explicit MonthPage(QWidget *parent = nullptr);
+	explicit SPushButton(QWidget *parent = nullptr);
+	~SPushButton();
 
-	QString title() const;
-	QDate date() const;
-	void setDate(const QDate &date);
-	int year() const;
-	int month() const;
-
-	void setup(int year, int month);
+	void setText(const QString &text);
+	void setDefault(bool value);
 
 protected:
-	void mousePressEvent(QMouseEvent *event) override;
-
-	QRect clickArea() const override;
+	bool event(QEvent *event) override;
 	void paintEvent(QPaintEvent *event) override;
-	void doClick() override;
 
 private:
-	QHash<int, int> m_daysX;
-	QHash<int, int> m_daysY;
-	QHash<int, int> m_baseLines;
-	QDate m_date;
-	int m_daysInMonth;
-	int m_offset;
-	int m_year;
-	int m_month;
-	int m_day;
+	void setSize();
+
+	SPushButtonPrivate *m_ptr;
 
 private slots:
-	void onTimeout();
-
-signals:
-	void dateChanged(const QDate &);
+	void onHighlightChanged(const QVariant &value);
 };
 
-#endif // MONTHPAGE_H
+#endif // SPUSHBUTTON_H

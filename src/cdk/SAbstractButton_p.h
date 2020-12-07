@@ -22,32 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef TOOLBUTTON_H
-#define TOOLBUTTON_H
+#ifndef SABSTRACTBUTTON_P_H
+#define SABSTRACTBUTTON_P_H
 
-#include "AbstractButton.h"
+#include <QtCore/qglobal.h>
 
-class ToolButtonPrivate;
+class SAbstractButton;
 
-class FLATGUISHARED_EXPORT ToolButton : public AbstractButton
+class SAbstractButtonPrivate
 {
-	Q_OBJECT
-public:
-	explicit ToolButton(QWidget *parent = nullptr);
-	~ToolButton();
+	Q_DISABLE_COPY(SAbstractButtonPrivate);
 
-	void setPixmap(const QPixmap &pixmap);
-	virtual void setSize(int n);
+	explicit SAbstractButtonPrivate(SAbstractButton *parent);
 
-protected:
-	void paintEvent(QPaintEvent *event) override final;
+	SAbstractButton *p_ptr;
+	bool pressed;
+	bool down;
 
-	virtual void paint(QPainter *painter);
-	void setPixmapOrigin(const QPoint &p);
-	void setScaleFactor(qreal d);
-
-private:
-	ToolButtonPrivate *m_ptr;
+	friend class SAbstractButton;
 };
 
-#endif // TOOLBUTTON_H
+#endif // SABSTRACTBUTTON_P_H

@@ -22,33 +22,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SWITCHBOX_H
-#define SWITCHBOX_H
+#ifndef SMONTHPAGE_H
+#define SMONTHPAGE_H
 
-#include "AbstractButton.h"
+#include "cdk/SAbstractButton.h"
+#include <QDate>
 
-class SwitchBoxPrivate;
+class SMonthPagePrivate;
 
-class FLATGUISHARED_EXPORT SwitchBox : public AbstractButton
+class FLATGUISHARED_EXPORT SMonthPage : public SAbstractButton
 {
 	Q_OBJECT
 public:
-	explicit SwitchBox(QWidget *parent = nullptr);
-	~SwitchBox();
+	explicit SMonthPage(QWidget *parent = nullptr);
+	~SMonthPage();
 
-	bool isChecked() const;
-	void setChecked(bool checked);
+	QString title() const;
+	QDate date() const;
+	void setDate(const QDate &date);
+	int year() const;
+	int month() const;
+
+	void setup(int year, int month);
 
 protected:
-	void paintEvent(QPaintEvent *event) override final;
+	void mousePressEvent(QMouseEvent *event) override;
+
+	QRect clickArea() const override;
+	void paintEvent(QPaintEvent *event) override;
 	void doClick() override;
 
 private:
-	SwitchBoxPrivate *m_ptr;
+	SMonthPagePrivate *m_ptr;
 
 private slots:
-	void onValueChanged(const QVariant &value);
-	void onFinished();
+	void onTimeout();
+
+signals:
+	void dateChanged(const QDate &);
 };
 
-#endif // SWITCHBOX_H
+#endif // SMONTHPAGE_H

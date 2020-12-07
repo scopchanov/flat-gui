@@ -26,7 +26,7 @@ SOFTWARE.
 #include "AbstractField.h"
 #include "TextDataModel.h"
 #include "ToolBar.h"
-#include "PushButton.h"
+#include "components/SPushButton.h"
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QSlider>
@@ -48,8 +48,8 @@ TimeEditor::TimeEditor(QWidget *parent) :
 	auto *labHours = new QLabel(tr("Hours"), this);
 	auto *labMinutes = new QLabel(tr("Minutes"), this);
 	auto *toolbar = new ToolBar(this);
-	auto *btnAccept = new PushButton(this);
-	auto *btnCancel = new PushButton(this);
+	auto *btnAccept = new SPushButton(this);
+	auto *btnCancel = new SPushButton(this);
 
 	m_labTime->setAlignment(Qt::AlignCenter);
 	m_labTime->setFixedHeight(48);
@@ -95,8 +95,8 @@ TimeEditor::TimeEditor(QWidget *parent) :
 
 	connect(m_sldHours, &QSlider::valueChanged, this, &TimeEditor::updateTime);
 	connect(m_sldMinutes, &QSlider::valueChanged, this, &TimeEditor::updateTime);
-	connect(btnCancel, &PushButton::clicked, this, &TimeEditor::onCancel);
-	connect(btnAccept, &PushButton::clicked, this, &TimeEditor::onAccept);
+	connect(btnCancel, &SPushButton::clicked, this, &TimeEditor::onCancel);
+	connect(btnAccept, &SPushButton::clicked, this, &TimeEditor::onAccept);
 }
 
 QTime TimeEditor::time() const

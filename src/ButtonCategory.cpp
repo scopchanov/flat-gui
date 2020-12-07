@@ -32,7 +32,7 @@ SOFTWARE.
  */
 
 ButtonCategory::ButtonCategory(QWidget *parent) :
-	ToolButton(parent),
+	SToolButton(parent),
 	m_ptr(new ButtonCategoryPrivate)
 {
 	setSize(200);
@@ -89,7 +89,7 @@ void ButtonCategory::paint(QPainter *painter)
 	painter->setPen(palette().color(QPalette::Midlight));
 	painter->drawRect(rect().adjusted(0, 0, -1, -1));
 
-	ToolButton::paint(painter);
+	SToolButton::paint(painter);
 }
 
 ButtonCategoryPrivate::ButtonCategoryPrivate()
