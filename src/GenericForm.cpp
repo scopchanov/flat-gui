@@ -99,7 +99,7 @@ void GenericForm::addField(AbstractField *field)
 
 bool GenericForm::isEmpty() const
 {
-	foreach (AbstractField *field, m_ptr->fields)
+	for (auto *field : m_ptr->fields)
 		if (!field->isEmpty())
 			return false;
 
@@ -108,7 +108,7 @@ bool GenericForm::isEmpty() const
 
 bool GenericForm::isValid() const
 {
-	foreach (AbstractField *field, m_ptr->fields)
+	for (auto *field : m_ptr->fields)
 		if (!field->isValid())
 			return false;
 
@@ -119,7 +119,7 @@ QJsonObject GenericForm::content() const
 {
 	QJsonObject entry;
 
-	foreach (AbstractField *field, m_ptr->fields)
+	for (auto *field : m_ptr->fields)
 		if (!field->isEmpty())
 			entry[field->objectName()] = QJsonValue::fromVariant(field->value());
 
@@ -130,7 +130,7 @@ QJsonObject GenericForm::content() const
 
 void GenericForm::clear() const
 {
-	foreach (AbstractField *field, m_ptr->fields)
+	for (auto *field : m_ptr->fields)
 		field->clear();
 }
 

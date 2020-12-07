@@ -112,8 +112,9 @@ void GridWidget::resizeEvent(QResizeEvent *)
 	if (leftMargin < m_ptr->spacing)
 		leftMargin = m_ptr->spacing;
 
-	foreach (QWidget *button, m_ptr->buttons) {
-		button->move(m_ptr->fullSize*n + leftMargin, m_ptr->fullSize*m + topMargin);
+	for (auto *button : m_ptr->buttons) {
+		button->move(m_ptr->fullSize*n + leftMargin,
+					 m_ptr->fullSize*m + topMargin);
 		n++;
 
 		if ((m_ptr->buttons.indexOf(button) % buttonsInRow) == (buttonsInRow - 1)) {

@@ -33,8 +33,9 @@ SOFTWARE.
 #include <QStyle>
 
 /*!
- * \class Alert
- * \inmodule FlatGui
+	\class Alert
+	\inmodule Components
+	\ingroup Overlays
  */
 
 Alert::Alert(QWidget *parent) :
@@ -103,7 +104,7 @@ void Alert::setWidget(QWidget *widget)
 
 void Alert::setButtons(const QStringList &buttonNames, int defaultButtonIndex)
 {
-	foreach (const QString &buttonName, buttonNames) {
+	for (const QString &buttonName : buttonNames) {
 		auto *button = new SPushButton(this);
 		int index = buttonNames.indexOf(buttonName);
 
@@ -124,7 +125,9 @@ QWidget *Alert::body() const
 	return m_ptr->body;
 }
 
-int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title, const QString &message, const QStringList &buttonNames, int defaultButtonIndex)
+int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title,
+					 const QString &message, const QStringList &buttonNames,
+					 int defaultButtonIndex)
 {
 	Alert alert(parent);
 	auto *widget = new QWidget();
@@ -140,7 +143,8 @@ int Alert::showAlert(QWidget *parent, const QPixmap &icon, const QString &title,
 	labMessage->setForegroundRole(QPalette::Text);
 	labMessage->setTextFormat(Qt::RichText);
 	labMessage->setOpenExternalLinks(true);
-	labMessage->setTextInteractionFlags(Qt::LinksAccessibleByMouse | Qt::TextSelectableByMouse);
+	labMessage->setTextInteractionFlags(Qt::LinksAccessibleByMouse
+										| Qt::TextSelectableByMouse);
 	labMessage->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	labMessage->setWordWrap(true);
 
@@ -169,11 +173,15 @@ void Alert::showEvent(QShowEvent *event)
 		return;
 	}
 
-	const QRect parentRect(parentWidget()->mapToGlobal(QPoint(0, 0)), parentWidget()->size());
+	const QRect parentRect(parentWidget()->mapToGlobal(QPoint(0, 0)),
+						   parentWidget()->size());
 	auto *flyIn = new QPropertyAnimation(this, "pos");
 
-	flyIn->setStartValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, size(), parentRect).topLeft());
-	flyIn->setEndValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(), parentRect).topLeft());
+	flyIn->setStartValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter
+											 | Qt::AlignBottom, size(),
+											 parentRect).topLeft());
+	flyIn->setEndValue(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
+										   size(), parentRect).topLeft());
 	flyIn->setDuration(500);
 	flyIn->setEasingCurve(QEasingCurve::OutBack);
 	flyIn->start(QPropertyAnimation::DeleteWhenStopped);
