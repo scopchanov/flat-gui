@@ -22,42 +22,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#ifndef MONTHPAGE_H
+#define MONTHPAGE_H
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
+#include "AbstractButton.h"
+#include <QDate>
 
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+class FLATGUISHARED_EXPORT MonthPage : public AbstractButton
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	Q_OBJECT
+public:
+	explicit MonthPage(QWidget *parent = nullptr);
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	QString title() const;
+	QDate date() const;
+	void setDate(const QDate &date);
+	int year() const;
+	int month() const;
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+	void setup(int year, int month);
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
+protected:
+	void mousePressEvent(QMouseEvent *event) override;
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
-}
+	QRect clickArea() const override;
+	void paintEvent(QPaintEvent *event) override;
+	void doClick() override;
+
+private:
+	QHash<int, int> m_daysX;
+	QHash<int, int> m_daysY;
+	QHash<int, int> m_baseLines;
+	QDate m_date;
+	int m_daysInMonth;
+	int m_offset;
+	int m_year;
+	int m_month;
+	int m_day;
+
+private slots:
+	void onTimeout();
+
+signals:
+	void dateChanged(const QDate &);
+};
+
+#endif // MONTHPAGE_H

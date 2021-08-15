@@ -22,42 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#include "MainWindow.h"
+#include "SSwitchBox.h"
+#include <QBoxLayout>
+#include <QLabel>
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
-
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+MainWindow::MainWindow(QWidget *parent) :
+	QWidget(parent)
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	auto *l = new QVBoxLayout(this);
+	auto *label = new QLabel(tr("Off"), this);
+	auto *switchBox = new SSwitchBox(this);
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+	l->addWidget(label);
+	l->addWidget(switchBox);
+	l->addStretch();
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
+	connect(switchBox, &SSwitchBox::, splitView,
+			&SSplitView::toggleSideWidget);
+
+	setWindowTitle(tr("SwitchBox Example"));
+	resize(480, 400);
 }

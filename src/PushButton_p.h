@@ -22,42 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#ifndef PUSHBUTTON_P_H
+#define PUSHBUTTON_P_H
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
+#include <QtCore/qglobal.h>
+#include <QString>
 
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+class PushButtonPrivate
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	Q_DISABLE_COPY(PushButtonPrivate)
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	explicit PushButtonPrivate();
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+	QString text;
+	qreal highlight;
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
+	friend class PushButton;
+};
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
-}
+#endif // PUSHBUTTON_P_H

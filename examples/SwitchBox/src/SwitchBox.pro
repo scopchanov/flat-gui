@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-QT += gui widgets
+QT += widgets
 
 CONFIG += c++11
 
@@ -35,8 +35,7 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES += \
-    SlideView.qdoc \
-    SlideViewExample.qdoc
+    SplitView.qdoc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -22,21 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SSwitchBox.h"
-#include "SSwitchBox_p.h"
+#include "SwitchBox.h"
+#include "SwitchBox_p.h"
 #include <QPaintEvent>
 #include <QPainter>
 #include <QVariantAnimation>
 
-/*!
-	\class SSwitchBox
-	\inmodule Components
-	\ingroup Buttons
- */
-
-SSwitchBox::SSwitchBox(QWidget *parent) :
-	SAbstractButton(parent),
-	m_ptr(new SSwitchBoxPrivate(this))
+SwitchBox::SwitchBox(QWidget *parent) :
+	AbstractButton(parent),
+	m_ptr(new SwitchBoxPrivate(this))
 {
 	m_ptr->createPixmapSlider();
 
@@ -44,24 +38,24 @@ SSwitchBox::SSwitchBox(QWidget *parent) :
 	setFixedSize(72, 36);
 }
 
-SSwitchBox::~SSwitchBox()
+SwitchBox::~SwitchBox()
 {
 	delete m_ptr;
 }
 
-bool SSwitchBox::isChecked() const
+bool SwitchBox::isChecked() const
 {
 	return m_ptr->checked;
 }
 
-void SSwitchBox::setChecked(bool checked)
+void SwitchBox::setChecked(bool checked)
 {
 	m_ptr->checked = checked;
 	m_ptr->offset = checked ? 39 : 3;
 	update();
 }
 
-void SSwitchBox::paintEvent(QPaintEvent *event)
+void SwitchBox::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
 
@@ -77,7 +71,7 @@ void SSwitchBox::paintEvent(QPaintEvent *event)
 
 	painter.setPen(palette().color(QPalette::Dark));
 
-	if (isDown()) {
+	if (m_down) {
 		painter.setPen(palette().color(QPalette::Highlight));
 		painter.drawRect(rect().adjusted(0, 0, -1, -1));
 	}
@@ -85,7 +79,7 @@ void SSwitchBox::paintEvent(QPaintEvent *event)
 	painter.drawRect(rect().adjusted(1, 1, -2, -2));
 }
 
-void SSwitchBox::doClick()
+void SwitchBox::doClick()
 {
 	if (m_ptr->busy)
 		return;
@@ -96,23 +90,22 @@ void SSwitchBox::doClick()
 
 	animation->setStartValue(m_ptr->offset);
 	animation->setEndValue(m_ptr->checked ? 3 : 39);
-	animation->setDuration(250);
-	animation->setEasingCurve(QEasingCurve::InOutQuad);
+	animation->setDuration(150);
 	animation->start(QAbstractAnimation::DeleteWhenStopped);
 
 	connect(animation, &QVariantAnimation::valueChanged,
-			this, &SSwitchBox::onValueChanged);
+			this, &SwitchBox::onValueChanged);
 	connect(animation, &QVariantAnimation::finished,
-			this, &SSwitchBox::onFinished);
+			this, &SwitchBox::onFinished);
 }
 
-void SSwitchBox::onValueChanged(const QVariant &value)
+void SwitchBox::onValueChanged(const QVariant &value)
 {
 	m_ptr->offset = value.toInt();
 	repaint();
 }
 
-void SSwitchBox::onFinished()
+void SwitchBox::onFinished()
 {
 	m_ptr->checked ^= true;
 	m_ptr->busy = false;
@@ -120,7 +113,7 @@ void SSwitchBox::onFinished()
 	clicked();
 }
 
-SSwitchBoxPrivate::SSwitchBoxPrivate(SSwitchBox *parent) :
+SwitchBoxPrivate::SwitchBoxPrivate(SwitchBox *parent) :
 	p_ptr(parent),
 	offset(3),
 	checked(false),
@@ -130,7 +123,7 @@ SSwitchBoxPrivate::SSwitchBoxPrivate(SSwitchBox *parent) :
 
 }
 
-void SSwitchBoxPrivate::createPixmapSlider()
+void SwitchBoxPrivate::createPixmapSlider()
 {
 	QPainter painter;
 

@@ -22,42 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#ifndef TOOLBUTTON_H
+#define TOOLBUTTON_H
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
+#include "AbstractButton.h"
 
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+class ToolButtonPrivate;
+
+class FLATGUISHARED_EXPORT ToolButton : public AbstractButton
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	Q_OBJECT
+public:
+	explicit ToolButton(QWidget *parent = nullptr);
+	~ToolButton();
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	void setPixmap(const QPixmap &pixmap);
+	virtual void setSize(int n);
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+protected:
+	void paintEvent(QPaintEvent *event) override final;
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
+	virtual void paint(QPainter *painter);
+	void setPixmapOrigin(const QPoint &p);
+	void setScaleFactor(qreal d);
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
-}
+private:
+	ToolButtonPrivate *m_ptr;
+};
+
+#endif // TOOLBUTTON_H

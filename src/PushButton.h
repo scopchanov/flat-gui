@@ -22,42 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#ifndef PUSHBUTTON_H
+#define PUSHBUTTON_H
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
+#include "AbstractButton.h"
 
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+class PushButtonPrivate;
+
+class FLATGUISHARED_EXPORT PushButton : public AbstractButton
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	Q_OBJECT
+public:
+	explicit PushButton(QWidget *parent = nullptr);
+	~PushButton();
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	void setText(const QString &text);
+	void setDefault(bool b);
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+protected:
+	bool event(QEvent *event) override;
+	void paintEvent(QPaintEvent *event) override;
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
+private:
+	void setSize();
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
-}
+	PushButtonPrivate *m_ptr;
+
+private slots:
+	void onHighlightChanged(const QVariant &value);
+};
+
+#endif // PUSHBUTTON_H

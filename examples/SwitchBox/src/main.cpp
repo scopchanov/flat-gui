@@ -22,42 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#include "MainWindow.h"
+#include <QApplication>
+#include <QFontDatabase>
+#include <QDebug>
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
-
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+int main(int argc, char *argv[])
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	QApplication a(argc, argv);
+	MainWindow w;
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	QFontDatabase::addApplicationFont(":/bin/fonts/roboto/Roboto-Regular.ttf");
+	QApplication::setFont(QFont("Roboto", 11));
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+	w.show();
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
-
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
+	return a.exec();
 }

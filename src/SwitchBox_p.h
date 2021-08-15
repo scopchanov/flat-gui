@@ -22,42 +22,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "PageCategories.h"
-#include "GridWidget.h"
-#include <QVBoxLayout>
-#include <QScrollArea>
+#ifndef SWITCHBOX_P_H
+#define SWITCHBOX_P_H
 
-/*!
-	\class PageCategories
-	\inmodule Components
- */
+#include <QPixmap>
 
-PageCategories::PageCategories(QWidget *parent) :
-    QWidget(parent),
-    m_grid(new GridWidget())
+class SwitchBox;
+
+class SwitchBoxPrivate
 {
-    auto *layoutMain = new QVBoxLayout(this);
-    auto *scrollArea = new QScrollArea(this);
+	Q_DISABLE_COPY(SwitchBoxPrivate)
 
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(m_grid);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	explicit SwitchBoxPrivate(SwitchBox *parent);
 
-    layoutMain->addWidget(scrollArea);
-    layoutMain->setContentsMargins(0, 0, 0, 0);
-}
+	void createPixmapSlider();
 
-void PageCategories::setDescription(const QString &text)
-{
-    m_grid->setDescription(text);
-}
+	SwitchBox *p_ptr;
 
-ButtonCategory *PageCategories::createButton(const QString &name,
-											 const QString &description,
-											 const QPixmap &pixmap,
-											 QAction *act)
-{
-    return m_grid->createButton(name, description, pixmap, act);
-}
+	int offset;
+	bool checked;
+	bool busy;
+	QPixmap pixmap;
+
+	friend class SwitchBox;
+};
+
+#endif // SWITCHBOX_P_H
