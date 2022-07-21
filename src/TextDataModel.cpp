@@ -96,7 +96,7 @@ void TextDataModel::setValue(const QVariant &value)
 	else
 		m_ptr->text = validText;
 
-	valueChanged();
+	emit valueChanged();
 }
 
 void TextDataModel::clear()

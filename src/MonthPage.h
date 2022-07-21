@@ -28,11 +28,14 @@ SOFTWARE.
 #include "AbstractButton.h"
 #include <QDate>
 
+class MonthPagePrivate;
+
 class FLATGUISHARED_EXPORT MonthPage : public AbstractButton
 {
 	Q_OBJECT
 public:
 	explicit MonthPage(QWidget *parent = nullptr);
+	~MonthPage();
 
 	QString title() const;
 	QDate date() const;
@@ -50,15 +53,7 @@ protected:
 	void doClick() override;
 
 private:
-	QHash<int, int> m_daysX;
-	QHash<int, int> m_daysY;
-	QHash<int, int> m_baseLines;
-	QDate m_date;
-	int m_daysInMonth;
-	int m_offset;
-	int m_year;
-	int m_month;
-	int m_day;
+	MonthPagePrivate *m_ptr;
 
 private slots:
 	void onTimeout();

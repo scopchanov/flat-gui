@@ -89,7 +89,7 @@ void TimeDataModel::setValue(const QVariant &value)
 	else
 		m_ptr->time = m_ptr->defaultTime;
 
-	valueChanged();
+	emit valueChanged();
 }
 
 void TimeDataModel::clear()

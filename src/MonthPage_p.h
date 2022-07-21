@@ -22,22 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SPUSHBUTTON_P_H
-#define SPUSHBUTTON_P_H
+#ifndef MONTHPAGE_P_H
+#define MONTHPAGE_P_H
 
 #include <QtCore/qglobal.h>
-#include <QString>
+#include <QDate>
 
-class SPushButtonPrivate
+class MonthPage;
+
+class MonthPagePrivate
 {
-	Q_DISABLE_COPY(SPushButtonPrivate)
+	Q_DISABLE_COPY(MonthPagePrivate)
 
-	explicit SPushButtonPrivate();
+	explicit MonthPagePrivate();
 
-	QString text;
-	qreal highlight;
+	QHash<int, int> daysX;
+	QHash<int, int> daysY;
+	QHash<int, int> baseLines;
+	QDate date;
+	int daysInMonth;
+	int offset;
+	int year;
+	int month;
+	int day;
 
-	friend class SPushButton;
+	friend class MonthPage;
 };
 
-#endif // SPUSHBUTTON_P_H
+#endif // MONTHPAGE_P_H

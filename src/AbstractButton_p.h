@@ -22,46 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SSLIDEVIEW_H
-#define SSLIDEVIEW_H
+#ifndef ABSTRACTBUTTON_P_H
+#define ABSTRACTBUTTON_P_H
 
-#include "flatgui_global.h"
-#include <QWidget>
+#include <QtCore/qglobal.h>
 
-class SSlideViewPrivate;
+class AbstractButton;
 
-class FLATGUISHARED_EXPORT SSlideView : public QWidget
+class AbstractButtonPrivate
 {
-	Q_OBJECT
-	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
-	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
-			   NOTIFY currentIndexChanged)
-public:
-	explicit SSlideView(QWidget *parent = nullptr);
-	~SSlideView();
+	Q_DISABLE_COPY(AbstractButtonPrivate);
 
-	void appendPage(QWidget *page);
-	int pageCount() const;
-	QWidget *currentPage() const;
+	explicit AbstractButtonPrivate();
 
-	int currentIndex() const;
-	void setCurrentIndex(int index);
+	bool pressed;
+	bool down;
 
-public slots:
-	void gotoPreviousPage();
-	void gotoFirstPage();
-	void gotoNextPage();
-	void gotoPage(int index, int duration);
-
-protected:
-	void resizeEvent(QResizeEvent *) override;
-
-private:
-	SSlideViewPrivate *m_ptr;
-
-signals:
-	void pageCountChanged();
-	void currentIndexChanged();
+	friend class AbstractButton;
 };
 
-#endif // SSLIDEVIEW_H
+#endif // ABSTRACTBUTTON_P_H

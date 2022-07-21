@@ -28,13 +28,19 @@ SOFTWARE.
 #include "flatgui_global.h"
 #include <QWidget>
 
+class AbstractButtonPrivate;
+
 class FLATGUISHARED_EXPORT AbstractButton : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AbstractButton(QWidget *parent);
+	explicit AbstractButton(QWidget *parent);
+	~AbstractButton();
 
-    bool event(QEvent *event) override;
+	bool isPressed() const;
+	bool isDown() const;
+
+	bool event(QEvent *event) override;
 
 protected:
     void actionEvent(QActionEvent *event) override;
@@ -44,10 +50,11 @@ protected:
 
     virtual QRect clickArea() const;
     virtual void doClick();
-    void setDown(bool down);
+	void setPressed(bool value);
+	void setDown(bool value);
 
-    bool m_pressed;
-    bool m_down;
+private:
+	AbstractButtonPrivate *m_ptr;
 
 signals:
     void clicked();

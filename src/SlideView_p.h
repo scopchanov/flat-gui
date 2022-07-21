@@ -22,42 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SABSTRACTBUTTON_H
-#define SABSTRACTBUTTON_H
+#ifndef SLIDEVIEW_P_H
+#define SLIDEVIEW_P_H
 
-#include "flatgui_global.h"
 #include <QWidget>
+#include <QWidgetList>
 
-class SAbstractButtonPrivate;
+class SlideView;
 
-class FLATGUISHARED_EXPORT SAbstractButton : public QWidget
+class SlideViewPrivate
 {
-    Q_OBJECT
-public:
-	explicit SAbstractButton(QWidget *parent);
-	~SAbstractButton();
+	Q_DISABLE_COPY(SlideViewPrivate)
 
-	bool isPressed() const;
-	bool isDown() const;
-    bool event(QEvent *event) override;
+	explicit SlideViewPrivate(SlideView *parent);
 
-protected:
-	void setPressed(bool pressed);
-	void setDown(bool down);
+	void slideToPage(int index, int duration);
 
-	void actionEvent(QActionEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
+	SlideView *p_ptr;
 
-    virtual QRect clickArea() const;
-    virtual void doClick();
+	QWidgetList pages;
+	int currentIndex;
+	int nextIndex;
+	bool busy;
 
-private:
-	SAbstractButtonPrivate *m_ptr;
-
-signals:
-    void clicked();
+	friend class SlideView;
 };
 
-#endif // SABSTRACTBUTTON_H
+#endif // SLIDEVIEW_P_H

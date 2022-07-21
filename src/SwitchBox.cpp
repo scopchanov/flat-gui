@@ -28,6 +28,12 @@ SOFTWARE.
 #include <QPainter>
 #include <QVariantAnimation>
 
+/*!
+	\class SSwitchBox
+	\inmodule Components
+	\ingroup Buttons
+ */
+
 SwitchBox::SwitchBox(QWidget *parent) :
 	AbstractButton(parent),
 	m_ptr(new SwitchBoxPrivate(this))
@@ -71,7 +77,7 @@ void SwitchBox::paintEvent(QPaintEvent *event)
 
 	painter.setPen(palette().color(QPalette::Dark));
 
-	if (m_down) {
+	if (isDown()) {
 		painter.setPen(palette().color(QPalette::Highlight));
 		painter.drawRect(rect().adjusted(0, 0, -1, -1));
 	}
@@ -90,7 +96,8 @@ void SwitchBox::doClick()
 
 	animation->setStartValue(m_ptr->offset);
 	animation->setEndValue(m_ptr->checked ? 3 : 39);
-	animation->setDuration(150);
+	animation->setDuration(250);
+	animation->setEasingCurve(QEasingCurve::InOutQuad);
 	animation->start(QAbstractAnimation::DeleteWhenStopped);
 
 	connect(animation, &QVariantAnimation::valueChanged,

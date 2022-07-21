@@ -22,34 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SSlideView.h"
-#include "SSlideView_p.h"
-#include "cdk/SHorizontalSlide.h"
+#include "SlideView.h"
+#include "SlideView_p.h"
+#include "HorizontalSlide.h"
 
 /*!
-	\class SSlideView
+	\class SlideView
 	\inmodule Components
 	\ingroup Layouts
 	\brief Provides a container for stacked widgets.
 
-	The pages are shown one at a time. SSlideView switches from one page
+	The pages are shown one at a time. SlideView switches from one page
 	to another using a horizontal sliding transition. Pages are added to
 	the view using addPage or addPageStacked. Any class inheriting from QWidget
 	could be used as a page.
  */
 
 /*!
-	Constructs a SSlideView instance with a given \a parent.
+	Constructs a SlideView instance with a given \a parent.
  */
 
-SSlideView::SSlideView(QWidget *parent) :
+SlideView::SlideView(QWidget *parent) :
 	QWidget(parent),
-	m_ptr(new SSlideViewPrivate(this))
+	m_ptr(new SlideViewPrivate(this))
 {
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
-SSlideView::~SSlideView()
+SlideView::~SlideView()
 {
 	delete m_ptr;
 }
@@ -61,12 +61,12 @@ SSlideView::~SSlideView()
 	\sa pageCount(), currentPage()
 */
 
-void SSlideView::appendPage(QWidget *page)
+void SlideView::appendPage(QWidget *page)
 {
 	if (!page || m_ptr->pages.contains(page))
 		return;
 
-	bool isFirstPage = m_ptr->pages.isEmpty();
+	bool isFirstPage{m_ptr->pages.isEmpty()};
 
 	page->setParent(this);
 	page->setVisible(isFirstPage);
@@ -84,36 +84,36 @@ void SSlideView::appendPage(QWidget *page)
 }
 
 /*!
-	\property SSlideView::pageCount
+	\property SlideView::pageCount
 	\brief The count of the pages, which has been added to the view.
 
 	This property's default is \c 0.
  */
 
-int SSlideView::pageCount() const
+int SlideView::pageCount() const
 {
 	return m_ptr->pages.count();
 }
 
-QWidget *SSlideView::currentPage() const
+QWidget *SlideView::currentPage() const
 {
 	return m_ptr->pages.at(m_ptr->currentIndex);
 }
 
 /*!
-	\property SSlideView::currentIndex
+	\property SlideView::currentIndex
 	\brief The index of the currently displayed page, or \c -1 if no pages has
 	been added to the view.
 
 	This property's default is \c -1.
  */
 
-int SSlideView::currentIndex() const
+int SlideView::currentIndex() const
 {
 	return m_ptr->currentIndex;
 }
 
-void SSlideView::setCurrentIndex(int index)
+void SlideView::setCurrentIndex(int index)
 {
 	if (m_ptr->currentIndex == index)
 		return;
@@ -121,6 +121,12 @@ void SSlideView::setCurrentIndex(int index)
 	m_ptr->currentIndex = index;
 
 	emit currentIndexChanged();
+}
+
+void SlideView::removeRemainingPages()
+{
+	while (m_ptr->currentIndex < m_ptr->pages.count() - 1)
+		m_ptr->pages.removeLast();
 }
 
 /*!
@@ -133,7 +139,7 @@ void SSlideView::setCurrentIndex(int index)
 	\sa gotoPage()
  */
 
-void SSlideView::gotoPreviousPage()
+void SlideView::gotoPreviousPage()
 {
 	gotoPage(m_ptr->currentIndex - 1, 300);
 }
@@ -147,7 +153,7 @@ void SSlideView::gotoPreviousPage()
 	\sa gotoPage()
  */
 
-void SSlideView::gotoFirstPage()
+void SlideView::gotoFirstPage()
 {
 	gotoPage(0, 100);
 }
@@ -162,7 +168,7 @@ void SSlideView::gotoFirstPage()
 	\sa gotoPage()
  */
 
-void SSlideView::gotoNextPage()
+void SlideView::gotoNextPage()
 {
 	gotoPage(m_ptr->currentIndex + 1, 300);
 }
@@ -173,7 +179,7 @@ void SSlideView::gotoNextPage()
 	nothing.
  */
 
-void SSlideView::gotoPage(int index, int duration)
+void SlideView::gotoPage(int index, int duration)
 {
 	if (m_ptr->currentIndex == index
 		|| index < 0
@@ -187,13 +193,13 @@ void SSlideView::gotoPage(int index, int duration)
 	\reimp
  */
 
-void SSlideView::resizeEvent(QResizeEvent *)
+void SlideView::resizeEvent(QResizeEvent *)
 {
 	if (!m_ptr->pages.isEmpty())
 		m_ptr->pages.at(m_ptr->currentIndex)->resize(size());
 }
 
-SSlideViewPrivate::SSlideViewPrivate(SSlideView *parent) :
+SlideViewPrivate::SlideViewPrivate(SlideView *parent) :
 	p_ptr(parent),
 	currentIndex(-1),
 	nextIndex(-1),
@@ -202,15 +208,7 @@ SSlideViewPrivate::SSlideViewPrivate(SSlideView *parent) :
 
 }
 
-// TODO: Make this method part of the public API
-
-void SSlideViewPrivate::removeRemainingPages()
-{
-	while (currentIndex < pages.count() - 1)
-		pages.removeLast();
-}
-
-void SSlideViewPrivate::slideToPage(int index, int duration)
+void SlideViewPrivate::slideToPage(int index, int duration)
 {
 	if (busy
 		|| pages.isEmpty()
@@ -219,7 +217,7 @@ void SSlideViewPrivate::slideToPage(int index, int duration)
 		|| (duration < 0))
 		return;
 
-	auto *transition = new SHorizontalSlide(p_ptr);
+	auto *transition = new HorizontalSlide(p_ptr);
 
 	busy = true;
 	pages.at(index)->resize(p_ptr->size());
@@ -228,11 +226,11 @@ void SSlideViewPrivate::slideToPage(int index, int duration)
 	transition->setCurrentPage(pages.at(currentIndex));
 	transition->setNextPage(pages.at(index));
 	transition->setDirection(index > currentIndex
-							 ? SHorizontalSlide::SD_SlideLeft
-							 : SHorizontalSlide::SD_SlideRight);
+							 ? HorizontalSlide::SD_SlideLeft
+							 : HorizontalSlide::SD_SlideRight);
 	transition->setDuration(duration);
 
-	QObject::connect(transition, &SHorizontalSlide::inProgressChanged,
+	QObject::connect(transition, &HorizontalSlide::inProgressChanged,
 					 [this, transition](){
 		if (transition->inProgress())
 			return;
@@ -240,7 +238,7 @@ void SSlideViewPrivate::slideToPage(int index, int duration)
 		currentIndex = pages.indexOf(transition->nextPage());
 		busy = false;
 
-		p_ptr->currentIndexChanged();
+		emit p_ptr->currentIndexChanged();
 		transition->deleteLater();
 	});
 

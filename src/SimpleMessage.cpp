@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "SimpleMessage.h"
 #include "PixmapBuilder.h"
-#include "components/SToolButton.h"
+#include "ToolButton.h"
 #include <QGraphicsDropShadowEffect>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -83,7 +83,7 @@ SimpleMessage::SimpleMessage(QWidget *parent, const QPixmap &icon,
 	auto *effect = new QGraphicsDropShadowEffect(this);
 	auto *labIcon = new QLabel(this);
 	auto *labMessage = new QLabel(message, this);
-	auto *btnClose = new SToolButton(this);
+	auto *btnClose = new ToolButton(this);
 
 	labIcon->setPixmap(icon);
 	labIcon->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -120,7 +120,7 @@ SimpleMessage::SimpleMessage(QWidget *parent, const QPixmap &icon,
 	setAttribute(Qt::WA_TranslucentBackground);
 	adjustSize();
 
-	connect(btnClose, &SToolButton::clicked, this, &SimpleMessage::accept);
+	connect(btnClose, &ToolButton::clicked, this, &SimpleMessage::accept);
 }
 
 void SimpleMessage::onTimeout()

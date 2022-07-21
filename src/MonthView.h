@@ -25,7 +25,7 @@ SOFTWARE.
 #ifndef MONTHVIEW_H
 #define MONTHVIEW_H
 
-#include "components/SMonthPage.h"
+#include "MonthPage.h"
 
 class FLATGUISHARED_EXPORT MonthView : public QWidget
 {
@@ -47,7 +47,7 @@ public slots:
 private:
 	void slide(bool left);
 
-	SMonthPage *m_page;
+	MonthPage *m_page;
 	bool m_transitionInProgress;
 
 private slots:

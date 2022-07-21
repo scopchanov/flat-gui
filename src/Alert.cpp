@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Alert.h"
 #include "Alert_p.h"
 #include "ToolBar.h"
-#include "components/SPushButton.h"
+#include "PushButton.h"
 #include <QGraphicsDropShadowEffect>
 #include <QPropertyAnimation>
 #include <QVBoxLayout>
@@ -105,7 +105,7 @@ void Alert::setWidget(QWidget *widget)
 void Alert::setButtons(const QStringList &buttonNames, int defaultButtonIndex)
 {
 	for (const QString &buttonName : buttonNames) {
-		auto *button = new SPushButton(this);
+		auto *button = new PushButton(this);
 		int index = buttonNames.indexOf(buttonName);
 
 		button->setText(buttonName);
@@ -114,7 +114,7 @@ void Alert::setButtons(const QStringList &buttonNames, int defaultButtonIndex)
 
 		m_ptr->toolBar->addWidget(button);
 
-		connect(button, &SPushButton::clicked, this, &Alert::onButtonClicked);
+		connect(button, &PushButton::clicked, this, &Alert::onButtonClicked);
 	}
 
 	m_ptr->defaultButtonIndex = defaultButtonIndex;

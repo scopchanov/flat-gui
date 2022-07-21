@@ -25,7 +25,6 @@ SOFTWARE.
 #include "GenericForm.h"
 #include "GenericForm_p.h"
 #include "AbstractField.h"
-#include "DynamicDecoration.h"
 #include "PixmapBuilder.h"
 #include <QJsonObject>
 #include <QHBoxLayout>
@@ -99,7 +98,7 @@ void GenericForm::addField(AbstractField *field)
 
 bool GenericForm::isEmpty() const
 {
-	for (auto *field : m_ptr->fields)
+	for (auto *field : qAsConst(m_ptr->fields))
 		if (!field->isEmpty())
 			return false;
 
@@ -108,7 +107,7 @@ bool GenericForm::isEmpty() const
 
 bool GenericForm::isValid() const
 {
-	for (auto *field : m_ptr->fields)
+	for (auto *field : qAsConst(m_ptr->fields))
 		if (!field->isValid())
 			return false;
 
@@ -119,7 +118,7 @@ QJsonObject GenericForm::content() const
 {
 	QJsonObject entry;
 
-	for (auto *field : m_ptr->fields)
+	for (auto *field : qAsConst(m_ptr->fields))
 		if (!field->isEmpty())
 			entry[field->objectName()] = QJsonValue::fromVariant(field->value());
 
@@ -130,7 +129,7 @@ QJsonObject GenericForm::content() const
 
 void GenericForm::clear() const
 {
-	for (auto *field : m_ptr->fields)
+	for (auto *field : qAsConst(m_ptr->fields))
 		field->clear();
 }
 

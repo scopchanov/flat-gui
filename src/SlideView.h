@@ -22,24 +22,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SABSTRACTBUTTON_P_H
-#define SABSTRACTBUTTON_P_H
+#ifndef SLIDEVIEW_H
+#define SLIDEVIEW_H
 
-#include <QtCore/qglobal.h>
+#include "flatgui_global.h"
+#include <QWidget>
 
-class SAbstractButton;
+class SlideViewPrivate;
 
-class SAbstractButtonPrivate
+class FLATGUISHARED_EXPORT SlideView : public QWidget
 {
-	Q_DISABLE_COPY(SAbstractButtonPrivate);
+	Q_OBJECT
+	Q_PROPERTY(int pageCount READ pageCount NOTIFY pageCountChanged)
+	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex
+			   NOTIFY currentIndexChanged)
+public:
+	explicit SlideView(QWidget *parent = nullptr);
+	~SlideView();
 
-	explicit SAbstractButtonPrivate(SAbstractButton *parent);
+	void appendPage(QWidget *page);
+	int pageCount() const;
+	QWidget *currentPage() const;
 
-	SAbstractButton *p_ptr;
-	bool pressed;
-	bool down;
+	int currentIndex() const;
+	void setCurrentIndex(int index);
 
-	friend class SAbstractButton;
+	void removeRemainingPages();
+
+public slots:
+	void gotoPreviousPage();
+	void gotoFirstPage();
+	void gotoNextPage();
+	void gotoPage(int index, int duration);
+
+protected:
+	void resizeEvent(QResizeEvent *) override;
+
+private:
+	SlideViewPrivate *m_ptr;
+
+signals:
+	void pageCountChanged();
+	void currentIndexChanged();
 };
 
-#endif // SABSTRACTBUTTON_P_H
+#endif // SLIDEVIEW_H

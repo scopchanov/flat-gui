@@ -32,10 +32,14 @@ SOFTWARE.
  */
 
 ButtonCategory::ButtonCategory(QWidget *parent) :
-	SToolButton(parent),
+	ToolButton(parent),
 	m_ptr(new ButtonCategoryPrivate)
 {
-	setSize(200);
+	setPixmapOrigin(QPoint(68, 18));
+	setScaleFactor(0.97);
+
+	resize(200, 200);
+	setFixedSize(200, 200);
 }
 
 ButtonCategory::~ButtonCategory()
@@ -46,20 +50,12 @@ ButtonCategory::~ButtonCategory()
 void ButtonCategory::setName(const QString &str)
 {
 
-	m_ptr->name = str.left(1).toUpper() + str.mid(1, str.length() - 1);
+	m_ptr->name = str.at(0).toUpper() + str.mid(1, str.length() - 1);
 }
 
 void ButtonCategory::setDescription(const QString &str)
 {
 	m_ptr->description = str;
-}
-
-void ButtonCategory::setSize(int n)
-{
-	setPixmapOrigin(QPoint(68, 18));
-	setScaleFactor(0.97);
-
-	resize(n, n);
 }
 
 /*!
@@ -83,13 +79,15 @@ void ButtonCategory::paint(QPainter *painter)
 	// Draw description
 	painter->setFont(font());
 	painter->setPen(palette().color(QPalette::Text));
-	painter->drawText(rect().adjusted(12, 120, -12, -12), Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, m_ptr->description);
+	painter->drawText(rect().adjusted(12, 120, -12, -12),
+					  Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap,
+					  m_ptr->description);
 
 	// Draw border
 	painter->setPen(palette().color(QPalette::Midlight));
 	painter->drawRect(rect().adjusted(0, 0, -1, -1));
 
-	SToolButton::paint(painter);
+	ToolButton::paint(painter);
 }
 
 ButtonCategoryPrivate::ButtonCategoryPrivate()

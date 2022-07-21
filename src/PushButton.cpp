@@ -29,8 +29,10 @@ SOFTWARE.
 #include <QPaintEvent>
 
 /*!
- * \class PushButton
- * \inmodule FlatGui
+	\class PushButton
+	\inmodule Components
+	\ingroup Layouts
+	\brief
  */
 
 PushButton::PushButton(QWidget *parent) :
@@ -55,9 +57,9 @@ void PushButton::setText(const QString &text)
 	setSize();
 }
 
-void PushButton::setDefault(bool b)
+void PushButton::setDefault(bool value)
 {
-	if (b)
+	if (value)
 		setForegroundRole(QPalette::Highlight);
 }
 
@@ -76,7 +78,8 @@ bool PushButton::event(QEvent *event)
 		animation->setEasingCurve(QEasingCurve::OutBack);
 		animation->start(QVariantAnimation::DeleteWhenStopped);
 
-		connect(animation, &QVariantAnimation::valueChanged, this, &PushButton::onHighlightChanged);
+		connect(animation, &QVariantAnimation::valueChanged,
+				this, &PushButton::onHighlightChanged);
 	}
 
 	repaint();
@@ -99,7 +102,7 @@ void PushButton::paintEvent(QPaintEvent *event)
 
 	canvasPainter.begin(&canvas);
 	canvasPainter.setPen(palette().color(foregroundRole()));
-	canvasPainter.setOpacity(m_down ? 0.8 : 1);
+	canvasPainter.setOpacity(isDown() ? 0.8 : 1);
 	canvasPainter.drawText(rect(), Qt::AlignCenter, m_ptr->text);
 
 	if (m_ptr->highlight) {
@@ -108,7 +111,7 @@ void PushButton::paintEvent(QPaintEvent *event)
 		painter.setOpacity(1);
 	}
 
-	if (m_down) {
+	if (isDown()) {
 		painter.translate(rect().center());
 		painter.scale(0.96, 0.96);
 		painter.translate(-rect().center());

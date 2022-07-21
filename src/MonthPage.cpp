@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 #include "MonthPage.h"
+#include "MonthPage_p.h"
 #include <QMouseEvent>
 #include <QLocale>
 #include <QPainter>
@@ -30,45 +31,45 @@ SOFTWARE.
 
 MonthPage::MonthPage(QWidget *parent) :
 	AbstractButton(parent),
-	m_date(QDate::currentDate()),
-	m_daysInMonth(0),
-	m_offset(0),
-	m_year(0),
-	m_month(0),
-	m_day(0)
+	m_ptr(new MonthPagePrivate())
 {
 	for (int n = 0; n < 5; n++)
-		m_baseLines.insert(n, 48*(n + 1) - 1);
+		m_ptr->baseLines.insert(n, 48*(n + 1) - 1);
 
-	setup(m_date.year(), m_date.month());
+	setup(m_ptr->date.year(), m_ptr->date.month());
 	setAttribute(Qt::WA_DeleteOnClose);
+}
+
+MonthPage::~MonthPage()
+{
+	delete m_ptr;
 }
 
 QString MonthPage::title() const
 {
-	return QLocale().monthName(m_month).toUpper() + ", "
-			+ QString::number(m_year);
+	return QLocale().monthName(m_ptr->month).toUpper() + ", "
+			+ QString::number(m_ptr->year);
 }
 
 QDate MonthPage::date() const
 {
-	return m_date;
+	return m_ptr->date;
 }
 
 void MonthPage::setDate(const QDate &date)
 {
 	if (date.isValid())
-		m_date = date;
+		m_ptr->date = date;
 }
 
 int MonthPage::year() const
 {
-	return m_year;
+	return m_ptr->year;
 }
 
 int MonthPage::month() const
 {
-	return m_month;
+	return m_ptr->month;
 }
 
 void MonthPage::setup(int year, int month)
@@ -76,16 +77,16 @@ void MonthPage::setup(int year, int month)
 	QDate currentDate(year, month, 1);
 	int weekIndex = 0;
 
-	m_daysInMonth = currentDate.daysInMonth();
-	m_offset = currentDate.dayOfWeek() - 2;
-	m_year = year;
-	m_month = month;
+	m_ptr->daysInMonth = currentDate.daysInMonth();
+	m_ptr->offset = currentDate.dayOfWeek() - 2;
+	m_ptr->year = year;
+	m_ptr->month = month;
 
-	for (int n = 1; n <= m_daysInMonth; n++) {
-		int dayOfWeek = QDate(m_year, m_month, n).dayOfWeek();
+	for (int n = 1; n <= m_ptr->daysInMonth; n++) {
+		int dayOfWeek = QDate(m_ptr->year, m_ptr->month, n).dayOfWeek();
 
-		m_daysX.insert(n, 48*(dayOfWeek - 1));
-		m_daysY.insert(n, 48*weekIndex);
+		m_ptr->daysX.insert(n, 48*(dayOfWeek - 1));
+		m_ptr->daysY.insert(n, 48*weekIndex);
 
 		if (dayOfWeek == 7)
 			weekIndex++;
@@ -101,12 +102,12 @@ void MonthPage::mousePressEvent(QMouseEvent *event)
 
 	const QPoint &clickPos(event->pos());
 
-	m_day = 7*(clickPos.y()/48) + clickPos.x()/48 - m_offset;
+	m_ptr->day = 7*(clickPos.y()/48) + clickPos.x()/48 - m_ptr->offset;
 
-	if ((m_day > 0) && (m_day <= m_daysInMonth)
+	if ((m_ptr->day > 0) && (m_ptr->day <= m_ptr->daysInMonth)
 		&& clickArea().contains(clickPos)) {
 		setDown(true);
-		m_pressed = true;
+		setPressed(true);
 		repaint();
 		event->accept();
 	} else {
@@ -116,7 +117,8 @@ void MonthPage::mousePressEvent(QMouseEvent *event)
 
 QRect MonthPage::clickArea() const
 {
-	return QRect(m_daysX.value(m_day), m_daysY.value(m_day), 48, 48);
+	return QRect(m_ptr->daysX.value(m_ptr->day),
+				 m_ptr->daysY.value(m_ptr->day), 48, 48);
 }
 
 //void MonthPage::mousePressEvent(QMouseEvent *event)
@@ -151,11 +153,12 @@ void MonthPage::paintEvent(QPaintEvent *event)
 	painter.setPen(palette().color(QPalette::Light));
 
 	for (int n = 0; n < 5; n++)
-		painter.drawLine(9, m_baseLines.value(n), 327, m_baseLines.value(n));
+		painter.drawLine(9, m_ptr->baseLines.value(n),
+						 327, m_ptr->baseLines.value(n));
 
-	for (int n = 1; n <= m_daysInMonth; n++) {
-		const QPoint topLeft(m_daysX.value(n), m_daysY.value(n));
-		bool selected = QDate(m_year, m_month, n) == m_date;
+	for (int n = 1; n <= m_ptr->daysInMonth; n++) {
+		const QPoint topLeft(m_ptr->daysX.value(n), m_ptr->daysY.value(n));
+		bool selected = QDate(m_ptr->year, m_ptr->month, n) == m_ptr->date;
 
 		QPixmap canvas(48, 48);
 		QPainter canvasPainter;
@@ -165,7 +168,7 @@ void MonthPage::paintEvent(QPaintEvent *event)
 		canvasPainter.begin(&canvas);
 		canvasPainter.setPen(palette().color(selected
 											 ? QPalette::HighlightedText
-											 : (n + m_offset) % 7 + 1 > 5
+											 : (n + m_ptr->offset) % 7 + 1 > 5
 											   ? QPalette::Mid
 											   : QPalette::ButtonText));
 		canvasPainter.drawText(rectDay, Qt::AlignCenter, QString::number(n));
@@ -175,7 +178,7 @@ void MonthPage::paintEvent(QPaintEvent *event)
 		if (selected)
 			painter.fillRect(rectDay, palette().color(QPalette::Highlight));
 
-		if (m_down && (rectDay.translated(topLeft) == clickArea())) {
+		if (isDown() && (rectDay.translated(topLeft) == clickArea())) {
 			painter.setOpacity(0.9);
 			painter.translate(rectDay.center());
 			painter.scale(0.8958, 0.8958);
@@ -192,7 +195,7 @@ void MonthPage::doClick()
 {
 	auto *timer = new QTimer(this);
 
-	m_date = QDate(m_year, m_month, m_day);
+	m_ptr->date = QDate(m_ptr->year, m_ptr->month, m_ptr->day);
 	update();
 
 	timer->setSingleShot(true);
@@ -204,5 +207,17 @@ void MonthPage::doClick()
 void MonthPage::onTimeout()
 {
 	sender()->deleteLater();
-	dateChanged(m_date);
+
+	emit dateChanged(m_ptr->date);
+}
+
+MonthPagePrivate::MonthPagePrivate() :
+	date(QDate::currentDate()),
+	daysInMonth(0),
+	offset(0),
+	year(0),
+	month(0),
+	day(0)
+{
+
 }

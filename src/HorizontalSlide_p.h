@@ -22,24 +22,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACTIONNAVIGATE_P_H
-#define ACTIONNAVIGATE_P_H
+#ifndef HORIZONTALSLIDE_P_H
+#define HORIZONTALSLIDE_P_H
 
 #include <QtCore/qglobal.h>
+#include <QPixmap>
 
-class SSlideView;
+class HorizontalSlide;
 class QWidget;
+class QLabel;
 
-class ActionNavigatePrivate
+class HorizontalSlidePrivate
 {
-	Q_DISABLE_COPY(ActionNavigatePrivate)
+	Q_DISABLE_COPY(HorizontalSlidePrivate);
 
-	explicit ActionNavigatePrivate();
+	explicit HorizontalSlidePrivate(HorizontalSlide *parent);
+	~HorizontalSlidePrivate();
 
-	SSlideView *view;
-	QWidget *page;
+	void startSlide();
+	QPixmap makeSnapshot(QWidget *page);
+	void setInProgress(bool value);
 
-	friend class ActionNavigate;
+	HorizontalSlide *p_ptr;
+
+	QWidget *currentPage;
+	QWidget *nextPage;
+	QLabel *labCurrent;
+	QLabel *labNext;
+	int direction;
+	int duration;
+	bool inProgress;
+
+	friend class HorizontalSlide;
 };
 
-#endif // ACTIONNAVIGATE_P_H
+#endif // HORIZONTALSLIDE_P_H

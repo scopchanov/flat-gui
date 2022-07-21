@@ -22,15 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SSPLITVIEW_H
-#define SSPLITVIEW_H
+#ifndef SPLITVIEW_H
+#define SPLITVIEW_H
 
 #include "flatgui_global.h"
 #include <QWidget>
 
-class SSplitViewPrivate;
+class SplitViewPrivate;
 
-class FLATGUISHARED_EXPORT SSplitView : public QWidget
+class FLATGUISHARED_EXPORT SplitView : public QWidget
 {
 	Q_OBJECT
 	Q_PROPERTY(QWidget *baseWidget READ baseWidget WRITE setBaseWidget
@@ -54,8 +54,8 @@ public:
 		ST_Open
 	};
 
-	explicit SSplitView(QWidget *parent = nullptr);
-	~SSplitView();
+	explicit SplitView(QWidget *parent = nullptr);
+	~SplitView();
 
 	QWidget *baseWidget() const;
 	void setBaseWidget(QWidget *widget);
@@ -77,7 +77,7 @@ protected:
 	void resizeEvent(QResizeEvent *) override;
 
 private:
-	SSplitViewPrivate *m_ptr;
+	SplitViewPrivate *m_ptr;
 
 signals:
 	void baseWidgetChanged();
@@ -87,4 +87,4 @@ signals:
 	void sideWidgetStateChanged();
 };
 
-#endif // SSPLITVIEW_H
+#endif // SPLITVIEW_H

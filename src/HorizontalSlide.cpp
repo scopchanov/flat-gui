@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SHorizontalSlide.h"
-#include "SHorizontalSlide_p.h"
+#include "HorizontalSlide.h"
+#include "HorizontalSlide_p.h"
 #include <QVariantAnimation>
 #include <QLabel>
 
 /*!
-	\class SHorizontalSlide
+	\class HorizontalSlide
 	\inmodule CDK
 	\ingroup libraries
 	\brief Provides a horizontal sliding transition between two pages.
@@ -48,7 +48,7 @@ SOFTWARE.
  */
 
 /*!
-	\enum SHorizontalSlide::SlideDirection
+	\enum HorizontalSlide::SlideDirection
 
 	SlideDirection is used to specify in which direction the transition between
 	the two pages should take place.
@@ -60,34 +60,34 @@ SOFTWARE.
  */
 
 /*!
-	Constructs a SHorizontalSlide instance with a given \a parent.
+	Constructs a HorizontalSlide instance with a given \a parent.
  */
 
-SHorizontalSlide::SHorizontalSlide(QWidget *parent) :
+HorizontalSlide::HorizontalSlide(QWidget *parent) :
 	QWidget(parent),
-	m_ptr(new SHorizontalSlidePrivate(this))
+	m_ptr(new HorizontalSlidePrivate(this))
 {
 
 }
 
-SHorizontalSlide::~SHorizontalSlide()
+HorizontalSlide::~HorizontalSlide()
 {
 	delete m_ptr;
 }
 
 /*!
-	\property SHorizontalSlide::currentPage
+	\property HorizontalSlide::currentPage
 	\brief The page from which the transition should start.
 
 	This property's default is \c nullptr.
  */
 
-QWidget *SHorizontalSlide::currentPage() const
+QWidget *HorizontalSlide::currentPage() const
 {
 	return m_ptr->currentPage;
 }
 
-void SHorizontalSlide::setCurrentPage(QWidget *page)
+void HorizontalSlide::setCurrentPage(QWidget *page)
 {
 	if (m_ptr->inProgress || m_ptr->currentPage == page)
 		return;
@@ -98,18 +98,18 @@ void SHorizontalSlide::setCurrentPage(QWidget *page)
 }
 
 /*!
-	\property SHorizontalSlide::nextPage
+	\property HorizontalSlide::nextPage
 	\brief The page to which should be trainsitioned.
 
 	This property's default is \c nullptr.
  */
 
-QWidget *SHorizontalSlide::nextPage() const
+QWidget *HorizontalSlide::nextPage() const
 {
 	return m_ptr->nextPage;
 }
 
-void SHorizontalSlide::setNextPage(QWidget *page)
+void HorizontalSlide::setNextPage(QWidget *page)
 {
 	if (m_ptr->inProgress || m_ptr->nextPage == page)
 		return;
@@ -120,18 +120,18 @@ void SHorizontalSlide::setNextPage(QWidget *page)
 }
 
 /*!
-	\property SHorizontalSlide::direction
+	\property HorizontalSlide::direction
 	\brief The direction of the transition.
 
 	This property's default is \c SD_SlideLeft.
  */
 
-SHorizontalSlide::SlideDirection SHorizontalSlide::direction() const
+HorizontalSlide::SlideDirection HorizontalSlide::direction() const
 {
 	return static_cast<SlideDirection>(m_ptr->direction);
 }
 
-void SHorizontalSlide::setDirection(SlideDirection direction)
+void HorizontalSlide::setDirection(SlideDirection direction)
 {
 	if (m_ptr->inProgress || m_ptr->direction == direction)
 		return;
@@ -142,18 +142,18 @@ void SHorizontalSlide::setDirection(SlideDirection direction)
 }
 
 /*!
-	\property SHorizontalSlide::duration
+	\property HorizontalSlide::duration
 	\brief The duration of the transition.
 
 	This property's default is \c 250.
  */
 
-int SHorizontalSlide::duration() const
+int HorizontalSlide::duration() const
 {
 	return m_ptr->duration;
 }
 
-void SHorizontalSlide::setDuration(int duration)
+void HorizontalSlide::setDuration(int duration)
 {
 	if (m_ptr->inProgress || m_ptr->duration == duration)
 		return;
@@ -164,13 +164,13 @@ void SHorizontalSlide::setDuration(int duration)
 }
 
 /*!
-	\property SHorizontalSlide::inProgress
+	\property HorizontalSlide::inProgress
 	\brief Wether the transition is currently in progress.
 
 	This property's default is \c false.
  */
 
-bool SHorizontalSlide::inProgress() const
+bool HorizontalSlide::inProgress() const
 {
 	return m_ptr->inProgress;
 }
@@ -179,7 +179,7 @@ bool SHorizontalSlide::inProgress() const
 	Starts the transition.
  */
 
-void SHorizontalSlide::start()
+void HorizontalSlide::start()
 {
 	if (m_ptr->inProgress)
 		return;
@@ -188,13 +188,13 @@ void SHorizontalSlide::start()
 	m_ptr->startSlide();
 }
 
-SHorizontalSlidePrivate::SHorizontalSlidePrivate(SHorizontalSlide *parent) :
+HorizontalSlidePrivate::HorizontalSlidePrivate(HorizontalSlide *parent) :
 	p_ptr(parent),
 	currentPage(nullptr),
 	nextPage(nullptr),
 	labCurrent(new QLabel(p_ptr)),
 	labNext(new QLabel(p_ptr)),
-	direction(SHorizontalSlide::SD_SlideLeft),
+	direction(HorizontalSlide::SD_SlideLeft),
 	duration(250),
 	inProgress(false)
 {
@@ -202,13 +202,13 @@ SHorizontalSlidePrivate::SHorizontalSlidePrivate(SHorizontalSlide *parent) :
 	labNext->hide();
 }
 
-SHorizontalSlidePrivate::~SHorizontalSlidePrivate()
+HorizontalSlidePrivate::~HorizontalSlidePrivate()
 {
 	delete labCurrent;
 	delete labNext;
 }
 
-void SHorizontalSlidePrivate::startSlide()
+void HorizontalSlidePrivate::startSlide()
 {
 	if (!currentPage || !nextPage)
 		return;
@@ -216,7 +216,7 @@ void SHorizontalSlidePrivate::startSlide()
 	setInProgress(true);
 
 	auto *animation = new QVariantAnimation(p_ptr);
-	bool slideLeft = direction == SHorizontalSlide::SD_SlideLeft;
+	bool slideLeft = direction == HorizontalSlide::SD_SlideLeft;
 
 	currentPage->hide();
 	nextPage->hide();
@@ -237,7 +237,7 @@ void SHorizontalSlidePrivate::startSlide()
 					 [this](const QVariant &value){
 		int n = -value.toInt();
 		int m = currentPage->width() + n;
-		bool slideLeft = direction == SHorizontalSlide::SD_SlideLeft;
+		bool slideLeft = direction == HorizontalSlide::SD_SlideLeft;
 
 		labCurrent->move(slideLeft ? n : m, 0);
 		labNext->move(slideLeft ? m : n, 0);
@@ -255,7 +255,7 @@ void SHorizontalSlidePrivate::startSlide()
 	animation->start(QVariantAnimation::DeleteWhenStopped);
 }
 
-QPixmap SHorizontalSlidePrivate::makeSnapshot(QWidget *page)
+QPixmap HorizontalSlidePrivate::makeSnapshot(QWidget *page)
 {
 	QPixmap pixmap(page->size());
 
@@ -264,7 +264,7 @@ QPixmap SHorizontalSlidePrivate::makeSnapshot(QWidget *page)
 	return pixmap;
 }
 
-void SHorizontalSlidePrivate::setInProgress(bool value)
+void HorizontalSlidePrivate::setInProgress(bool value)
 {
 	if (inProgress == value)
 		return;

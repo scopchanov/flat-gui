@@ -25,13 +25,13 @@ SOFTWARE.
 #ifndef ABSTRACTFIELD_H
 #define ABSTRACTFIELD_H
 
-#include "cdk/SAbstractButton.h"
+#include "AbstractButton.h"
 
 class AbstractFieldPrivate;
 class AbstractDecoration;
 class AbstractDataModel;
 
-class FLATGUISHARED_EXPORT AbstractField : public SAbstractButton
+class FLATGUISHARED_EXPORT AbstractField : public AbstractButton
 {
 	Q_OBJECT
 	Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText)

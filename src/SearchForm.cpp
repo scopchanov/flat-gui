@@ -28,7 +28,7 @@ SOFTWARE.
 #include "StaticDecoration.h"
 #include "TextDataModel.h"
 #include "PixmapBuilder.h"
-#include "components/SToolButton.h"
+#include "ToolButton.h"
 #include <QHBoxLayout>
 #include <QVariant>
 
@@ -45,7 +45,7 @@ SearchForm::SearchForm(QWidget *parent) :
 	auto *layoutMain = new QHBoxLayout(this);
 	auto *model = new TextDataModel;
 	auto *decoration = new StaticDecoration;
-	auto *btnMatch = new SToolButton(this);
+	auto *btnMatch = new ToolButton(this);
 
 	model->setPlaceholderText(placeholderText);
 
@@ -68,7 +68,7 @@ SearchForm::SearchForm(QWidget *parent) :
 	setMinimumSize(150, 48);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-	connect(btnMatch, &SToolButton::clicked, this, &SearchForm::onMatchClicked);
+	connect(btnMatch, &ToolButton::clicked, this, &SearchForm::onMatchClicked);
 	connect(m_ptr->field, &AbstractField::contentChanged,
 			this, &SearchForm::contentChanged);
 }
@@ -90,7 +90,7 @@ int SearchForm::matchType() const
 
 void SearchForm::onMatchClicked()
 {
-	auto *btnMatch = static_cast<SToolButton *>(sender());
+	auto *btnMatch = static_cast<ToolButton *>(sender());
 	QString str(":/pix/images/icons/16/match-");
 
 	m_ptr->matchType++;

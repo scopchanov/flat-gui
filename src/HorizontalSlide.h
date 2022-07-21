@@ -22,16 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SHORIZONTALSLIDE_H
-#define SHORIZONTALSLIDE_H
+#ifndef HORIZONTALSLIDE_H
+#define HORIZONTALSLIDE_H
 
 #include "flatgui_global.h"
 #include <QWidget>
 
 class QLabel;
-class SHorizontalSlidePrivate;
+class HorizontalSlidePrivate;
 
-class FLATGUISHARED_EXPORT SHorizontalSlide : public QWidget
+class FLATGUISHARED_EXPORT HorizontalSlide : public QWidget
 {
 	Q_OBJECT
 	Q_PROPERTY(QWidget *currentPage READ currentPage WRITE setCurrentPage
@@ -49,8 +49,8 @@ public:
 		SD_SlideRight
 	};
 
-	explicit SHorizontalSlide(QWidget *parent = nullptr);
-	~SHorizontalSlide();
+	explicit HorizontalSlide(QWidget *parent = nullptr);
+	~HorizontalSlide();
 
 	QWidget *currentPage() const;
 	void setCurrentPage(QWidget *page);
@@ -66,7 +66,7 @@ public slots:
 	void start();
 
 private:
-	SHorizontalSlidePrivate *m_ptr;
+	HorizontalSlidePrivate *m_ptr;
 
 signals:
 	void currentPageChanged();
@@ -75,7 +75,7 @@ signals:
 	void durationChanged();
 	void inProgressChanged();
 
-	friend class SHorizontalSlidePrivate;
+	friend class HorizontalSlidePrivate;
 };
 
-#endif // SHORIZONTALSLIDE_H
+#endif // HORIZONTALSLIDE_H

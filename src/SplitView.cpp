@@ -22,46 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SSplitView.h"
-#include "SSplitView_p.h"
+#include "SplitView.h"
+#include "SplitView_p.h"
 #include <QVariantAnimation>
 
 /*!
-	\class SSplitView
+	\class SplitView
 	\inmodule Components
 	\ingroup Layouts
 	\brief Provides a horizontally splittable widget.
  */
 
 /*!
-	Constructs a SSplitView instance with a given \a parent.
+	Constructs a SplitView instance with a given \a parent.
  */
 
-SSplitView::SSplitView(QWidget *parent) :
+SplitView::SplitView(QWidget *parent) :
 	QWidget(parent),
-	m_ptr(new SSplitViewPrivate(this))
+	m_ptr(new SplitViewPrivate(this))
 {
 
 }
 
-SSplitView::~SSplitView()
+SplitView::~SplitView()
 {
 	delete m_ptr;
 }
 
 /*!
-	\property SSplitView::baseWidget
+	\property SplitView::baseWidget
 	\brief The widget which is constantly shown.
 
 	This property's default is \c nullptr.
  */
 
-QWidget *SSplitView::baseWidget() const
+QWidget *SplitView::baseWidget() const
 {
 	return m_ptr->baseWidget;
 }
 
-void SSplitView::setBaseWidget(QWidget *widget)
+void SplitView::setBaseWidget(QWidget *widget)
 {
 	if (!widget || m_ptr->inProgress || m_ptr->baseWidget == widget)
 		return;
@@ -73,18 +73,18 @@ void SSplitView::setBaseWidget(QWidget *widget)
 }
 
 /*!
-	\property SSplitView::sideWidget
+	\property SplitView::sideWidget
 	\brief The widget which is toggled.
 
 	This property's default is \c nullptr.
  */
 
-QWidget *SSplitView::sideWidget() const
+QWidget *SplitView::sideWidget() const
 {
 	return m_ptr->sideWidget;
 }
 
-void SSplitView::setSideWidget(QWidget *widget)
+void SplitView::setSideWidget(QWidget *widget)
 {
 	if (!widget || m_ptr->inProgress || m_ptr->sideWidget == widget)
 		return;
@@ -96,18 +96,18 @@ void SSplitView::setSideWidget(QWidget *widget)
 }
 
 /*!
-	\property SSplitView::splitSide
+	\property SplitView::splitSide
 	\brief The side on which the side widget is placed.
 
-	This property's default is SSplitView::ST_Left.
+	This property's default is SplitView::ST_Left.
  */
 
-SSplitView::SideType SSplitView::splitSide() const
+SplitView::SideType SplitView::splitSide() const
 {
 	return static_cast<SideType>(m_ptr->splitSide);
 }
 
-void SSplitView::setSplitSide(SSplitView::SideType side)
+void SplitView::setSplitSide(SplitView::SideType side)
 {
 	if (m_ptr->inProgress || m_ptr->splitSide == side)
 		return;
@@ -118,18 +118,18 @@ void SSplitView::setSplitSide(SSplitView::SideType side)
 }
 
 /*!
-	\property SSplitView::splitDuration
+	\property SplitView::splitDuration
 	\brief The duration of the side widget's toggle transition.
 
 	This property's default is 250.
  */
 
-int SSplitView::splitDuration() const
+int SplitView::splitDuration() const
 {
 	return m_ptr->splitDuration;
 }
 
-void SSplitView::setSplitDuration(int duration)
+void SplitView::setSplitDuration(int duration)
 {
 	if (m_ptr->inProgress || m_ptr->splitDuration == duration)
 		return;
@@ -140,18 +140,18 @@ void SSplitView::setSplitDuration(int duration)
 }
 
 /*!
-	\property SSplitView::sideWidgetState
+	\property SplitView::sideWidgetState
 	\brief The state of the side widget.
 
-	This property's default is SSplitView::ST_Closed.
+	This property's default is SplitView::ST_Closed.
  */
 
-SSplitView::StateType SSplitView::sideWidgetState() const
+SplitView::StateType SplitView::sideWidgetState() const
 {
 	return static_cast<StateType>(m_ptr->sideWidgetState);
 }
 
-void SSplitView::openSideWidget()
+void SplitView::openSideWidget()
 {
 	m_ptr->setSideWidgetState(ST_Open);
 
@@ -159,7 +159,7 @@ void SSplitView::openSideWidget()
 						 ? 0 : width() - m_ptr->sideWidget->width());
 }
 
-void SSplitView::closeSideWidget()
+void SplitView::closeSideWidget()
 {
 	m_ptr->setSideWidgetState(ST_Closed);
 
@@ -171,7 +171,7 @@ void SSplitView::closeSideWidget()
 	Toggles the side widget with a horizontal split transition.
  */
 
-void SSplitView::toggleSideWidget()
+void SplitView::toggleSideWidget()
 {
 	m_ptr->startTransition();
 }
@@ -180,31 +180,31 @@ void SSplitView::toggleSideWidget()
 	\reimp
  */
 
-void SSplitView::resizeEvent(QResizeEvent *)
+void SplitView::resizeEvent(QResizeEvent *)
 {
 	m_ptr->resizeWidgets();
 }
 
-SSplitViewPrivate::SSplitViewPrivate(SSplitView *parent) :
+SplitViewPrivate::SplitViewPrivate(SplitView *parent) :
 	p_ptr(parent),
 	baseWidget(nullptr),
 	sideWidget(nullptr),
-	splitSide(SSplitView::ST_Left),
+	splitSide(SplitView::ST_Left),
 	splitDuration(250),
-	sideWidgetState(SSplitView::ST_Closed),
+	sideWidgetState(SplitView::ST_Closed),
 	inProgress(false)
 {
 
 }
 
-void SSplitViewPrivate::startTransition()
+void SplitViewPrivate::startTransition()
 {
 	if (inProgress || !sideWidget)
 		return;
 
 	auto *animation = new QVariantAnimation(p_ptr);
-	bool isLeft = splitSide == SSplitView::ST_Left;
-	bool isClosed = sideWidgetState == SSplitView::ST_Closed;
+	bool isLeft = splitSide == SplitView::ST_Left;
+	bool isClosed = sideWidgetState == SplitView::ST_Closed;
 
 	inProgress = true;
 
@@ -224,8 +224,8 @@ void SSplitViewPrivate::startTransition()
 
 	QObject::connect(animation, &QVariantAnimation::finished,
 					 [this](){
-		setSideWidgetState(sideWidgetState == SSplitView::ST_Closed
-						   ? SSplitView::ST_Open : SSplitView::ST_Closed);
+		setSideWidgetState(sideWidgetState == SplitView::ST_Closed
+						   ? SplitView::ST_Open : SplitView::ST_Closed);
 
 		inProgress = false;
 	});
@@ -233,7 +233,7 @@ void SSplitViewPrivate::startTransition()
 	animation->start(QVariantAnimation::DeleteWhenStopped);
 }
 
-void SSplitViewPrivate::setSideWidgetState(int value)
+void SplitViewPrivate::setSideWidgetState(int value)
 {
 	if (sideWidgetState == value)
 		return;
@@ -243,24 +243,24 @@ void SSplitViewPrivate::setSideWidgetState(int value)
 	emit p_ptr->sideWidgetStateChanged();
 }
 
-void SSplitViewPrivate::resizeWidgets()
+void SplitViewPrivate::resizeWidgets()
 {
 	if (!sideWidget)
 		return;
 
-	bool isClosed = sideWidgetState == SSplitView::ST_Closed;
+	bool isClosed = sideWidgetState == SplitView::ST_Closed;
 
-	layoutWidgets(splitSide == SSplitView::ST_Left
+	layoutWidgets(splitSide == SplitView::ST_Left
 				  ? (isClosed ? -sideWidget->width() : 0)
 				  : (isClosed ? 0 : sideWidget->width()));
 }
 
-void SSplitViewPrivate::layoutWidgets(int x)
+void SplitViewPrivate::layoutWidgets(int x)
 {
 	if (!baseWidget || !sideWidget)
 		return;
 
-	bool isLeft = splitSide == SSplitView::ST_Left;
+	bool isLeft = splitSide == SplitView::ST_Left;
 	int w = p_ptr->width() - x;
 	int h = p_ptr->height();
 

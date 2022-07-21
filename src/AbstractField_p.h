@@ -30,7 +30,7 @@ SOFTWARE.
 
 class AbstractDataModel;
 class AbstractDecoration;
-class SToolButton;
+class ToolButton;
 
 class AbstractFieldPrivate
 {
@@ -40,7 +40,7 @@ class AbstractFieldPrivate
 
 	AbstractDataModel *model;
 	AbstractDecoration *decoration;
-	SToolButton *btnClear;
+	ToolButton *btnClear;
 	QString text;
 	QString placeholderText;
 	bool required;

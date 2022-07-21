@@ -25,11 +25,11 @@ SOFTWARE.
 #ifndef BUTTONCATEGORY_H
 #define BUTTONCATEGORY_H
 
-#include "components/SToolButton.h"
+#include "ToolButton.h"
 
 class ButtonCategoryPrivate;
 
-class ButtonCategory : public SToolButton
+class ButtonCategory : public ToolButton
 {
 	Q_OBJECT
 public:
@@ -38,7 +38,6 @@ public:
 
 	void setName(const QString &str);
 	void setDescription(const QString &str);
-	void setSize(int n) override;
 
 protected:
 	void paint(QPainter *painter) override;

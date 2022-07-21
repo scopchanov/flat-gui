@@ -37,7 +37,7 @@ public:
 	~PushButton();
 
 	void setText(const QString &text);
-	void setDefault(bool b);
+	void setDefault(bool value);
 
 protected:
 	bool event(QEvent *event) override;

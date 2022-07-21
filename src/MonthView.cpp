@@ -23,14 +23,14 @@ SOFTWARE.
 */
 
 #include "MonthView.h"
-#include "cdk/SHorizontalSlide.h"
+#include "HorizontalSlide.h"
 
 MonthView::MonthView(QWidget *parent) :
 	QWidget(parent),
-	m_page(new SMonthPage(this)),
+	m_page(new MonthPage(this)),
 	m_transitionInProgress(false)
 {
-	connect(m_page, &SMonthPage::dateChanged, this, &MonthView::dateChanged);
+	connect(m_page, &MonthPage::dateChanged, this, &MonthView::dateChanged);
 }
 
 QString MonthView::title() const
@@ -70,8 +70,8 @@ void MonthView::slide(bool left)
 		const auto &datePage(QDate(m_page->year(),
 								   m_page->month(), 1).addMonths(left
 																 ? 1 : -1));
-		auto *transition = new SHorizontalSlide(this);
-		auto *page = new SMonthPage(this);
+		auto *transition = new HorizontalSlide(this);
+		auto *page = new MonthPage(this);
 
 		page->setup(datePage.year(), datePage.month());
 		page->setDate(m_page->date());
@@ -80,8 +80,8 @@ void MonthView::slide(bool left)
 
 		transition->setCurrentPage(m_page);
 		transition->setNextPage(page);
-		transition->setDirection(left ? SHorizontalSlide::SD_SlideLeft
-									  : SHorizontalSlide::SD_SlideRight);
+		transition->setDirection(left ? HorizontalSlide::SD_SlideLeft
+									  : HorizontalSlide::SD_SlideRight);
 		transition->setDuration(300);
 		transition->start();
 
@@ -94,10 +94,11 @@ void MonthView::slide(bool left)
 
 void MonthView::onSlideFinished()
 {
+	auto *slide{static_cast<HorizontalSlide *>(sender())};
+
 	m_transitionInProgress = false;
 	m_page->close();
-	m_page = static_cast<SMonthPage *>(
-				 static_cast<SHorizontalSlide *>(sender())->nextPage());
+	m_page = static_cast<MonthPage *>(slide->nextPage());
 
-	monthChanged(m_page->title());
+	emit monthChanged(m_page->title());
 }

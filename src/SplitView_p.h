@@ -22,29 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACTIONNAVIGATE_H
-#define ACTIONNAVIGATE_H
+#ifndef SPLITVIEW_P_H
+#define SPLITVIEW_P_H
 
-#include "flatgui_global.h"
-#include <QAction>
+#include <QtCore/qglobal.h>
 
-class ActionNavigatePrivate;
-class SSlideView;
+class SplitView;
+class QWidget;
 
-class FLATGUISHARED_EXPORT ActionNavigate : public QAction
+class SplitViewPrivate
 {
-	Q_OBJECT
-public:
-	explicit ActionNavigate(QWidget *parent = nullptr);
+	Q_DISABLE_COPY(SplitViewPrivate)
 
-	void setView(SSlideView *view);
-	void setPage(QWidget *page);
+	explicit SplitViewPrivate(SplitView *parent);
 
-private:
-	ActionNavigatePrivate *m_ptr;
+	void startTransition();
+	void setSideWidgetState(int value);
+	void resizeWidgets();
+	void layoutWidgets(int x);
 
-private slots:
-	void onTriggered();
+	SplitView *p_ptr;
+	QWidget *baseWidget;
+	QWidget *sideWidget;
+	int splitSide;
+	int splitDuration;
+	int sideWidgetState;
+	bool inProgress;
+
+	friend class SplitView;
 };
 
-#endif // ACTIONNAVIGATE_H
+#endif // SPLITVIEW_P_H

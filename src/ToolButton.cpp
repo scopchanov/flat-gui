@@ -28,8 +28,9 @@ SOFTWARE.
 #include <QPainter>
 
 /*!
- * \class ToolButton
- * \inmodule FlatGui
+	\class ToolButton
+	\inmodule Components
+	\ingroup Buttons
  */
 
 ToolButton::ToolButton(QWidget *parent) :
@@ -97,7 +98,7 @@ void ToolButton::paintEvent(QPaintEvent *event)
 
 	paint(&canvasPainter);
 
-	if (clickable && m_down) {
+	if (clickable && isDown()) {
 		painter.setOpacity(0.9);
 		painter.translate(rect().center());
 		painter.scale(m_ptr->scaleFactor, m_ptr->scaleFactor);

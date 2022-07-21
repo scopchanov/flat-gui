@@ -24,15 +24,15 @@ include(../../common/autoversion.pri)
 
 VERSION = $$PROJECT_VERSION
 
-QT += widgets
+QT          += widgets
 
-CONFIG += c++11
-CONFIG += skip_target_version_ext
-DEFINES += QT_DEPRECATED_WARNINGS
+CONFIG      += c++17
+CONFIG      += skip_target_version_ext
+DEFINES     += QT_DEPRECATED_WARNINGS
 
 TEMPLATE    = lib
 TARGET	    = $$qtLibraryTarget(FlatGui)
-DESTDIR	    = ../deploy/lib
+DESTDIR	    = ../deploy/bin
 
 TRANSLATIONS = \
     translations/FlatGui_de.ts \
@@ -47,13 +47,13 @@ TRANSLATIONS = \
 DEFINES += FLATGUI_LIBRARY
 
 SOURCES += \
+    AbstractButton.cpp \
     AbstractDataModel.cpp \
     AbstractDecoration.cpp \
     AbstractEditor.cpp \
     AbstractField.cpp \
     AbstractPanel.cpp \
     AbstractValidator.cpp \
-    ActionNavigate.cpp \
     Alert.cpp \
     ButtonCategory.cpp \
     DateDataModel.cpp \
@@ -64,6 +64,7 @@ SOURCES += \
     FancyField.cpp \
     GenericForm.cpp \
     GridWidget.cpp \
+    HorizontalSlide.cpp \
     LineEdit.cpp \
     ListItemAnimation.cpp \
     MonthView.cpp \
@@ -85,16 +86,16 @@ SOURCES += \
     TimeField.cpp \
     ToolBar.cpp \
     ValidatorFactory.cpp \
-    cdk/SAbstractButton.cpp \
-    cdk/SHorizontalSlide.cpp \
-    components/SMonthPage.cpp \
-    components/SPushButton.cpp \
-    components/SSlideView.cpp \
-    components/SSplitView.cpp \
-    components/SSwitchBox.cpp \
-    components/SToolButton.cpp
+    MonthPage.cpp \
+    PushButton.cpp \
+    SlideView.cpp \
+    SplitView.cpp \
+    SwitchBox.cpp \
+    ToolButton.cpp
 
 HEADERS += \
+    AbstractButton.h \
+    AbstractButton_p.h \
     AbstractDataModel.h \
     AbstractDataModel_p.h \
     AbstractDecoration.h \
@@ -104,8 +105,6 @@ HEADERS += \
     AbstractField_p.h \
     AbstractPanel.h \
     AbstractValidator.h \
-    ActionNavigate.h \
-    ActionNavigate_p.h \
     Alert.h \
     Alert_p.h \
     ButtonCategory.h \
@@ -118,7 +117,20 @@ HEADERS += \
     DoubleValidator_p.h \
     DynamicDecoration.h \
     FancyField.h \
-    components/SMonthPage_p.h \
+    HorizontalSlide.h \
+    HorizontalSlide_p.h \
+    MonthPage.h \
+    MonthPage_p.h \
+    PushButton.h \
+    PushButton_p.h \
+    SlideView.h \
+    SlideView_p.h \
+    SplitView.h \
+    SplitView_p.h \
+    SwitchBox.h \
+    SwitchBox_p.h \
+    ToolButton.h \
+    ToolButton_p.h \
     flatgui_global.h \
     GenericForm.h \
     GenericForm_p.h \
@@ -149,22 +161,55 @@ HEADERS += \
     TimeEditor.h \
     TimeField.h \
     ToolBar.h \
-    ValidatorFactory.h \
-    cdk/SAbstractButton.h \
-    cdk/SAbstractButton_p.h \
-    cdk/SHorizontalSlide.h \
-    cdk/SHorizontalSlide_p.h \
-    components/SMonthPage.h \
-    components/SPushButton.h \
-    components/SPushButton_p.h \
-    components/SSlideView.h \
-    components/SSlideView_p.h \
-    components/SSplitView.h \
-    components/SSplitView_p.h \
-    components/SSwitchBox.h \
-    components/SSwitchBox_p.h \
-    components/SToolButton.h \
-    components/SToolButton_p.h
+    ValidatorFactory.h
+
+PUBLIC_HEADERS += \
+    AbstractButton.h \
+    AbstractDataModel.h \
+    AbstractDecoration.h \
+    AbstractEditor.h \
+    AbstractField.h \
+    AbstractPanel.h \
+    AbstractValidator.h \
+    Alert.h \
+    ButtonCategory.h \
+    DateDataModel.h \
+    DateEditor.h \
+    DateField.h \
+    DoubleValidator.h \
+    DynamicDecoration.h \
+    FancyField.h \
+    HorizontalSlide.h \
+    MonthPage.h \
+    PushButton.h \
+    SlideView.h \
+    SplitView.h \
+    SwitchBox.h \
+    ToolButton.h \
+    flatgui_global.h \
+    GenericForm.h \
+    GridWidget.h \
+    LineEdit.h \
+    ListItemAnimation.h \
+    MonthView.h \
+    NavigationBar.h \
+    PageCategories.h \
+    PageIndicator.h \
+    PersonNameValidator.h \
+    PixmapBuilder.h \
+    SearchForm.h \
+    SidePanel.h \
+    SimpleMessage.h \
+    Splash.h \
+    StaticDecoration.h \
+    TextDataModel.h \
+    TextEditor.h \
+    TextField.h \
+    TimeDataModel.h \
+    TimeEditor.h \
+    TimeField.h \
+    ToolBar.h \
+    ValidatorFactory.h
 
 OTHER_FILES += \
     FlatGui.qdocconf \
@@ -173,6 +218,6 @@ OTHER_FILES += \
 RESOURCES += \
     guires.qrc
 
-headers.path    = ../deploy/include
-headers.files   += $$HEADERS
+headers.path    = $$PWD/../deploy/include
+headers.files   += $$PUBLIC_HEADERS
 INSTALLS       += headers
