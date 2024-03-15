@@ -29,7 +29,7 @@ SOFTWARE.
 #include <QVariantAnimation>
 
 /*!
-	\class SSwitchBox
+	\class SwitchBox
 	\inmodule Components
 	\ingroup Buttons
  */
