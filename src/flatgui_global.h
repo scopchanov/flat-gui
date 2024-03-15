@@ -3,10 +3,17 @@
 
 #include <QtCore/qglobal.h>
 
+// #if defined(FLATGUI_LIBRARY)
+// #  define FLATGUISHARED_EXPORT Q_DECL_EXPORT
+// #else
+// #  define FLATGUISHARED_EXPORT Q_DECL_IMPORT
+// #endif
+
 #if defined(FLATGUI_LIBRARY)
-#  define FLATGUISHARED_EXPORT Q_DECL_EXPORT
+#  define FLATGUISHARED_EXPORT 
 #else
-#  define FLATGUISHARED_EXPORT Q_DECL_IMPORT
+#  define FLATGUISHARED_EXPORT 
 #endif
+
 
 #endif // FLATGUI_GLOBAL_H
