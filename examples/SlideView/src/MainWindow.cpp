@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #include "MainWindow.h"
-#include "SSlideView.h"
+#include "SlideView.h"
 #include <QToolBar>
 #include <QAction>
 #include <QLabel>
@@ -33,24 +33,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	auto *toolBar = new QToolBar(this);
 	auto *labTitle(new QLabel(this));
-	auto *slideView(new SSlideView(this));
+	auto *slideView(new SlideView(this));
 	auto *actBack = new QAction(QIcon(":/pix/images/icons/arrow-left.png"),
 								tr("Previous"), this);
 	auto *actNext = new QAction(QIcon(":/pix/images/icons/arrow-right.png"),
 								tr("Next"), this);
 
 	connect(actBack, &QAction::triggered,
-			slideView, &SSlideView::gotoPreviousPage);
+			slideView, &SlideView::gotoPreviousPage);
 	connect(actNext, &QAction::triggered,
-			slideView, &SSlideView::gotoNextPage);
+			slideView, &SlideView::gotoNextPage);
 
-	connect(slideView, &SSlideView::currentIndexChanged,
+	connect(slideView, &SlideView::currentIndexChanged,
 			[this, slideView, labTitle, actBack, actNext](){
 		enableButtons(slideView, actBack, actNext);
 		labTitle->setText(slideView->currentPage()->windowTitle());
 	});
 
-	connect(slideView, &SSlideView::pageCountChanged,
+	connect(slideView, &SlideView::pageCountChanged,
 			[this, slideView, actBack, actNext](){
 		enableButtons(slideView, actBack, actNext);
 	});
@@ -105,7 +105,7 @@ QWidget *MainWindow::createStretch()
 	return stretch;
 }
 
-void MainWindow::enableButtons(SSlideView *slideView, QAction *actBack,
+void MainWindow::enableButtons(SlideView *slideView, QAction *actBack,
 							   QAction *actNext)
 {
 	int currentIndex = slideView->currentIndex();

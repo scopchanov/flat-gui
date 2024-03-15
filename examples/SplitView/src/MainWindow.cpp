@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #include "MainWindow.h"
-#include "SSplitView.h"
+#include "SplitView.h"
 #include <QToolButton>
 #include <QToolBar>
 #include <QLabel>
@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	auto *toolBar = new QToolBar(this);
 	auto *actMenu = new QAction(QIcon(":/pix/images/icons/menu.png"),
 								tr("Menu"), this);
-	auto *splitView = new SSplitView(this);
+	auto *splitView = new SplitView(this);
 	auto *labSidePanel = new QLabel(tr("Side Panel"), this);
 	auto *labBody = new QLabel("Lorem ipsum dolor sit amet, consetetur sadipscing"
 							   " elitr, sed diam nonumy eirmod tempor invidunt ut"
@@ -64,11 +64,11 @@ MainWindow::MainWindow(QWidget *parent) :
 	splitView->setBaseWidget(labBody);
 	splitView->setSideWidget(labSidePanel);
 	splitView->closeSideWidget();
-	splitView->setSplitSide(SSplitView::ST_Left);
+	splitView->setSplitSide(SplitView::ST_Left);
 	splitView->setSplitDuration(300);
 
 	connect(actMenu, &QAction::triggered, splitView,
-			&SSplitView::toggleSideWidget);
+			&SplitView::toggleSideWidget);
 
 	setWindowTitle(tr("SplitView Example"));
 	setCentralWidget(splitView);

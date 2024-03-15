@@ -25,7 +25,7 @@ SOFTWARE.
 #include "TextEditor.h"
 #include "LineEdit.h"
 #include <QVBoxLayout>
-#include <AbstractField.h>
+#include "AbstractField.h"
 
 /*!
  * \class TextEditor

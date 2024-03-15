@@ -23,7 +23,8 @@ SOFTWARE.
 */
 
 #include "MainWindow.h"
-#include "SSwitchBox.h"
+#include "SwitchBox.h"
+#include "SplitView.h"
 #include <QBoxLayout>
 #include <QLabel>
 
@@ -33,15 +34,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	auto *l = new QVBoxLayout(this);
 	auto *label = new QLabel(tr("Off"), this);
-	auto *switchBox = new SSwitchBox(this);
+	auto *switchBox = new SwitchBox(this);
 
 	l->addWidget(label);
 	l->addWidget(switchBox);
 	l->addStretch();
 
 
-	connect(switchBox, &SSwitchBox::, splitView,
-			&SSplitView::toggleSideWidget);
+	connect(this, &SwitchBox::clicked, switchBox,
+	  		&SplitView::toggleSideWidget);
 
 	setWindowTitle(tr("SwitchBox Example"));
 	resize(480, 400);
