@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/pix">
+        <file>images/icons/48/arrow-left.png</file>
+        <file>images/icons/48/arrow-right.png</file>
+        <file>images/photos/daisy.png</file>
+        <file>images/photos/orchid.png</file>
+        <file>images/photos/rose.png</file>
+        <file>images/photos/sunflower.png</file>
+    </qresource>
+    <qresource prefix="/txt">
+        <file>content.json</file>
+    </qresource>
+</RCC>

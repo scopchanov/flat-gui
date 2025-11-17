@@ -1,0 +1,24 @@
+{
+	"pages": [
+		{
+			"title": "Rose",
+			"image": "rose.png",
+			"text": "The rose is one of the most popular and widely cultivated flowers in the world. Known for its layered petals and sweet fragrance, it symbolizes love, beauty, and passion. Roses come in many colors - red, pink, white, yellow, and even blue - each carrying different meanings. They thrive in well-drained soil and full sunlight. Apart from their ornamental use, roses are also used in perfumes, cosmetics, and even in food products like rose water and jam."
+		},
+		{
+			"title": "Daisy",
+			"image": "daisy.png",
+			"text": "The daisy is a cheerful, simple flower characterized by white petals surrounding a yellow center. It symbolizes innocence, purity, and new beginnings. Daisies belong to the Asteraceae family and can thrive in various climates. They open during the day and close at night, following the sun - a behavior known as heliotropism. Daisies are not only beautiful but also have medicinal uses, often found in herbal teas and skincare products for their soothing properties."
+		},
+		{
+			"title": "Sunflower",
+			"image": "sunflower.png",
+			"text": "Sunflowers are tall, bright yellow flowers known for turning their heads toward the sun, a phenomenon called heliotropism. They symbolize loyalty, positivity, and happiness. Native to North America, sunflowers are valued not only for their beauty but also for their seeds and oil, which are nutritious and widely used. Their large, round flower heads are composed of hundreds of tiny florets, attracting bees and birds. Sunflowers are a favorite in summer gardens and art due to their vibrant, cheerful look."
+		},
+		{
+			"title": "Orchid",
+			"image": "orchid.png",
+			"text": "Orchids are one of the largest and most diverse families of flowering plants, known for their exotic beauty and delicate structure. They come in countless shapes, colors, and sizes, symbolizing luxury, love, and strength. Orchids grow in tropical regions and can be terrestrial or epiphytic, often clinging to trees. They require careful care, thriving in humid environments with filtered light. Orchids are highly prized in horticulture and are often gifted as symbols of rare and refined beauty."
+		}
+	]
+}

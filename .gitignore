@@ -9,6 +9,7 @@ $RECYCLE.BIN/
 
 build/
 deploy/
+install/
 doc/
 misc/
 
@@ -16,3 +17,4 @@ misc/
 *.user
 *.pro.user
 *.pro.user.*
+.qtcreator/
